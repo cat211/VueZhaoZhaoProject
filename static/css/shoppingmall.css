@@ -268,27 +268,13 @@ footer ul li{
   background: #f4f4f4;
   padding-top: 0.1px;
 }
-.intergral-hot{
+.intergral-hot,.intergral-can{
   float: left;
   text-align: center;
   height: 50px;
   width: 150px;
   font-size: 25px;
-  border-bottom: 3px solid #00cc66;
-  border-top: 3px solid #00cc66;
-  box-sizing: border-box;
-  line-height: 50px;
-  margin-top: 20px;
-  margin-left: 28px;
-}
-.intergral-can{
-  float: left;
-  text-align: center;
-  height: 50px;
-  width: 150px;
-  font-size: 25px;
-  border-bottom: 3px solid #00cc66;
-  border-top: 3px solid #00cc66;
+  border: #0AC165 1px solid;
   box-sizing: border-box;
   line-height: 50px;
   margin-top: 20px;

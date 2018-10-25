@@ -25,7 +25,7 @@
               </div>
               <div class="col-sm-4 col-md-4 " v-for="b in bh_info" v-if="bh_info.length>=1">
                 <div class="thumbnail">
-                  <img src="../assets/images/det2.jpg" alt="..." :title=b.long_beadhouse__name>
+                  <img :src="housesrc[b.beadhouse__id%10]" alt="..." :title=b.long_beadhouse__name>
                   <div class="caption">
                     <h4><strong v-text="b.beadhouse__name"></strong></h4>
                     <p>公寓</p>
@@ -48,7 +48,7 @@
               </div>
               <div class="col-sm-4 col-md-4" v-for="r in room_info">
                 <div class="thumbnail">
-                  <img src="../assets/images/det2.jpg" :title=r.long_room__beadhouse__name>
+                  <img :src="roomsrc[r.room_id%10]"  :title=r.long_room__beadhouse__name>
                   <div class="caption">
                     <h4><strong v-text="r.room__name"></strong></h4>
                     <p v-text="r.room__beadhouse__name"></p>
@@ -70,7 +70,7 @@
               </div>
               <div class="col-sm-4 col-md-4" v-for="a in art_info">
                 <div class="thumbnail">
-                  <img src="../assets/images/det2.jpg" :title=a.long_article__title+a.long_article__beadhouse__name>
+                  <img :src="artsrc[a.article_id%10]" :title=a.long_article__title+a.long_article__beadhouse__name>
                   <div class="caption">
                     <h4 :id=a.article_id><strong v-text="a.article__title"></strong></h4>
                     <p v-text="a.article__beadhouse__name"></p>
@@ -108,7 +108,43 @@
         art_info: [],
         showbh: false,
         showroom: false,
-        showart: false
+        showart: false,
+        roomsrc:[
+          'http://127.0.0.1:8000/media/pic/room-1.jpg',
+          'http://127.0.0.1:8000/media/pic/room-2.jpg',
+          'http://127.0.0.1:8000/media/pic/room-3.jpg',
+          'http://127.0.0.1:8000/media/pic/room-4.jpg',
+          'http://127.0.0.1:8000/media/pic/room-1.jpg',
+          'http://127.0.0.1:8000/media/pic/room-2.jpg',
+          'http://127.0.0.1:8000/media/pic/room-3.jpg',
+          'http://127.0.0.1:8000/media/pic/room-4.jpg',
+          'http://127.0.0.1:8000/media/pic/room-1.jpg',
+          'http://127.0.0.1:8000/media/pic/room-2.jpg',
+        ],
+        artsrc:[
+          'http://127.0.0.1:8000/media/pic/art-1.jpg',
+          'http://127.0.0.1:8000/media/pic/art-2.jpg',
+          'http://127.0.0.1:8000/media/pic/art-3.jpg',
+          'http://127.0.0.1:8000/media/pic/art-4.jpg',
+          'http://127.0.0.1:8000/media/pic/art-1.jpg',
+          'http://127.0.0.1:8000/media/pic/art-2.jpg',
+          'http://127.0.0.1:8000/media/pic/art-3.jpg',
+          'http://127.0.0.1:8000/media/pic/art-4.jpg',
+          'http://127.0.0.1:8000/media/pic/art-1.jpg',
+          'http://127.0.0.1:8000/media/pic/art-2.jpg',
+        ],
+        housesrc:[
+          'http://127.0.0.1:8000/media/pic/house-1.jpg',
+          'http://127.0.0.1:8000/media/pic/house-2.jpg',
+          'http://127.0.0.1:8000/media/pic/house-3.jpg',
+          'http://127.0.0.1:8000/media/pic/house-2.jpg',
+          'http://127.0.0.1:8000/media/pic/house-1.jpg',
+          'http://127.0.0.1:8000/media/pic/house-2.jpg',
+          'http://127.0.0.1:8000/media/pic/house-3.jpg',
+          'http://127.0.0.1:8000/media/pic/house-2.jpg',
+          'http://127.0.0.1:8000/media/pic/house-1.jpg',
+          'http://127.0.0.1:8000/media/pic/house-2.jpg',
+        ]
 
       }
     },

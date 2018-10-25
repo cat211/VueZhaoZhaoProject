@@ -89,7 +89,7 @@
             <div class="row  ">
               <div class="col-md-3 single-room " v-for="h in house_list" v-on:click="toapartinfo(h.id)">
                 <router-link to="/house" class="beadhouse-img">
-                  <img src="../assets/images/room_pic.jpg" alt="" :title=h.long_name>
+                  <img :src=housesrc[h.id%10] alt="" :title=h.long_name>
                 </router-link>
                 <router-link to="/house" class="beadhouse-title">
                   <div>
@@ -127,7 +127,19 @@
         mask: false,
         search_city: '苏州',
         sky: {},
-        sky_src:'http://127.0.0.1:8000/media/pic/sky-sun.png'
+        sky_src:'http://127.0.0.1:8000/media/pic/sky-sun.png',
+        housesrc:[
+          'http://127.0.0.1:8000/media/pic/house-1.jpg',
+          'http://127.0.0.1:8000/media/pic/house-2.jpg',
+          'http://127.0.0.1:8000/media/pic/house-3.jpg',
+          'http://127.0.0.1:8000/media/pic/house-2.jpg',
+          'http://127.0.0.1:8000/media/pic/house-1.jpg',
+          'http://127.0.0.1:8000/media/pic/house-2.jpg',
+          'http://127.0.0.1:8000/media/pic/house-3.jpg',
+          'http://127.0.0.1:8000/media/pic/house-2.jpg',
+          'http://127.0.0.1:8000/media/pic/house-1.jpg',
+          'http://127.0.0.1:8000/media/pic/house-2.jpg',
+        ]
 
       }
     },
@@ -191,7 +203,7 @@
         axios.get('http://127.0.0.1:8000/beadhouse/gethouseby///1/1/')
           .then(function (response) {
             response.data.forEach((item, index) => {
-              if (item.score >= 4.8) {
+              if (item.score >= 4.9) {
                 console.log(item);
                 if (that.house_list.length < 8) {
                   that.house_list.push(item)

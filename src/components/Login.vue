@@ -195,7 +195,7 @@
   .login-background {
     min-height: 750px;
     background: url("../../src/assets/images/login_background.jpg");
-    background-size: inherit;
+    background-size: cover;
   }
 
   #login {
@@ -204,7 +204,6 @@
     position: relative;
     background: rgba(255, 255, 255, 0.83);
     text-align: center;
-    opacity: 0.9;
   }
 
   .input-group-addon {
@@ -218,11 +217,14 @@
   }
 
   .input-group {
-    margin-top: 25px;
+    margin-top: 20px;
   }
 
-  #login h1, #login {
-    margin-top: 50px;
+  #login h1{
+    margin-top: 55px;
+  }
+  #login {
+    margin-top: 90px;
   }
 
   .col-md-12 {
@@ -237,6 +239,5 @@
     width: 100px;
     height: 35px;
   }
-
 
 </style>
