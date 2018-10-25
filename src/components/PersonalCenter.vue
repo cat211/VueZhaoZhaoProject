@@ -70,6 +70,17 @@ export default {
         this.mystatestate=false
     }
 
+  },
+  mounted(){
+    if(sessionStorage.getItem('gotostate')){
+      sessionStorage.setItem('gotostate','')
+      this.myhomestate=false,
+        this.myinfostate=false,
+        this.myoldstate=false,
+        this.mycollstate=false,
+        this.myordertate=false,
+        this.mystatestate=true
+    }
   }
 }
 </script>
@@ -97,9 +108,6 @@ export default {
     min-height: 750px;
   }
 
-  .panel-primary > .panel-heading,.bg-green{
-    background: #40a170;
-  }
   .nav > li > a:hover,
   .nav > li > a:focus {
     color: black;

@@ -14,8 +14,8 @@
             <div class="panel-heading">
               <div class="row">
                 <div class="col-lg-4">
-                  <input class="city inputkey form-control" @click="toAddress" v-model="city" placeholder="请选择地区">
-                  <v-distpicker type="mobile" @selected='selected' v-show="addInp">
+                  <input class="inputkey form-control" @click="toAddress" v-model="city" placeholder="请选择地区">
+                  <v-distpicker  @selected='selected' v-show="addInp" class="city">
                   </v-distpicker>
                 </div>
                 <div class="col-md-3"></div>
@@ -75,8 +75,8 @@
                 <div class="col-md-4">
                   <div class="row">
                     <div class="col-md-4"><a href="#" >默认排序</a></div>
-                    <div class="col-md-4" @click="Search()"><a href="#" @click="changeSortType(sort_type_one=0,sort_type_two)">价格排序</a></div>
-                    <div class="col-md-4" @click="Search()"><a href="#" @click="changeSortType(sort_type_one=1,sort_type_two)">评分排序</a></div>
+                    <div class="col-md-4" ><a href="#" @click="changeSortType(sort_type_one=0,sort_type_two)">价格排序</a></div>
+                    <div class="col-md-4" ><a href="#" @click="changeSortType(sort_type_one=1,sort_type_two)">评分排序</a></div>
                   </div>
                 </div>
                 <div class="col-md-8"></div>
@@ -161,7 +161,7 @@
         this.mask = false;
         this.addInp = false;
         this.city = data.province.value + ' ' + data.city.value + ' ' + data.area.value;
-        this.search_city=data.city.value
+        this.search_city = data.city.value.split('市')[0].split('城区')[0]
       },
       //根据地址+关键字搜索
       Search: function () {
@@ -173,8 +173,6 @@
             vm.showContent();
             vm.search_city='';
             vm.search_data='';
-            vm.sort_type_one='';
-            vm.sort_type_two='';
             vm.city='';
           })
           .catch(function (error) {
@@ -228,8 +226,8 @@
       },
       //排序
       changeSortType:function (sort_type_one,sort_type_two) {
-        this.$options.methods.Search();
-        if(this.sort_type_two==0){
+        this.Search();
+        if(sort_type_two==0){
           this.sort_type_two=1;
         }else {
           this.sort_type_two=0;
@@ -379,5 +377,9 @@
   }
   .bigimg:hover{
     transform: scale(1.3);
+  }
+  .city{
+    position: fixed;
+    z-index: 2;
   }
 </style>

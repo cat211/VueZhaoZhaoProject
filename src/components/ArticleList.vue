@@ -8,35 +8,45 @@
 
     <div class="col-md-8">
       <div class="row panel panel-info">
-        <div class="col-md-3 panel-heading">
-          <h4>筛选本页公寓</h4>
+        <div class="col-md-5 panel-heading">
+          <h4>热门文章</h4>
         </div>
-        <div class="col-md-9 panel-heading">
+        <div class="col-md-7 panel-heading">
           <h4>
-            <img class="icon" src="../assets/images/art_book_icon.png" alt="">最新文章</h4>
+           最新文章</h4>
         </div>
+
         <div class="row panel-body">
-          <div class="col-md-3 choice" >
-            <div><a href="#" @click="flag=true">不限</a></div>
-            <div v-for="a in result_list"><a href="#" @click="getkeyWord($event)"  v-text="a.beadhouse__name"></a></div>
+          <div class="col-md-5">
+            <div class=" row" v-for="article in result_list_three" >
+              <div class="hot-pic col-md-12 ">
+                <img src="../assets/images/room_pic.jpg" alt="">
+                <div class="hot-title">
+                  <h4 v-text="article.title" v-on:click="toarticledetails(article.id)"></h4>
+                  <p v-text="article.beadhouse__name" v-on:click="toapaertinfo(article.beadhouse_id)"></p>
+                  <p v-text="article.date"></p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="col-md-9">
-            <div class="article-body row" v-for="article in result_list" v-if="article.beadhouse__name==keyword||flag">
+
+          <div class="col-md-7">
+            <div class="article-body row" v-for="article in result_list">
               <div class="article-info col-md-8 col-sm-8 col-xs-8" :key="result_list.id">
                 <div class="article-title" id="articlelist.id">
                   <a v-text="article.title" v-on:click="toarticledetails(article.id)"></a>
                 </div>
                 <div class="article-author" :id="result_list.beadhouse_id">
-                  <a  v-text="article.beadhouse__name" v-on:click="toapaertinfo(article.beadhouse_id)"></a>
+                  <a v-text="article.beadhouse__name" v-on:click="toapaertinfo(article.beadhouse_id)"></a>
                 </div>
-                <div class="article-time"><span></span><span v-text="article.date"></span></div>
+                <div><span></span><span v-text="article.date"></span></div>
               </div>
               <div class="article-pic col-md-4 col-sm-4 col-xs-4 "><img src="../assets/images/article_picture_01.jpg"
                                                                         alt=""></div>
             </div>
-
           </div>
         </div>
+
         <page-list :page_size="page_size" @indexclick="getIndex" @lastindexclick="lastPage"
                    @nextindexclick="nextPage"></page-list>
       </div>
@@ -58,8 +68,9 @@
         result_list: [],
         page_index: 1,
         page_size: 1,
-        keyword:'',
-        flag:true
+        keyword: '',
+        flag: true,
+        result_list_three:[]
       }
     },
     mounted() {
@@ -68,21 +79,22 @@
         that.articlelist = response.data;
         console.log(that.articlelist)
         that.showContent();
-        if (that.articlelist.length / 10 == 0) {
-          that.page_size = that.articlelist.length / 10;
+        if (that.articlelist.length / 9 == 0) {
+          that.page_size = that.articlelist.length / 9;
         } else {
-          that.page_size = Math.ceil(that.articlelist.length / 10);
+          that.page_size = Math.ceil(that.articlelist.length / 9);
         }
       }).catch();
     },
     methods: {
       showContent: function () {
-        let start = (this.page_index - 1) * 10;
-        let end = this.articlelist.length <= this.page_index * 10 - 1 ? this.articlelist.length : this.page_index * 10 - 1;
+        let start = (this.page_index - 1) * 9;
+        let end = this.articlelist.length <= this.page_index * 9 - 1 ? this.articlelist.length : this.page_index * 9 - 1;
         this.result_list = [];
         for (let i = start; i <= end; i++) {
           this.result_list.push(this.articlelist[i]);
         }
+        this.result_list_three=this.result_list.splice(0,3)
       },
       getIndex: function (i) {
         this.page_index = i;
@@ -91,26 +103,26 @@
       lastPage: function () {
         if (this.page_index > 1) {
           this.page_index -= 1;
-          this.flag=true;
+          this.flag = true;
           this.showContent();
         }
       },
       nextPage: function () {
         if (this.page_size > this.page_index) {
           this.page_index += 1;
-          this.flag=true;
+          this.flag = true;
           this.showContent();
         }
       },
-      getkeyWord:function (event) {
-        this.flag=false
-        this.keyword=event.target.innerText;
+      // getkeyWord:function (event) {
+      //   this.flag=false
+      //   this.keyword=event.target.innerText;
+      // },
+      toapaertinfo: function (id) {
+        sessionStorage.setItem('bhid', id)
       },
-      toapaertinfo:function (id) {
-        sessionStorage.setItem('bhid',id)
-      },
-      toarticledetails:function (id) {
-        sessionStorage.setItem('artid',id)
+      toarticledetails: function (id) {
+        sessionStorage.setItem('artid', id)
         this.$router.push({path: "/articledetails"});
       }
     },
@@ -140,7 +152,7 @@
   .article-title {
     margin-top: 4px;
     height: 40px;
-    font-size: 22px;
+    font-size: 18px;
     line-height: 40px;
   }
 
@@ -155,41 +167,46 @@
     color: gray;
   }
 
-  .article-time {
-    margin-top: 4px;
-    height: 30px;
-    font-size: 14px;
-    line-height: 30px;
-    color: gray;
-  }
-
-  .article-info span {
-    margin-left: 1px;
-
-  }
-
   .article-pic {
     padding: 0;
   }
-
   .article-pic img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
   }
-  .choice div {
-    width: 95%;
-    height: 45px;
-    margin: 10px auto;
-    padding: 5px;
-    background: #d8ecf6;
-    border-radius: 5px;
-    text-align: center;
+  .hot-pic img{
+    width: 400px;
+    height: 250px;
+    object-fit: cover;
+    margin-bottom: 11px;
   }
-  img.icon {
-    width: 25px;
-    height: 19px;
+  .hot-title{
+    position: absolute;
+    padding-left: 25px;
+    bottom:0px;
+    width: 400px;
+    background: rgba(255, 255, 255, 0.49);
+  }
+  .hot-title h4{
+    color:black;
+    text-shadow: black 1px 1px 1px;
+  }
+  .my-index-center {
+    padding-top: 20px;
+    min-height: 600px;
+  }
+  .my-active a {
+    color: white;
+  }
+
+  .my-nav-size ul li {
+    font-size: 14px;
+  }
+
+  .my-img-btn p {
+    position: absolute;
   }
 </style>
 
