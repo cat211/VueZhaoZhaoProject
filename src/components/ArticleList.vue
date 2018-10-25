@@ -20,7 +20,7 @@
           <div class="col-md-5">
             <div class=" row" v-for="article in result_list_three" >
               <div class="hot-pic col-md-12 ">
-                <img src="../assets/images/room_pic.jpg" alt="">
+                <img :src=artsrc[article.id%10] alt="">
                 <div class="hot-title">
                   <h4 v-text="article.title" v-on:click="toarticledetails(article.id)"></h4>
                   <p v-text="article.beadhouse__name" v-on:click="toapaertinfo(article.beadhouse_id)"></p>
@@ -41,8 +41,7 @@
                 </div>
                 <div><span></span><span v-text="article.date"></span></div>
               </div>
-              <div class="article-pic col-md-4 col-sm-4 col-xs-4 "><img src="../assets/images/article_picture_01.jpg"
-                                                                        alt=""></div>
+              <div class="article-pic col-md-4 col-sm-4 col-xs-4 "><img :src=artsrc[article.id%10] alt=""></div>
             </div>
           </div>
         </div>
@@ -70,7 +69,19 @@
         page_size: 1,
         keyword: '',
         flag: true,
-        result_list_three:[]
+        result_list_three:[],
+        artsrc:[
+          'http://127.0.0.1:8000/media/pic/art-1.jpg',
+          'http://127.0.0.1:8000/media/pic/art-2.jpg',
+          'http://127.0.0.1:8000/media/pic/art-3.jpg',
+          'http://127.0.0.1:8000/media/pic/art-4.jpg',
+          'http://127.0.0.1:8000/media/pic/art-1.jpg',
+          'http://127.0.0.1:8000/media/pic/art-2.jpg',
+          'http://127.0.0.1:8000/media/pic/art-3.jpg',
+          'http://127.0.0.1:8000/media/pic/art-4.jpg',
+          'http://127.0.0.1:8000/media/pic/art-1.jpg',
+          'http://127.0.0.1:8000/media/pic/art-2.jpg',
+        ]
       }
     },
     mounted() {
@@ -141,32 +152,23 @@
 
   .article-info {
     height: 100%;
-    background: #f0f0f0;
+    border: #b4cbfe 1px solid;
   }
 
   .article-pic {
-    border-radius: 10px;
+    border-radius: 5px;
     height: 100%;
   }
-
   .article-title {
-    margin-top: 4px;
     height: 40px;
     font-size: 18px;
     line-height: 40px;
   }
-
   .article-author {
-    margin-top: 4px;
     height: 30px;
     font-size: 14px;
     line-height: 30px;
   }
-
-  .article-author a {
-    color: gray;
-  }
-
   .article-pic {
     padding: 0;
   }
@@ -174,13 +176,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 5px;
   }
   .hot-pic img{
     width: 400px;
     height: 250px;
     object-fit: cover;
-    margin-bottom: 11px;
+    margin: 5px 0;
   }
   .hot-title{
     position: absolute;
@@ -189,22 +191,16 @@
     width: 400px;
     background: rgba(255, 255, 255, 0.49);
   }
-  .hot-title h4{
+  h4{
     color:black;
-    text-shadow: black 1px 1px 1px;
   }
   .my-index-center {
     padding-top: 20px;
     min-height: 600px;
   }
-  .my-active a {
-    color: white;
-  }
-
   .my-nav-size ul li {
     font-size: 14px;
   }
-
   .my-img-btn p {
     position: absolute;
   }

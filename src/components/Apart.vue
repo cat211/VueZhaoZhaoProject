@@ -86,7 +86,7 @@
               <div class="bh-border-bottom" :id="b.id">
                 <div class="row">
                   <div class="col-md-3 bhimg">
-                    <img src="../assets/images/room_pic.jpg" class="bigimg" alt="..." @click="getBhid()">
+                    <img :src=housesrc[b.id%10] class="bigimg" alt="..." @click="getBhid()">
                   </div>
                   <div class="col-md-5">
                     <h4 @click="saveBhId(b.id)">
@@ -148,6 +148,18 @@
         page_size : 0,
         result_list:[],
         new_result_list:[],
+        housesrc:[
+          'http://127.0.0.1:8000/media/pic/house-1.jpg',
+          'http://127.0.0.1:8000/media/pic/house-2.jpg',
+          'http://127.0.0.1:8000/media/pic/house-3.jpg',
+          'http://127.0.0.1:8000/media/pic/house-2.jpg',
+          'http://127.0.0.1:8000/media/pic/house-1.jpg',
+          'http://127.0.0.1:8000/media/pic/house-2.jpg',
+          'http://127.0.0.1:8000/media/pic/house-3.jpg',
+          'http://127.0.0.1:8000/media/pic/house-2.jpg',
+          'http://127.0.0.1:8000/media/pic/house-1.jpg',
+          'http://127.0.0.1:8000/media/pic/house-2.jpg',
+        ]
       }
     },
     methods: {

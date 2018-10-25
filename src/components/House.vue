@@ -53,7 +53,7 @@
               <div class="col-md-4">
               <div class="row">
               <div class="col-md-6 houseimg">
-              <img src="../assets/images/det2.jpg" alt="">
+              <img :src=roomsrc[r.id%10] alt="">
               </div>
               <div class="col-md-6">
                 <h4 class="houselineheight">
@@ -103,7 +103,19 @@
             rooms_info : [
             ],
             bh_id:'',
-            bh_name:''
+            bh_name:'',
+            roomsrc:[
+              'http://127.0.0.1:8000/media/pic/room-1.jpg',
+              'http://127.0.0.1:8000/media/pic/room-2.jpg',
+              'http://127.0.0.1:8000/media/pic/room-3.jpg',
+              'http://127.0.0.1:8000/media/pic/room-4.jpg',
+              'http://127.0.0.1:8000/media/pic/room-1.jpg',
+              'http://127.0.0.1:8000/media/pic/room-2.jpg',
+              'http://127.0.0.1:8000/media/pic/room-3.jpg',
+              'http://127.0.0.1:8000/media/pic/room-4.jpg',
+              'http://127.0.0.1:8000/media/pic/room-1.jpg',
+              'http://127.0.0.1:8000/media/pic/room-2.jpg',
+            ]
           }
       },
       methods:{

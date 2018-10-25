@@ -2,13 +2,12 @@
   <div class="container-fluid register-body">
     <div style="height: 100px"></div>
     <div class="row">
-      <div class="col-md-8">
-
+      <div class="col-md-7">
       </div>
       <div class="col-md-3 register-form my-input">
         <div class="col-md-1"></div>
         <div class="col-md-10">
-          <div class="first-line">
+          <div class="first-line text-center">
             <h2>注册朝朝优选平台</h2>
           </div>
           <div class="input-group">
@@ -43,7 +42,7 @@
           </div>
 
         </div>
-        <div class="col-md-1"></div>
+        <div class="col-md-2"></div>
       </div>
     </div>
   </div>
@@ -164,8 +163,9 @@ export default {
     height: 750px;
   }
   .register-form{
-    height: 550px;
-    background: rgba(255, 255, 255, 0.83)
+    height: 500px;
+    margin-top: -5px;
+    background: rgba(255, 255, 255, 0.83);
   }
   .input-group-addon {
     margin: 0;
@@ -176,12 +176,15 @@ export default {
     width: 200px;
   }
   .input-group{
-    margin-top: 25px;
+    margin-top: 15px;
   }
   .btn-lg{
     width: 120px;
     height: 40px;
     font-size: 14px;
     margin: 5px;
+  }
+  .first-line h2{
+    margin-top: 40px;
   }
 </style>

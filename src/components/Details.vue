@@ -22,7 +22,7 @@
                 <li class="list-group-item">
                   <div class="row">
                     <div class="col-md-6 room-img">
-                      <img src="../assets/images/det2.jpg" alt="">
+                      <img src="http://127.0.0.1:8000/media/pic/room-1.jpg" alt="">
                     </div>
                     <div class="col-md-4">
                       <div class="panel panel-default">
