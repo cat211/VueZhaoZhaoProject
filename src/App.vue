@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav-main :islogin="my_token"></nav-main>
+    <nav-main :islogin="my_token" @exit="toexit"></nav-main>
     <router-view @send="tochange"/>
     <div-footer></div-footer>
   </div>
@@ -22,6 +22,9 @@ export default {
   methods:{
     tochange:function (f) {
       this.my_token=f
+    },
+    toexit:function (l) {
+      this.my_token=l
     }
   }
 }
