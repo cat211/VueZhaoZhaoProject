@@ -1,0 +1,154 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+h3,h4,h5,h6{
+  font-size: 14px;
+}
+ul li{
+  list-style-type: none;
+}
+a:link,a:visited{
+  text-decoration: none;
+  color: black;
+}
+header{
+  background: linear-gradient(to right,#3d8d65 ,#42b57b );
+}
+/*导航部分*/
+nav{
+  height: 65px;
+  margin: 0 auto;
+}
+.index-nav a{
+  color:white;
+}
+.index-nav a:link{
+  font-size: 14px;
+}
+.index-nav a:visited{
+  color:white;
+}
+
+.index-logo img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.index-nav>div{
+  flex: 1;
+  height: 65px;
+  max-width: 100px;
+  text-align: center;
+  line-height: 65px;
+}
+.index-nav>div:hover{
+  box-sizing: border-box;
+  border-bottom: 5px solid white;
+  background: rgba(0, 0, 0, 0.26);
+}
+/**************************显示登录者*/
+.showtel p{
+  display: none;
+  width: 150px;
+  height: 65px;
+  text-align: center;
+  color: whitesmoke;
+  position: fixed;
+  /*top: 10px;*/
+  line-height: 65px;
+  left: 1300px;
+  margin: 0;
+  padding: 0;
+}
+.showtel p:hover{
+  box-sizing: border-box;
+  border-bottom: 5px solid white;
+  background: rgba(0, 0, 0, 0.26);
+}
+.showtel .exit{
+  display: none;
+  width: 70px;
+  height: 65px;
+  position: fixed;
+  text-align: center;
+  line-height: 65px;
+  left: 1450px;
+  color: whitesmoke;
+}
+.showtel .exit:hover{
+  box-sizing: border-box;
+  border-bottom: 5px solid white;
+  background: rgba(0, 0, 0, 0.26);
+  /*登录者结束*/
+}
+
+
+.single-room img{
+  width: 100%;
+  height: 50%;
+  object-fit: cover;
+}
+
+.single-room .room-p01 a{
+  font-size: 20px;
+}
+.single-room a:visited, .room-p02 a:visited{
+  color: black;
+}
+.single-room .room-p02 a:link{
+  font-size: 14px;
+  color: #bbbbbb;
+}
+
+footer{
+  width: 100%;
+  background: #35383a;
+}
+footer ul li{
+  float: none;
+  margin-top: 10px;
+}
+
+
+/*兑换按钮*/
+.intergral-content-middle div button{
+  width: 100px;
+  height: 25px;
+  border: 1px solid;
+  border-radius: 15px;
+  background: #fdb814;
+  font-size: 14px;
+}
+
+.intergral-nextpage div{
+  height: 48px;
+  width: 48px;
+  margin-right: 20px;
+  text-align: center;
+  line-height: 48px;
+}
+/*******************************************页码*/
+
+.apart-footer ul{
+  list-style: none;
+}
+.apart-footer ul li{
+  float: left;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  border: solid 1px black;
+  box-sizing: border-box;
+  margin: 0 5px;
+  font-size: 20px;
+  color: black;
+}
+.apart-footer .apart-footer-content ul .li-img-left{
+  border: none;
+}
+.apart-footer .apart-footer-content ul .li-img-right{
+  border: none;
+}

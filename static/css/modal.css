@@ -1,0 +1,135 @@
+#modal-backdrop {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /*background-color: red;*/
+  background-color: rgba(198, 198, 198, 0.13);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  width: 500px;
+  height: 400px;
+  position: fixed;
+  top: 200px;
+  left: 500px;
+  background-color: #fff;
+  box-shadow: 2px 2px 20px 1px;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header, .modal-footer {
+  border: none;
+  padding: 15px;
+  display: flex;
+}
+
+.modal-header {
+  /*border-bottom: 1px solid #eee;*/
+  height: 60px;
+  background:#4aae9b;
+  color: white;
+  justify-content: space-between;
+  /*padding: 0;*/
+}
+.f{
+  position: fixed;
+  left: 540px;
+}
+.t{
+  position: fixed;
+  left: 680px;
+}
+.s{
+  position: fixed;
+  left: 780px;
+}
+.selectBox_show a{
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  /*padding-left: 80px;*/
+}
+.por{
+  /*background: chocolate;*/
+  width: 300px;
+  margin-left: 40px;
+  margin-top: 50px;
+  cursor:pointer
+}
+.selectBox_listLi{
+  font-size: 15px;
+}
+
+.modal-footer-p{
+  border: none;
+  position: fixed;
+  top: 505px;
+  left: 540px;
+  /*border-top: 1px solid #eee;*/
+  justify-content: flex-end;
+}
+.f-l{
+  list-style: none;
+  width: 200px;
+  margin-left: 140px;
+}
+.modal-body {
+  position: relative;
+  padding: 20px 10px;
+}
+.d-btn-close{
+  position: fixed;
+  right: 530px;
+  top: 205px;
+  /*background: crimson;*/
+  width: 30px;
+  height: 30px;
+  /*padding-left: 50px;*/
+}
+.btn-close {
+  width: 20px;
+  height: 20px;
+  border: none 0;
+  font-size: 20px;
+  /*padding: 20px;*/
+  cursor: pointer;
+  font-weight: bold;
+  color: #4aae9b;
+  background-color: transparent;
+}
+
+.btn-green {
+  position: fixed;
+  top: 550px;
+  left: 930px;
+  color: #fff;
+  background-color: #4aae9b;
+  border: 1px solid #4aae9b;
+  border-radius: 2px;
+}
+.btn-q{
+  position: fixed;
+  top: 550px;
+  left: 820px;
+  color: #fff;
+  background-color: #4aae9b;
+  border: 1px solid #4aae9b;
+  border-radius: 2px;
+}
+
+.modal-fade-enter, .modal-fade-leave-active {
+  opacity: 0;
+}
+
+.modal-fade-enter-active, .modal-fade-leave-active {
+  transition: opacity .5s ease
+}

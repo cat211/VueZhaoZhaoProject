@@ -1,0 +1,411 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+h3,h4,h5,h6{
+  font-size: 14px;
+}
+ul li{
+  list-style-type: none;
+}
+a:link,a:visited{
+  text-decoration: none;
+  color: black;
+}
+header{
+  background: linear-gradient(to right,#3d8d65 ,#42b57b );
+}
+/*导航部分*/
+nav{
+  height: 65px;
+  margin: 0 auto;
+}
+.index-nav a{
+  color:white;
+}
+.index-nav a:link{
+  font-size: 14px;
+}
+.index-nav a:visited{
+  color:white;
+}
+
+.index-logo img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.index-nav>div{
+  flex: 1;
+  height: 65px;
+  max-width: 100px;
+  text-align: center;
+  line-height: 65px;
+}
+.index-nav>div:hover{
+  box-sizing: border-box;
+  border-bottom: 5px solid white;
+  background: rgba(0, 0, 0, 0.26);
+}
+/**************************显示登录者*/
+.showtel p{
+  display: none;
+  width: 150px;
+  height: 65px;
+  text-align: center;
+  color: whitesmoke;
+  position: fixed;
+  /*top: 10px;*/
+  line-height: 65px;
+  left: 1300px;
+  margin: 0;
+  padding: 0;
+}
+.showtel p:hover{
+  box-sizing: border-box;
+  border-bottom: 5px solid white;
+  background: rgba(0, 0, 0, 0.26);
+}
+.showtel .exit{
+  display: none;
+  width: 70px;
+  height: 65px;
+  position: fixed;
+  text-align: center;
+  line-height: 65px;
+  left: 1450px;
+  color: whitesmoke;
+}
+.showtel .exit:hover{
+  box-sizing: border-box;
+  border-bottom: 5px solid white;
+  background: rgba(0, 0, 0, 0.26);
+  /*登录者结束*/
+}
+/*搜索部分*/
+
+/*搜索框*/
+
+.index-search div{
+  display: flex;
+}
+.index-search .input-search{
+  height: 70px;
+  width: 79%;
+  font-size: 30px;
+  border: none;
+
+}
+
+/*公寓展示部分*/
+
+.single-room img{
+  width: 100%;
+  height: 50%;
+  object-fit: cover;
+}
+
+.single-room .room-p01 a{
+  font-size: 20px;
+}
+.single-room a:visited, .room-p02 a:visited{
+  color: black;
+}
+.single-room .room-p02 a:link{
+  font-size: 14px;
+  color: #bbbbbb;
+}
+
+/*footer*/
+footer{
+  width: 100%;
+  background: #35383a;
+}
+footer ul li{
+  float: none;
+  margin-top: 10px;
+}
+.index-footer ul li:first-child{
+  font-size: 20px;
+  color: white;
+}
+.index-footer a:link{
+  font-size: 16px;
+  color: #fff2e3;
+}
+.index-footer a:visited{
+  color: white;
+}
+.index-footer a:hover{
+  color: #00cc66;
+  text-decoration: #00cc66;
+}
+
+
+.login-background{
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 1200px;
+  height: 800px;
+  background: url("../../src/assets/images/login_background.jpg");
+  background-size: cover;
+}
+/*登录界面*/
+#login{
+  width: 400px;
+  height: 500px;
+  position: relative;
+  left:55%;
+  top: 20%;
+  background: #e5e5e5;
+  text-align: center;
+  opacity: 0.9;
+}
+#login p:first-child{
+  font-size: 30px;
+  position: relative;
+  top: 40px;
+}
+#login div{
+  margin-top: 60px;
+  color: chocolate;
+}
+#login input{
+  height: 50px;
+  width: 300px;
+  border: none;
+  margin-top: 30px;
+  font-size: 20px;
+  color: black;
+
+
+}
+#login button{
+  width: 200px;
+  height: 60px;
+  outline: none;
+  border: none;
+  background: #00cc66;
+  font-size: 20px;
+  position: absolute;
+  top: 310px;
+  left:100px;
+}
+.fpwd a{
+  position: relative;
+  left: 900px;
+  top: -38px;
+}
+.fpwd a:hover{
+  text-decoration: none;
+  color: black;
+}
+
+.lg-rg p{
+  position: relative;
+  left: 780px;
+  top: 60px;
+}
+.lg-rg a{
+  position: relative;
+  left: 875px;
+  top: 30px;
+}
+.lg-rg a:link{
+  color: #0BC165;
+  text-decoration: none;
+}
+.lg-rg a:visited{
+  color: #0BC165;
+}
+#login #reg-btn{
+  position: absolute;
+  top: 400px;
+}
+#login #reg-tel{
+  position: absolute;
+  top: 60px;
+  left: 50px;
+}
+#reg-pwd{
+  position: absolute;
+  top: 165px;
+  left: 50px;
+}
+#conf-pwd{
+  position: absolute;
+  top: 270px;
+  left: 50px;
+
+}
+#loginform .tel-reg-err{
+  position: absolute;
+  top: 100px;
+  left: 70px;
+  color: red;
+}
+.reg-err{
+  position: absolute;
+  top: 360px;
+  left: 55px;
+  color: red;
+}
+.pwd-im{
+  position: absolute;
+  top: 260px;
+  left: 55px;
+  color: grey;
+}
+#loginform  .ret-log .err-p{
+  width: 100px;
+  position: relative;
+  top: 247px;
+  left: 130px;
+}
+#loginform  .ret-log .err-a{
+  width: 100px;
+  position: relative;
+  top: 270px;
+  left: 80px;
+}
+#loginform .ret-log p{
+  font-size: 15px;
+  color: red;
+  position: absolute;
+  top: 352px;
+  left: 150px;
+}
+#loginform .ret-log a{
+  font-size: 15px;
+  color: #0AC165;
+  position: absolute;
+  top: 367px;
+  left: 250px;
+}
+
+/*手机版导航*/
+.index-phone-false{
+  overflow: hidden;
+  width: 100%;
+  height: 1000px;
+  background: #292929;
+}
+
+.index-phone-arr div{
+  width: 100%;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  margin-bottom: 40px;
+  border-bottom: 2px solid white;
+  border-top: 2px solid white;
+}
+.index-phone-arr div:hover{
+  background: #717171;
+  color: black;
+}
+.index-phone-arrt a:link{
+  color: white;
+  text-decoration: none;
+}
+.index-phone-arr a:visited{
+  color: white;
+  text-decoration: none;
+}
+
+
+
+/*积分商城*/
+
+.intergral-ads img{
+  width: 100%;
+  height: 120px;
+}
+.showintegral p{
+  float: left;
+  position: absolute;
+  left: 650px;
+  top: 225px;
+  font-size: 18px;
+}
+.showintegral a{
+  float: left;
+  position: absolute;
+  left: 650px;
+  top: 240px;
+  font-size: 18px;
+  color: #00cc66;
+
+}
+.intergral-content-middle div{
+  width: 250px;
+  height: 350px;
+  display: table-cell;
+  text-align: center;
+  margin-bottom: 20px;
+  background: white;
+  border-radius: 10px;
+}
+.intergral-content-middle div:hover{
+  box-shadow: 5px 5px 10px #717171;
+  margin-top: -5px;
+}
+/*设置图片属性*/
+.intergral-content-middle div img{
+  width: 70%;
+  height:180px;
+  object-fit: cover;
+  margin: 0 auto;
+}
+.intergral-content-middle div a{
+  font-size: 16px;
+}
+.intergral-content-middle div a:hover{
+  color: #00cc66;
+  font-size: 20px;
+}
+.intergral-content-middle div p{
+  font-size: 16px;
+  color: #7b8099;
+}
+/*兑换按钮*/
+.intergral-content-middle div button{
+  width: 100px;
+  height: 25px;
+  border: 1px solid;
+  border-radius: 15px;
+  background: #fdb814;
+  font-size: 14px;
+}
+
+.intergral-nextpage div{
+  height: 48px;
+  width: 48px;
+  margin-right: 20px;
+  text-align: center;
+  line-height: 48px;
+}
+/*******************************************页码*/
+
+.apart-footer ul{
+  list-style: none;
+}
+.apart-footer ul li{
+  float: left;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  border: solid 1px black;
+  box-sizing: border-box;
+  margin: 0 5px;
+  font-size: 20px;
+  color: black;
+}
+.apart-footer .apart-footer-content ul .li-img-left{
+  border: none;
+}
+.apart-footer .apart-footer-content ul .li-img-right{
+  border: none;
+}
