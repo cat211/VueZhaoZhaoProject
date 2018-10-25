@@ -75,8 +75,8 @@
                 <div class="col-md-4">
                   <div class="row">
                     <div class="col-md-4"><a href="#" >默认排序</a></div>
-                    <div class="col-md-4" @click="Search()"><a href="#" @click="changeSortType(sort_type_one=0,sort_type_two)">价格排序</a></div>
-                    <div class="col-md-4" @click="Search()"><a href="#" @click="changeSortType(sort_type_one=1,sort_type_two)">评分排序</a></div>
+                    <div class="col-md-4"><a href="#" @click.prevent="PriceSort(0)">价格排序</a></div>
+                    <div class="col-md-4"><a href="#" @click.prevent="MarkSort(1)">评分排序</a></div>
                   </div>
                 </div>
                 <div class="col-md-8"></div>
@@ -173,8 +173,6 @@
             vm.showContent();
             vm.search_city='';
             vm.search_data='';
-            vm.sort_type_one='';
-            vm.sort_type_two='';
             vm.city='';
           })
           .catch(function (error) {
@@ -226,14 +224,29 @@
         sessionStorage.setItem('bhname',name);
         this.$router.push({path: "/house"});
       },
-      //排序
-      changeSortType:function (sort_type_one,sort_type_two) {
-        this.$options.methods.Search();
-        if(this.sort_type_two==0){
-          this.sort_type_two=1;
-        }else {
-          this.sort_type_two=0;
-        }
+      // 价格排序
+      PriceSort:function(type){
+        this.search_city = '';
+        this.search_data = '';
+        this.page_index = 1;
+        this.sort_type_one = type;
+        if (this.sort_type_two === 0){
+          this.sort_type_two = 1;
+        } else
+          this.sort_type_two = 0;
+        this.getData();
+      },
+      // 评分排序
+      MarkSort:function(type){
+        this.search_city = '';
+        this.search_data = '';
+        this.page_index = 1;
+        this.sort_type_one = type;
+        if (this.sort_type_two === 0){
+          this.sort_type_two = 1;
+        } else
+          this.sort_type_two = 0;
+        this.getData();
       },
       showContent:function () {
         if (this.new_result_list.length<1){
@@ -269,7 +282,23 @@
           this.showContent();
         }
       },
-
+      getData:function () {
+        let vm = this;
+        axios.get('http://127.0.0.1:8000/beadhouse/gethouseby/'+vm.search_city+'/'+vm.search_data+'/'+vm.sort_type_one+'/'+vm.sort_type_two+'/')
+          .then(function (response) {
+            vm.bh_info = response.data;
+            vm.new_result_list = vm.bh_info;
+            vm.showContent();
+            if(vm.new_result_list.length/10 == 0){
+              vm.page_size = vm.new_result_list.length/10;
+            } else{
+              vm.page_size = Math.ceil(vm.new_result_list.length/10);
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      }
     },
 
     mounted() {
@@ -281,20 +310,7 @@
       }else {
         vm.search_data=''
       }
-      axios.get('http://127.0.0.1:8000/beadhouse/gethouseby//'+vm.search_data+'///')
-        .then(function (response) {
-          vm.bh_info = response.data;
-          vm.new_result_list = vm.bh_info;
-          vm.showContent();
-          if(vm.new_result_list.length/10 == 0){
-            vm.page_size = vm.new_result_list.length/10;
-          } else{
-            vm.page_size = Math.ceil(vm.new_result_list.length/10);
-          }
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+      this.getData()
     }
   }
 </script>
