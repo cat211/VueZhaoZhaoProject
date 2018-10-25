@@ -10,6 +10,9 @@
           </li>
           <li v-show="is_show" v-for="i in page_control"><a href="javascript:void 0" v-text="i" @click.prevent="getIndex(i)"></a></li>
           <li>
+            <span v-show="etc_show">...</span>
+          </li>
+          <li>
             <a href="javascript:void 0" aria-label="Next" @click.prevent="nextPage">
               <span aria-hidden="true">&raquo;</span>
             </a>
@@ -28,7 +31,8 @@ export default {
       return {
         page_control:[],
         pageindex : 1,
-        is_show : true
+        is_show : true,
+        etc_show: false,
       }
     },
     mounted () {
@@ -37,13 +41,25 @@ export default {
     watch:{
       "page_size": function(newpage,oldpage) {
         this.pageindex = 1;
-        this.changeIndex(this.pageindex)
+        this.changeIndex(this.pageindex);
         if(this.page_size>1){
           this.is_show = true;
         }else
           this.is_show = false;
+        if (this.pageindex<=this.page_size-3){
+          this.etc_show = true;
+        }else {
+          this.etc_show = false;
+        }
       },
     deep:true,
+      "pageindex":function () {
+        if (this.pageindex<=this.page_size-3){
+          this.etc_show = true;
+        }else {
+          this.etc_show = false;
+        }
+      }
   },
     methods:{
       changeIndex:function(i){

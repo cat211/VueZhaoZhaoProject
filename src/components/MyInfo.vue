@@ -1,5 +1,7 @@
 <template>
   <div class="col-md-9">
+    <!--提示消息模态框-->
+    <message-modal :err_message="err_message" :err_message_info="err_message_info"></message-modal>
     <div class="row">
       <div class="col-md-12">
         <div class="panel panel-primary">
@@ -63,6 +65,8 @@
     data() {
       return{
         user_info: {
+          err_message_info:'',
+          err_message:''
         },
         useridicon: sessionStorage.getItem('u_id'),
       }
@@ -71,7 +75,8 @@
       //保存用户信息
       saveUserInfo:function(){
         if(this.user_info.telephone==''){
-          alert('电话号码不能为空！');
+          this.err_message='电话号不能为空';
+          this.err_message_info='请输入完整的电话号码';
         }else {
           var token=sessionStorage.getItem('token');
           var user_id=sessionStorage.getItem('u_id');
@@ -81,19 +86,17 @@
             "sex":this.user_info.sex,
             "telephone":this.user_info.telephone,
           };
+          let that = this;
           axios.post('http://127.0.0.1:8000/user/changeinfo/',data,{headers:{"token":token}})
             .then(function (response) {
               if(response.data.code=='202'){
-                alert('保存成功');
+                that.err_message='保存成功';
+                that.err_message_info='用户信息保存成功';
               }
-              console.log(response.data)
-              console.log(response)
             })
             .catch(function (error) {
               console.log(error)
-            })
-
-          console.log(this.user_info.telephone);
+            });
         }
       },
 
@@ -122,8 +125,8 @@
 
       }
       else {
-        alert('请先登录！');
-        this.$router.push({path: "/login"});
+        this.err_message='你还未登录';
+        this.err_message_info='请登录后使用该功能';
       }
 
     }

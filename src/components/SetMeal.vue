@@ -1,5 +1,7 @@
 <template>
   <div class="meal-body container panel panel-success">
+    <!--提示消息模态框-->
+    <message-modal :err_message="err_message" :err_message_info="err_message_info"></message-modal>
     <div class="row meal-body-title panel-heading ">
       <div class="col-md-12 ">
         <a href="" @click.prevent="goBeadHouse"><h1 class="text-center" >{{beadhouse_name}}</h1></a>
@@ -45,6 +47,8 @@
         beadhouse_id: 0,
         beadhouse_name: '',
         meal_list : [],
+        err_message:'',
+        err_message_info:'',
       }
     },
     mounted: function () {
@@ -74,20 +78,23 @@
             "user_id": sessionStorage.getItem('u_id'),
             "good_list": [
               {
-                "id": event.target.id,
+                "id": parseInt(event.target.id),
                 "number": 1,
                 "type": 1
               },
             ]
           };
+          let that = this;
           let token = sessionStorage.getItem('token');
           axios.post('http://127.0.0.1:8000/cart/addcart/', meal, {headers: {"token": token}})
             .then(function (response) {
               if (response.data.statuscode === '202') {
-                alert('添加成功');
+                that.err_message='添加成功';
+                that.err_message_info='详情请在购物车内查看';
                 vm.getOldInfo();
               } else {
-                alert("添加失败");
+                that.err_message='添加失败';
+                that.err_message_info='如果遇到问题请联系客服解决';
               }
               console.log(response.data);
             })
@@ -95,7 +102,8 @@
               console.log(error)
             })
         }else {
-          alert('你还未登录')
+          this.err_message='你还未登录';
+          this.err_message_info='请登录后使用该功能'
         }
       }
     }
@@ -112,7 +120,7 @@
     margin: 0 auto;
     margin-top: 20px;
     width: 100%;
-    height: 200px;
+    min-height: 200px;
     background: url("../assets/images/room01.png");
     background-size: cover;
   }
@@ -141,6 +149,9 @@
   }
   .panel{
     margin-top: 20px;
+  }
+  .meal-body{
+    min-height: 700px;
   }
 </style>
 
