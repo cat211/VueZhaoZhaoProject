@@ -4,7 +4,60 @@
     <div class="index-search-background">
       <div class="container ">
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-md-4 sky">
+            <h4>
+              <img :src=sky_src alt="">今日天气</h4>
+
+            <p class="city">
+              <input class="form-control" @click="toAddress" v-model="city">
+              <button class="btn btn-sm btn-success" @click="getSky()">切换</button>
+              <v-distpicker @selected='selected' v-show="addInp" class="address">
+              </v-distpicker>
+            </p>
+            <p>
+              <span>日期:</span>
+              <span v-text="sky.result.HeWeather5[0].daily_forecast.date"></span>
+            </p>
+            <p>
+              <span>最高气温:</span>
+              <span v-text="sky.result.HeWeather5[0].daily_forecast.tmp.max"></span>
+              <span>℃</span>
+            </p>
+            <p>
+              <span>最低气温:</span>
+              <span v-text="sky.result.HeWeather5[0].daily_forecast.tmp.min"></span>
+              <span>℃</span>
+            </p>
+            <p>
+              <span>天气状况:</span>
+              <span v-text="sky.result.HeWeather5[0].daily_forecast.cond.txt_n"></span>
+            </p>
+            <p>
+              <span>风力:</span>
+              <span v-text="sky.result.HeWeather5[0].daily_forecast.wind.dir"></span>
+              <span v-text="sky.result.HeWeather5[0].daily_forecast.wind.sc"></span>
+              <span>级</span>
+              <span v-text="sky.result.HeWeather5[0].suggestion.comf.brf"></span>
+            </p>
+            <p>
+              <span>空气质量:</span>
+              <span v-text="sky.result.HeWeather5[0].aqi.city.qlty"></span>
+            </p>
+            <p>
+              <span>PM2.5:</span>
+              <span v-text="sky.result.HeWeather5[0].aqi.city.pm25"></span>
+            </p>
+            <p>
+              <span>能见度:</span>
+              <span v-text="sky.result.HeWeather5[0].daily_forecast.vis"></span>
+            </p>
+            <p>
+              <span>感冒:</span>
+              <span v-text="sky.result.HeWeather5[0].suggestion.flu.brf"></span>
+            </p>
+
+          </div>
+          <div class="col-md-6">
             <div class="input-group">
               <input type="text" class="form-control input-search" placeholder="" v-model="ser_word">
               <span class="input-group-btn">
@@ -12,6 +65,9 @@
               </span>
             </div><!-- /input-group -->
           </div><!-- /.col-lg-6 -->
+          <div class="col-md-2">
+            <h4 class="state text-center btn" @click="goToMyState()"><strong></strong></h4>
+          </div>
         </div><!-- /.row -->
       </div>
 
@@ -21,7 +77,10 @@
       <div class="index-rooms-back">
         <div class="row">
           <p class="col-md-5"></p>
-          <p class="col-md-2 goodhouse"><button class="center-block center-button btn btn-warning"><h4><img src="../assets/images/index_hot_icon.png" alt="">优 选 公 寓</h4></button></p>
+          <p class="col-md-2 goodhouse">
+            <button class="center-block center-button btn btn-warning"><h4><img
+              src="../assets/images/index_hot_icon.png" alt="">优 选 公 寓</h4></button>
+          </p>
           <p class="col-md-5"></p>
         </div>
         <div class="row">
@@ -30,7 +89,7 @@
             <div class="row  ">
               <div class="col-md-3 single-room " v-for="h in house_list" v-on:click="toapartinfo(h.id)">
                 <router-link to="/house" class="beadhouse-img">
-                  <img  src="../assets/images/room_pic.jpg" alt="" :title=h.long_name>
+                  <img src="../assets/images/room_pic.jpg" alt="" :title=h.long_name>
                 </router-link>
                 <router-link to="/house" class="beadhouse-title">
                   <div>
@@ -56,27 +115,85 @@
 
 <script>
   import axios from 'axios'
+
   export default {
     name: 'Index',
     data: function () {
       return {
         house_list: [],
         ser_word: '',
+        city: '北京',
+        addInp: false,
+        mask: false,
+        search_city: '北京',
+        sky: {},
+        sky_src:'http://127.0.0.1:8000/media/pic/sky-sun.png'
 
       }
     },
     mounted: function () {
+      this.getSky();
       this.GetHouseData();
     },
     methods: {
+      //点击弹出三级联动npm install v-distpicker --save
+      toAddress() {
+        this.mask = true;
+        this.addInp = true;
+      },
+      //省市区三级联动
+      selected(data) {
+        this.mask = false;
+        this.addInp = false;
+        this.city = data.province.value + ' ' + data.city.value + ' ' + data.area.value;
+        this.search_city = data.city.value.split('市')[0].split('城区')[0]
+      },
+      getSky: function () {
+        var vm = this;
+        var data = {
+          "city": this.search_city
+        }
+        axios.post('http://127.0.0.1:8000/beadhouse/sky/', data)
+          .then(function (response) {
+            vm.sky = response.data
+            var reg1 = /.*?晴.*/;
+            var reg2 = /.*?阴.*/;
+            var reg3 = /.*?云.*/;
+            var reg4 = /.*?雨.*/;
+            var reg5 = /.*?雪.*/;
+
+            if (reg1.test(vm.sky.result.HeWeather5[0].daily_forecast[0].cond.txt_n)) {
+              vm.sky_src='http://127.0.0.1:8000/media/pic/sky-sun.png';
+            }
+            else if (reg2.test(vm.sky.result.HeWeather5[0].daily_forecast[0].cond.txt_n)) {
+              vm.sky_src='http://127.0.0.1:8000/media/pic/sky-yin.png';
+            }
+            else if (reg3.test(vm.sky.result.HeWeather5[0].daily_forecast[0].cond.txt_n)) {
+              vm.sky_src='http://127.0.0.1:8000/media/pic/sky-yun.png';
+            }
+            else if (reg4.test(vm.sky.result.HeWeather5[0].daily_forecast[0].cond.txt_n)) {
+              vm.sky_src='http://127.0.0.1:8000/media/pic/sky-rain.png';
+            }
+            else if (reg5.test(vm.sky.result.HeWeather5[0].daily_forecast[0].cond.txt_n)) {
+              vm.sky_src='http://127.0.0.1:8000/media/pic/sky-xue.png';
+            }
+            else{
+              vm.sky_src='http://127.0.0.1:8000/media/pic/sky-sun.png';
+            }
+            console.log(vm.sky)
+          })
+          .catch(function (error) {
+            console.log(error)
+          });
+      },
       GetHouseData: function () {
-        var that=this;
+        var that = this;
         axios.get('http://127.0.0.1:8000/beadhouse/gethouseby///1/1/')
           .then(function (response) {
             response.data.forEach((item, index) => {
-              if (item.score >=4.8) {
+              if (item.score >= 4.8) {
                 console.log(item);
-                if(that.house_list.length<8){
+                if (that.house_list.length < 8) {
                   that.house_list.push(item)
                 }
 
@@ -102,8 +219,12 @@
           this.$router.push({path: "/apart"});
         }
       },
-      toapartinfo:function (id) {
-        sessionStorage.setItem('bhid',id);
+      toapartinfo: function (id) {
+        sessionStorage.setItem('bhid', id);
+      },
+      goToMyState:function () {
+        sessionStorage.setItem('gotostate',true)
+        this.$router.push({path: "/personalcenter"});
       }
     }
   }
@@ -111,69 +232,81 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .goodhouse{
+  .goodhouse {
     width: 100%;
     height: 85px;
   }
-  .single-room{
+
+  .single-room {
     padding: 0;
     margin: 0;
   }
-  .single-room img{
+
+  .single-room img {
     width: 100%;
 
   }
-  .center-button{
-    margin-top:20px;
+
+  .center-button {
+    margin-top: 20px;
     width: 250px;
     height: 55px;
   }
-  .beadhouse-img img,.beadhouse-title div{
+
+  .beadhouse-img img, .beadhouse-title div {
     border: white solid 15px;
     border-bottom: white solid 8px;
   }
-  .beadhouse-title h3{
-   float: right;
+
+  .beadhouse-title h3 {
+    float: right;
     overflow: hidden;
   }
 
-  p,h3,h4{
+  p, h3, h4 {
     margin: 0;
     padding: 0;
   }
-  a:link,a:visited{
+
+  a:link, a:visited {
     color: black;
   }
-  a{
+
+  a {
     text-decoration: none;
   }
-  .text-orange{
-    color:orange;
+
+  .text-orange {
+    color: orange;
   }
-  .goodhouse h4 img,.beadhouse-title span img{
+
+  .goodhouse h4 img, .beadhouse-title span img {
     width: 35px;
     height: 35px;
   }
+
   /*搜索部分*/
-  .index-search-background{
+  .index-search-background {
     height: 400px;
     background: url("../../src/assets/images/index_search_background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
+
   /*搜索框*/
-  .index-search-background div{
-    display: flex;
+  .index-search-background div {
+    /*display: flex;*/
   }
-  .index-search-background .input-group .input-search{
+
+  .index-search-background .input-group .input-search {
     height: 50px;
     width: 500px;
     margin-top: 260px;
-    margin-left: 320px;
     font-size: 30px;
     border: none;
   }
-  .index-search-background .input-group-btn #input-submit{
+
+  .index-search-background .input-group-btn #input-submit {
     height: 50px;
     width: 100px;
     margin-top: 260px;
@@ -182,13 +315,59 @@
     outline: none;
     font-size: 18px;
   }
-  .input-search{
+
+  .input-search {
     outline: none;
   }
-  .index-rooms-back{
+
+  .index-rooms-back {
     margin-bottom: 70px;
   }
-  #input-submit{
+
+  #input-submit {
     color: white;
+  }
+
+  .sky {
+    width: 300px;
+    height: 350px;
+    margin-top: 20px;
+    padding: 5px 35px;
+    color: white;
+    background: rgba(0, 0, 0, 0.34);
+  }
+
+  .sky p {
+    width: 240px;
+    margin: 5px;
+  }
+
+  .sky img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .city input {
+    width: 170px;
+    display: inline-block;
+  }
+
+  .city button {
+    display: inline-block;
+  }
+  .address{
+    position: fixed;
+    z-index: 2;
+  }
+  .state{
+    width: 80px;
+    height: 80px;
+    color: #00cc66;
+    background-image: url("../assets/images/index_state.png");
+    background-size:80px;
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 70%;
+    right: 0;
   }
 </style>
