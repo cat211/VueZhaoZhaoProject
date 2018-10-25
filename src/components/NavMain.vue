@@ -30,7 +30,7 @@
             <router-link to="./personalcenter"><a href="javascript:void 0" >个人中心</a></router-link>
           </li>
           <li role="presentation" v-show="true">
-            <a href="javascript:void 0" @click = logOut v-show="islogin">退出</a>
+            <a href="javascript:void 0" @click = logOut v-if="islogin">退出</a>
           </li>
         </ul>
       </div>
@@ -53,7 +53,7 @@ export default {
   methods:{
     logOut:function () {
       sessionStorage.clear();
-      this.islogin=false;
+      this.$emit('exit',false)
       this.$router.push({path:"/login"});
     }
   }
