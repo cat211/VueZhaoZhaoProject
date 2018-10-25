@@ -275,7 +275,7 @@
                   that.want_replay=true;
                 }else {
                   that.all_comment[i].showreplay = false
-
+                  that.want_replay=false;
                 }
                 // console.log('看看状态加进来没')
                 console.log(that.all_comment)
