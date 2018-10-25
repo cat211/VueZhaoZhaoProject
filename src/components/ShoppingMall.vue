@@ -29,7 +29,7 @@
           <!--兑换 class="btn btn-primary btn-lg"-->
           <!--</button>-->
           <div id="app">
-            <button type="button" class="btn g_b" @click="showModal(good.price)" >兑换</button>
+            <button type="button" class="btn g_b" @click="showModal(good.price,good.name,good.id)" >兑换</button>
             <modal v-show="isModalVisible"  @close="closeModal" :good_poins="fa_goodnum" :showinterl="myintergral"/>
           </div>
         </div>
@@ -86,6 +86,11 @@
         result_list : [],
         page_index : 1,
         page_size : 1,
+        b_name:'',
+        order_list:[],
+        good_id:0,
+        good_name:'',
+        good_price:0,
       }
     },
     mounted: function () {
@@ -131,7 +136,9 @@
         var that = this
         axios.get('http://127.0.0.1:8000/goods/getallgoods/')
             .then(function (response){
+              // console.log(response.data)
               response.data.forEach((item, index) => {
+                item.fields.id=item.pk;
                 item.fields.long_name=item.fields.name;
                 if (item.fields.name.length>11){
                   item.fields.name=item.fields.name.substring(0,11)+'...'
@@ -158,8 +165,11 @@
             })
 
       },
-      showModal: function (p) {
+      showModal: function (p,n,i) {
           this.fa_goodnum=p
+        this.good_price=p
+        this.good_name=n
+        this.good_id=i
         setTimeout(() => {
           var user = {
             "user_id":sessionStorage.getItem('u_id')
@@ -191,7 +201,7 @@
       },
       closeModal: function (state) {
         //0 是确认兑换 1 是关闭
-        if (state===0){
+        if (state.code===0){
           setTimeout(() => {
             var user = {
               "user_id":sessionStorage.getItem('u_id')
@@ -217,6 +227,71 @@
               })
             this.isModalVisible = false
           }, 900);
+          // this.$options.methods.toorder(state.name,state.id)
+          console.log('toorder')
+          var that=this
+          var u_id=sessionStorage.getItem('u_id')
+          var token=sessionStorage.getItem('token')
+          var user={
+            "user_id":u_id
+          }
+
+          axios.post('http://127.0.0.1:8000/order/getorder/', user, {
+            headers: {
+              "token": token
+            }
+          })
+            .then(function (response) {
+              // console.log(response.data)
+              response.data.forEach((item, index) => {
+                if (item.check_info__name==state.name){
+                  // console.log(item.order_list[0])
+                  that.order_list.push(item.order_list[0])
+                }
+              })
+
+
+
+                that.b_name=that.order_list[0].beadhouse_name
+                // console.log('1')
+                // console.log(that.b_name)
+                var addorder={
+                  "user_id":u_id,
+                  "good_list":[{
+                    "id":4,
+                    "name":that.good_name,
+                    "price":that.good_price,
+                    "beadhouse_name":that.b_name,
+                    "number":1,
+                    "good_id":that.good_id,
+                    "type":3
+                  }],
+                  "check_info_id":state.id,
+                  "price":that.good_price,
+                  "status":2
+                }
+                  console.log(addorder)
+                  axios.post('http://127.0.0.1:8000/order/addorder/', addorder, {
+                    headers: {
+                      "token": token
+                    }
+                  })
+                    .then(function (response) {
+                      console.log(response.data)
+
+                    })
+                    .catch(function (error) {
+                      console.log(error)
+                    })
+
+
+
+
+            })
+            .catch(function (error) {
+              console.log(error)
+            })
+
 
         } else {
           this.isModalVisible = false
@@ -279,6 +354,7 @@
           this.showContent();
         }
       },
+
     }
   }
 

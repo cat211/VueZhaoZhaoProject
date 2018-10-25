@@ -70,6 +70,7 @@
 
         ],
         unitName: '请选择入住人',
+        unitId: 0,
         unitModel: '',
         num:0,
         err_im:'',
@@ -82,8 +83,8 @@
 
       this.num=sessionStorage.getItem('good_intergral');
       setTimeout(() => {
-        console.log('看看积分传过来没')
-        console.log(this.showinterl)
+        // console.log('看看积分传过来没')
+        // console.log(this.showinterl)
         this.islogin();
       }, 4000);
 
@@ -120,7 +121,7 @@
               .catch(function (error) {
                 console.log(error)
               })
-            this.$emit('close',0);
+            this.$emit('close',{code:0,name:this.unitName,id:this.unitId});
           }
 
         }
@@ -133,8 +134,8 @@
       },
       islogin:function(){
         if (sessionStorage.getItem('u_id')) {
-          console.log('看看积分传到islogin')
-          console.log(this.showinterl)
+          // console.log('看看积分传到islogin')
+          // console.log(this.showinterl)
           this.showint=this.showinterl
           // 传到了
         } else {
@@ -157,6 +158,7 @@
         console.log(index);
         this.unitModel = index;
         this.unitName = item.name;
+        this.unitId=item.id;
       },
       getname: function () {
         var u_id = {
