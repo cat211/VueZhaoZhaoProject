@@ -14,8 +14,8 @@
             <div class="panel-heading">
               <div class="row">
                 <div class="col-lg-4">
-                  <input class="city inputkey form-control" @click="toAddress" v-model="city" placeholder="请选择地区">
-                  <v-distpicker type="mobile" @selected='selected' v-show="addInp">
+                  <input class="inputkey form-control" @click="toAddress" v-model="city" placeholder="请选择地区">
+                  <v-distpicker class="city" @selected='selected' v-show="addInp">
                   </v-distpicker>
                 </div>
                 <div class="col-md-3"></div>
@@ -75,8 +75,8 @@
                 <div class="col-md-4">
                   <div class="row">
                     <div class="col-md-4"><a href="#" >默认排序</a></div>
-                    <div class="col-md-4"><a href="#" @click.prevent="PriceSort(0)">价格排序</a></div>
-                    <div class="col-md-4"><a href="#" @click.prevent="MarkSort(1)">评分排序</a></div>
+                    <div class="col-md-4"><a href="#" @click="changeSortType(sort_type_one=0,sort_type_two)">价格排序</a></div>
+                    <div class="col-md-4"><a href="#" @click="changeSortType(sort_type_one=1,sort_type_two)">评分排序</a></div>
                   </div>
                 </div>
                 <div class="col-md-8"></div>
@@ -142,8 +142,8 @@
         mask: false,
         search_data: '',
         search_city:'',
-        sort_type_one:0,
-        sort_type_two:0,
+        sort_type_one:'',
+        sort_type_two:'',
         page_index : 1,
         page_size : 0,
         result_list:[],
@@ -161,10 +161,13 @@
         this.mask = false;
         this.addInp = false;
         this.city = data.province.value + ' ' + data.city.value + ' ' + data.area.value;
-        this.search_city=data.city.value
+        this.search_city = data.city.value.split('市')[0].split('城区')[0]
       },
       //根据地址+关键字搜索
       Search: function () {
+        this.sort_type_two = '';
+        this.sort_type_one = '';
+        this.page_index = 1;
         var vm = this;
         axios.get('http://127.0.0.1:8000/beadhouse/gethouseby/' + vm.search_city + '/' + vm.search_data + '/'+ vm.sort_type_one+'/'+ vm.sort_type_two+'/')
           .then(function (response) {
@@ -178,7 +181,6 @@
           .catch(function (error) {
             console.log(error)
           });
-
       },
       // 筛选价格
       getPrice:function(event){
@@ -225,27 +227,39 @@
         this.$router.push({path: "/house"});
       },
       // 价格排序
-      PriceSort:function(type){
+      // PriceSort:function(type){
+      //   this.search_city = '';
+      //   this.search_data = '';
+      //   this.page_index = 1;
+      //   this.sort_type_one = type;
+      //   if (this.sort_type_two === 0){
+      //     this.sort_type_two = 1;
+      //   } else
+      //     this.sort_type_two = 0;
+      //   this.getData();
+      // },
+      // // 评分排序
+      // MarkSort:function(type){
+      //   this.search_city = '';
+      //   this.search_data = '';
+      //   this.page_index = 1;
+      //   this.sort_type_one = type;
+      //   if (this.sort_type_two === 0){
+      //     this.sort_type_two = 1;
+      //   } else
+      //     this.sort_type_two = 0;
+      //   this.getData();
+      // },
+      //排序
+      changeSortType:function (sort_type_one,sort_type_two) {
+        if(sort_type_two==0){
+          this.sort_type_two=1;
+        }else {
+          this.sort_type_two=0;
+        }
         this.search_city = '';
         this.search_data = '';
         this.page_index = 1;
-        this.sort_type_one = type;
-        if (this.sort_type_two === 0){
-          this.sort_type_two = 1;
-        } else
-          this.sort_type_two = 0;
-        this.getData();
-      },
-      // 评分排序
-      MarkSort:function(type){
-        this.search_city = '';
-        this.search_data = '';
-        this.page_index = 1;
-        this.sort_type_one = type;
-        if (this.sort_type_two === 0){
-          this.sort_type_two = 1;
-        } else
-          this.sort_type_two = 0;
         this.getData();
       },
       showContent:function () {
@@ -396,4 +410,9 @@
   .bigimg:hover{
     transform: scale(1.3);
   }
+  .city{
+    position: fixed;
+    z-index: 2;
+  }
+
 </style>

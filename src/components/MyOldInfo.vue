@@ -101,26 +101,24 @@
         var user_id = sessionStorage.getItem('u_id');
         var data = {
           "user_id": user_id
-        }
+        };
         if (token) {
           axios.post('http://127.0.0.1:8000/user/getcheckinfo/', data, {headers: {"token": token}
           })
             .then(function (response) {
-              vm.old_info = response.data
+              vm.old_info = response.data;
               if(vm.old_info.length<1){
                 vm.show=true;
               }
               sessionStorage.setItem('old_id',vm.old_info.id);
-              console.log(response.data)
-              console.log(response)
             })
             .catch(function (error) {
               console.log(error)
             })
         }
         else {
-          alert('请先登录！')
-          this.$router.push({path: "/login"});
+          this.err_message='你还未登录';
+          this.err_message_info='请登录后使用该功能';
         }
       },
       //保存全部入住人信息
@@ -131,15 +129,18 @@
         var reg2= /^1[3456789]\d{9}$/;
         for (let i of this.old_info) {
           if (i.name == '') {
-            alert('姓名不能为空！');
+            this.err_message='姓名不能为空';
+            this.err_message_info='请输入完整的姓名';
             break;
           }
           if (!reg2.test(i.telephone)||!reg2.test(i.ec_telephone)) {
-            alert('手机号码格式错误！')
+            this.err_message='电话号格式不正确';
+            this.err_message_info='请输入正确的电话号码';
             break;
           }
           if (!reg1.test(i.birthday)) {
-            alert('日期格式错误！')
+            this.err_message='日期格式错误';
+            this.err_message_info='请输入正确的日期 如:1975-01-29';
             break;
           }
           j++;
@@ -151,27 +152,27 @@
           var data = {
             "user_id": user_id,
             "check_infos": this.old_info
-          }
+          };
+          let that = this;
           if (token) {
             axios.post('http://127.0.0.1:8000/user/addcheckinfo/', data, {headers: {"token": token}})
               .then(function (response) {
                 if (response.data.statuscode == '202') {
-                  alert('保存成功！')
+                  that.err_message='保存成功';
+                  that.err_message_info='成功保存入住人信息';
                   vm.getOldInfo();
                 } else {
-                  alert(response.data.statuscode)
-                  alert('保存失败！')
+                  that.err_message='保存失败';
+                  that.err_message_info='具体问题请咨询客服';
                 }
-                console.log(response.data)
-                console.log(response)
               })
               .catch(function (error) {
                 console.log(error)
               })
           }
           else {
-            alert('请先登录！')
-            this.$router.push({path: "/login"});
+            that.err_message='你还未登录';
+            that.err_message_info='请登录后使用该功能';
           }
         }
       },
@@ -180,7 +181,8 @@
         var k = 0
         for (let i of this.old_info) {
           if (i.name =='') {
-            alert('姓名不能为空！')
+            this.err_message='姓名不能为空';
+            this.err_message_info='请完整的输入入住人姓名';
             break;
           }
           else {
