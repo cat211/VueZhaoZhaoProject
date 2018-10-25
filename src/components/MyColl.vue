@@ -137,11 +137,11 @@
           'http://127.0.0.1:8000/media/pic/house-1.jpg',
           'http://127.0.0.1:8000/media/pic/house-2.jpg',
           'http://127.0.0.1:8000/media/pic/house-3.jpg',
-          'http://127.0.0.1:8000/media/pic/house-2.jpg',
+          'http://127.0.0.1:8000/media/pic/house-4.jpg',
           'http://127.0.0.1:8000/media/pic/house-1.jpg',
           'http://127.0.0.1:8000/media/pic/house-2.jpg',
           'http://127.0.0.1:8000/media/pic/house-3.jpg',
-          'http://127.0.0.1:8000/media/pic/house-2.jpg',
+          'http://127.0.0.1:8000/media/pic/house-4.jpg',
           'http://127.0.0.1:8000/media/pic/house-1.jpg',
           'http://127.0.0.1:8000/media/pic/house-2.jpg',
         ]
