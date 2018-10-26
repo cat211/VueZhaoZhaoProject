@@ -78,8 +78,8 @@
         <div class="row">
           <p class="col-md-5"></p>
           <p class="col-md-2 goodhouse">
-            <button class="center-block center-button btn btn-warning"><h4><img
-              src="../assets/images/index_hot_icon.png" alt="">优 选 公 寓</h4></button>
+            <button class="center-block center-button btn btn-warning">
+              <h4><img src="../assets/images/index_hot_icon.png" alt="">优选养老院</h4></button>
           </p>
           <p class="col-md-5"></p>
         </div>
@@ -381,5 +381,8 @@
     position: fixed;
     top: 70%;
     right: 0;
+  }
+  .goodhouse img{
+    margin-left: -10px;
   }
 </style>

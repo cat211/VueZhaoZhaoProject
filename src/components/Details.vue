@@ -22,7 +22,7 @@
                 <li class="list-group-item">
                   <div class="row">
                     <div class="col-md-6 room-img">
-                      <img src="http://127.0.0.1:8000/media/pic/room-1.jpg" alt="">
+                      <img src="../assets/images/det2.jpg" alt="">
                     </div>
                     <div class="col-md-4">
                       <div class="panel panel-default">
@@ -107,7 +107,7 @@
                         </div>
                         <div class="panel-body row">
                           <div class="col-md-6 room-set-img">
-                            <img class="center-block" src="../assets/images/det2.jpg" alt="">
+                            <img class="center-block" :src=setsrc[rs.id%10] alt="">
                           </div>
                           <div class="col-md-6" v-text="rs.content">这是标准营养套餐内容介绍</div>
                         </div>
@@ -152,6 +152,18 @@
         room_name: '',
         err_message: '',
         err_message_info:'',
+        setsrc:[
+          'http://127.0.0.1:8000/media/pic/set-3.jpg',
+          'http://127.0.0.1:8000/media/pic/set-1.jpg',
+          'http://127.0.0.1:8000/media/pic/set-2.jpg',
+          'http://127.0.0.1:8000/media/pic/set-4.jpg',
+          'http://127.0.0.1:8000/media/pic/set-3.jpg',
+          'http://127.0.0.1:8000/media/pic/set-1.jpg',
+          'http://127.0.0.1:8000/media/pic/set-2.jpg',
+          'http://127.0.0.1:8000/media/pic/set-4.jpg',
+          'http://127.0.0.1:8000/media/pic/set-3.jpg',
+          'http://127.0.0.1:8000/media/pic/set-1.jpg',
+        ]
       }
     },
     methods: {

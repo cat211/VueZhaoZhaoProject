@@ -170,8 +170,8 @@
     border-bottom: #deefd8 solid 2px;
     padding: 25px;
   }
-  .jumbotron{
-    color: white;
+  .jumbotron h2{
+    color: black;
     text-shadow: #c6c6c6 2px 2px ;
   }
 
@@ -194,7 +194,6 @@
     height: 80px;
     border: solid 0px black;
     border-radius: 50%;
-    box-shadow: #7b8099 2px 2px 2px;
   }
   .my-index-center{
     padding-top: 20px;

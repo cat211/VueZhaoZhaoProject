@@ -6,7 +6,9 @@
     <!--内容左空白end-->
     <!--中间内容-->
     <div class="col-md-6" v-if="show">
+
       <div class="col-md-2"></div>
+
       <div class="col-md-8">
         <div class="panel panel-danger">
           <div class="panel-heading">登录公寓账户</div>
@@ -23,17 +25,21 @@
           </div>
         </div>
       </div>
+
+
       <div class="col-md-2"></div>
     </div>
-    <div class="col-md-6" v-if="!show">
-      <div class="panel panel-info center-block">
+
+    <div class="col-md-6 user" v-if="!show">
+      <ul class="nav nav-tabs">
+        <li role="presentation"><a href="#" @click="checkstate=true,userstate=false">入住人管理</a></li>
+        <li role="presentation"><a href="#" @click="checkstate=false,userstate=true">用户管理</a></li>
+      </ul>
+      <!--公寓管理-->
+      <div class="panel panel-info center-block" v-if="checkstate">
         <div class="panel-heading">状态报表数据更新</div>
         <div class="panel-body ">
           <div class="col-md-12">
-            <!--<div class="input-group my-input">-->
-              <!--<span class="input-group-addon " ><p>公寓id:</p></span>-->
-              <!--<input type="text" class="form-control" >-->
-            <!--</div>-->
             <div class="input-group my-input">
               <span class="input-group-addon "><p>入住人id:</p></span>
               <input type="text" class="form-control" v-model="check_info_id">
@@ -56,9 +62,36 @@
             </div>
             <button class="btn btn-success center-block" @click="addState()">提交</button>
           </div>
+
         </div>
       </div>
+      <!--公寓管理end-->
+      <!--用户管理-->
+      <div class="panel panel-info center-block" v-if="userstate">
+        <div class="panel-heading">用户积分数据更新</div>
+        <div class="panel-body ">
+          <div class="col-md-12">
+            <div class="input-group my-input">
+              <span class="input-group-addon "><p>用户id:</p></span>
+              <input type="text" class="form-control" v-model="user_id">
+            </div>
+            <div class="input-group my-input">
+              <span class="input-group-addon " ><p>积分类别:</p></span>
+              <select v-model="user_score">
+                <option value ="10" >探望:10</option>
+                <option value ="50" >陪伴:50</option>
+                <option value="100">照料:100</option>
+              </select>
+            </div>
+            <button class="btn btn-success center-block" @click="changeScore()">提交</button>
+          </div>
+
+        </div>
+      </div>
+      <!--用户管理end-->
     </div>
+
+
     <!--中间内容end-->
 
   </div>
@@ -79,6 +112,10 @@
             show:true,
             beadhouse_id:'',
             password:'',
+            checkstate:true,
+            userstate:false,
+            user_id: '',
+            user_score:''
           }
         },
       methods:{
@@ -94,6 +131,8 @@
                 if(response.headers.token){
                   alert('登录成功！')
                   vm.show=false;
+                  sessionStorage.setItem('adminid',vm.beadhouse_id)
+                  sessionStorage.setItem('token',response.headers.token)
                 }
                 else {
                   alert('登录失败！')
@@ -145,7 +184,53 @@
               alert("数据不能为空！")
             }
 
+          },
+        changeScore:function () {
+          var data = {
+            "user_id": this.user_id,
+            "admin_id":sessionStorage.getItem('adminid')
           }
+          var vm = this;
+          var token = sessionStorage.getItem('token');
+          //获取用户积分
+          axios.post('http://127.0.0.1:8000/user/admingetuserinfo/', data,{headers: {"token": token}})
+            .then(function (response) {
+              var user_info=response.data;
+             // 获取成功
+              console.log(user_info)
+             if(user_info.points){
+               vm.user_score=parseInt(user_info.points)+parseInt(vm.user_score);
+               var data = {
+                 "user_id": vm.user_id,
+                 "admin_id":sessionStorage.getItem('adminid'),
+                 "points": vm.user_score,
+
+               }
+               //更改用户积分
+               axios.post('http://127.0.0.1:8000/user/adminupdatepoints/', data,{headers: {"token": token}})
+                 .then(function (response) {
+                   if(response.data.code=='202'){
+                     alert('操作成功！')
+                   }
+                   else{
+                     alert('操作失败!')
+                   }
+                   console.log(response)
+                 })
+                 .catch(function (error) {
+                   console.log(error)
+                 })
+             }
+             //获取用户信息失败
+             else{
+               alert('操作失败！')
+             }
+            })
+            .catch(function (error) {
+              console.log(error)
+            })
+
+        }
       }
     }
 </script>
@@ -185,4 +270,10 @@
     height: 32px;
     width: 506px;
   }
+  .user li{
+    background: #d8ecf6;
+    border-radius: 5px 5px 0 0;
+    margin-right: 2px;
+  }
+
 </style>

@@ -17,18 +17,22 @@
 
       </div>
     </div>
-    <div class="row panel-body">
-      <div class="col-md-12 meal-line1 panel-heading" >
-        <div class="every-meal text-center panel panel-success" v-for="meal in meal_list">
-          <h3 class="panel-heading">{{meal.name}}</h3>
-          <div style="height: 10px"></div>
-          <span>{{meal.price}}</span>元<br>
-          <div style="height: 10px"></div>
-          <div style="height: 50px">
-            <span>{{meal.content}}</span>
+    <div class="row" >
+      <div class="col-md-3 meal-line1 panel-body" v-for="meal in meal_list">
+        <div class="every-meal text-center panel panel-success" >
+          <div class="panel-heading">
+            <h3 >{{meal.name}}</h3>
           </div>
-          <div style="height: 30px"></div>
-          <button class="btn btn-success" @click="addCart($event)" :id="meal.id">加入到购物车</button>
+          <div class="panel-body">
+            <img :src=setsrc[meal.id%10] alt="">
+            <span>{{meal.price}}</span>元<br>
+            <div class="meal-content">
+              <span >{{meal.content}}</span>
+            </div>
+
+            <button class="btn btn-success" @click="addCart($event)" :id="meal.id">加入到购物车</button>
+          </div>
+
         </div>
       </div>
     </div>
@@ -49,6 +53,18 @@
         meal_list : [],
         err_message:'',
         err_message_info:'',
+        setsrc:[
+          'http://127.0.0.1:8000/media/pic/set-3.jpg',
+          'http://127.0.0.1:8000/media/pic/set-1.jpg',
+          'http://127.0.0.1:8000/media/pic/set-4.jpg',
+          'http://127.0.0.1:8000/media/pic/set-2.jpg',
+          'http://127.0.0.1:8000/media/pic/set-3.jpg',
+          'http://127.0.0.1:8000/media/pic/set-1.jpg',
+          'http://127.0.0.1:8000/media/pic/set-4.jpg',
+          'http://127.0.0.1:8000/media/pic/set-2.jpg',
+          'http://127.0.0.1:8000/media/pic/set-3.jpg',
+          'http://127.0.0.1:8000/media/pic/set-1.jpg',
+        ]
       }
     },
     mounted: function () {
@@ -129,10 +145,15 @@
     flex-wrap: wrap;
     justify-content: space-around;
   }
+  .meal-line1 img{
+    width: 200px;
+    height: 120px;
+    border-radius: 5px;
+  }
   .every-meal{
     margin-top: 20px;
-    width: 200px;
-    height: 250px;
+    width: 240px;
+    height: 400px;
     border-radius: 10px;
     background: white;
   }
@@ -142,16 +163,16 @@
   .meal-body-title a{
     color: white;
     text-shadow: #6f777d 2px 2px 2px;
-
   }
   .btngobh{
     margin-top: 70px;
   }
-  .panel{
-    margin-top: 20px;
-  }
   .meal-body{
     min-height: 700px;
+  }
+  .meal-content{
+    width: 200px;
+    height: 80px;
   }
 </style>
 
