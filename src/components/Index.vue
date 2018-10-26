@@ -109,7 +109,7 @@
 
       </div>
     </content>
-
+    <!--<page-comment></page-comment>-->
   </div>
 </template>
 
@@ -122,10 +122,10 @@
       return {
         house_list: [],
         ser_word: '',
-        city: '北京',
+        city: '苏州',
         addInp: false,
         mask: false,
-        search_city: '北京',
+        search_city: '苏州',
         sky: {},
         sky_src:'http://127.0.0.1:8000/media/pic/sky-sun.png',
         housesrc:[

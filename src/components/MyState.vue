@@ -1,6 +1,8 @@
 <template>
 
   <div class="col-md-9" >
+    <!--提示消息模态框-->
+    <message-modal :err_message="err_message" :err_message_info="err_message_info"></message-modal>
     <div class="row" >
       <div class="col-md-12 ">
         <!--报表1-->
@@ -181,6 +183,8 @@
         eshow:true,
         mshow:true,
         ashow:true,
+        err_message_info:'',
+        err_message:'',
       }
     },
     methods: {
@@ -313,8 +317,8 @@
 
       }
       else {
-        alert('请先登录！')
-        this.$router.push({path: "/login"});
+        this.err_message='你还未登录';
+        this.err_message_info='请登录后使用该功能';
       }
 
     }

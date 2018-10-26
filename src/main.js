@@ -15,6 +15,7 @@ import MyState from './components/MyState'
 import PageList from './components/PageList'
 import Modal from './components/Modal'
 import MessageModal from './components/MessageModal'
+import Comment from './components/Comment' // 测试评论用
 // 引用第三方模块
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
@@ -34,6 +35,7 @@ Vue.component('v-distpicker',VDistpicker);
 Vue.component('page-list',PageList);
 Vue.component('modal',Modal);
 Vue.component('message-modal',MessageModal);
+Vue.component('page-comment',Comment);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

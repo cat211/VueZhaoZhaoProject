@@ -1,6 +1,7 @@
 
 <template>
   <div>
+
     <!--内容-->
     <div class="row bg-success my-index-center">
       <!--内容左空白-->

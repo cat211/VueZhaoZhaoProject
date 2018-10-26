@@ -166,10 +166,10 @@
 
       },
       showModal: function (p,n,i) {
-          this.fa_goodnum=p
-        this.good_price=p
-        this.good_name=n
-        this.good_id=i
+          this.fa_goodnum=p;
+        this.good_price=p;
+        this.good_name=n;
+        this.good_id=i;
         setTimeout(() => {
           var user = {
             "user_id":sessionStorage.getItem('u_id')
@@ -248,11 +248,11 @@
                   // console.log(item.order_list[0])
                   that.order_list.push(item.order_list[0])
                 }
-              })
+              });
 
 
 
-                that.b_name=that.order_list[0].beadhouse_name
+                that.b_name=that.order_list[0].beadhouse_name;
                 // console.log('1')
                 // console.log(that.b_name)
                 var addorder={
@@ -269,8 +269,8 @@
                   "check_info_id":state.id,
                   "price":that.good_price,
                   "status":2
-                }
-                  console.log(addorder)
+                };
+                  console.log(addorder);
                   axios.post('http://127.0.0.1:8000/order/addorder/', addorder, {
                     headers: {
                       "token": token
