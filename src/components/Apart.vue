@@ -89,7 +89,7 @@
                     <img :src=housesrc[b.id%10] class="bigimg" alt="..." @click="getBhid()">
                   </div>
                   <div class="col-md-5">
-                    <h4 @click="saveBhId(b.id)">
+                    <h4 @click="saveBhId(b.id,b.name)">
                       <span class="glyphicon glyphicon-home"> </span>
                       <span v-text="b.name">苏州小太阳养老公寓老年招待所等公寓</span>
                     </h4>
