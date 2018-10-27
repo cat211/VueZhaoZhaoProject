@@ -115,7 +115,10 @@
       if(token){
         axios.post('http://127.0.0.1:8000/user/getuserinfo/',data,{headers:{"token":token}})
           .then(function (response) {
-            // config.headers.common['token']=token
+            if(response.data.code === "202"){
+              this.err_message = '修改成功';
+              this.err_message = '修改个人信息成功';
+            }
             vm.user_info = response.data;
             console.log(vm.user_info )
           })
