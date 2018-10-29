@@ -76,7 +76,7 @@
         u_tel: '',
         u_pwd: '',
         u_err: '',
-        checked: null
+        checked: null,
         // remember_flag:false,
       }
     },
@@ -109,8 +109,8 @@
           var user = {
             "telephone": this.u_tel,
             "password": this.u_pwd,
-          }
-          var that = this
+          };
+          var that = this;
           axios.post('http://127.0.0.1:8000/user/login/', user)
             .then(function (response) {
               // vm.list = response.data;
@@ -124,6 +124,7 @@
                 sessionStorage.setItem('u_id', response.data.id);
                 sessionStorage.setItem('u_points', response.data.points);
                 var from = sessionStorage.getItem('from');
+                that.WebSocketConnect();
                 if (from) {
                   // location.href = from;
                   that.$router.push({path: from});
@@ -151,7 +152,10 @@
           this.u_err = '请输入正确的手机号'
         }
         this.$emit('send',true)
-
+      },
+      // 触发父组件连接websocket函数
+      WebSocketConnect:function(){
+        this.$emit('connectwebsocket');
       },
       remember: function () {
         if (!this.checked) {

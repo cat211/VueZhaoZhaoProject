@@ -32,10 +32,10 @@
           <li role="presentation" v-show="true">
             <a href="javascript:void 0" @click = logOut v-if="islogin">退出</a>
           </li>
-          <li role="presentation" v-if="!my_message" @click="goToMessage()">
+          <li role="presentation" v-if="!flag" @click="goToMessage()">
             <a href="javascript:void 0" ><img src="../assets/images/nav-xx.png" alt=""></a>
           </li>
-          <li role="presentation" v-if="my_message" @click="goToMessage()">
+          <li role="presentation" v-if="flag" @click="goToMessage()">
             <a href="javascript:void 0" ><img src="../assets/images/nav-xx2.png" alt=""></a>
           </li>
         </ul>
@@ -48,10 +48,10 @@
 <script>
 export default {
   name: 'NavMain',
-  props:['islogin'],
+  props:['islogin','dyn_flag'],
   data () {
     return {
-      my_message:false
+      flag:false,
     }
   },
   mounted:function () {
@@ -61,13 +61,28 @@ export default {
     logOut:function () {
       sessionStorage.clear();
       this.$emit('exit',false);
+      this.disConnectSocket();
       this.$router.push({path:"/login"});
     },
     goToMessage:function () {
-      sessionStorage.setItem('gotomessage',true)
+      this.flag = false;
+      this.disConnectSocket();
+      sessionStorage.setItem('gotomessage',true);
       this.$router.push({path:"/personalcenter"});
+    },
+    // 断开websocket连接
+    disConnectSocket:function () {
+      this.$emit('disconnectwebsocket');
     }
-  }
+  },
+  watch: {
+    "dyn_flag": function () {
+      if (this.dyn_flag === true) {
+        this.flag = true
+      }
+    },
+    deep: true,
+  },
 }
 </script>
 
