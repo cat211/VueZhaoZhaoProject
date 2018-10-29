@@ -173,26 +173,26 @@
         setTimeout(() => {
           var user = {
             "user_id":sessionStorage.getItem('u_id')
-          }
-          var that=this
-          console.log(sessionStorage.getItem('token'))
+          };
+          var that=this;
+          console.log(sessionStorage.getItem('token'));
           axios.post('http://127.0.0.1:8000/user/getuserinfo/',user,{
             headers:{
               "token":sessionStorage.getItem('token')
             }
           })
             .then(function (response) {
-              console.log('ok')
+              console.log('ok');
               if (response.data.id) {
-                that.myintergral='我的积分：'+response.data.points
-                sessionStorage.setItem('u_points',response.data.points)
-                console.log('打开后的积分')
+                that.myintergral='我的积分：'+response.data.points;
+                sessionStorage.setItem('u_points',response.data.points);
+                console.log('打开后的积分');
                 console.log(that.myintergral)
               }
             })
             .catch(function (error) {
               console.log(error)
-            })
+            });
           this.isModalVisible = true
         }, 600);
           // this.isModalVisible = true
@@ -206,7 +206,7 @@
             var user = {
               "user_id":sessionStorage.getItem('u_id')
             }
-            var that=this
+            var that=this;
             console.log(sessionStorage.getItem('token'))
             axios.post('http://127.0.0.1:8000/user/getuserinfo/',user,{
               headers:{

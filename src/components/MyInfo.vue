@@ -195,23 +195,9 @@
     font-size: 14px;
 
   }
-  .my-img-btn {
-    width: 85px;
-    height: 35px;
-  }
 
   .my-img-btn p {
     position: absolute;
-  }
-
-  #user-pic {
-    opacity: 0;
-    filter: alpha(opacity=0);
-  }
-
-  .my-img-btn {
-    width: 85px;
-    height: 35px;
   }
 
   .my-img-btn p {
