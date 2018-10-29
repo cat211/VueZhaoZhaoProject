@@ -1,5 +1,11 @@
 <template>
   <div class="comment-body container">
+    <!--提示消息模态框-->
+    <message-modal :err_message="err_message" :err_message_info="err_message_info"></message-modal>
+    <!--评论标题-->
+    <div class="comment-title">
+      <h3>评论:</h3>
+    </div>
     <!--评论输入区域-->
     <div class="comment-input-area">
       <!--输入框-->
@@ -9,6 +15,10 @@
       <div>
         <button class="btn btn-primary" @click="comment">发表评论</button>
       </div>
+    </div>
+    <!--所有评论标题-->
+    <div class="all-comment-title">
+      <h3>所有评论:</h3>
     </div>
     <!--每条评论的总区域-->
     <div class="comment-area" v-for="comment in result_list">
@@ -27,6 +37,15 @@
         </div>
         <!--评论内容区域-->
         <div class="con-content">
+          <!--点赞区域-->
+          <div class="likes-area" v-show="!comment.islike">
+            <a href="javascript:void 0" @click="alreadyClick"><img src="../assets/images/orangezan.svg" alt=""></a>
+            <span v-text="comment.likes"></span>
+          </div>
+          <div class="likes-area" v-show="comment.islike">
+            <a href="javascript:void 0" @click="clickLike(comment.comment_id)"><img src="../assets/images/blackzan.svg" alt=""></a>
+            <span v-text="comment.likes"></span>
+          </div>
           <!--文字区-->
           <div class="con-font">
             <span v-text="comment.comment_content"></span>
@@ -93,14 +112,17 @@
 <script>
   import axios from 'axios'
 export default {
-    name: 'PageList',
-    props :['page_size'],
+    name: 'Comment',
     data () {
       return {
         reply_isShow:true, // 是否显示回复
         result_list:[], // 请求到的所有评论
         reply_content:'', // 回复内容
         comment_text:'', // 评论内容
+        user_id:'',     // 用户id
+        art_id:'', // 文章id
+        err_message:'', // 提示信息
+        err_message_info:'', // 提示信息描述
       }
     },
     mounted () {
@@ -139,7 +161,9 @@ export default {
       // 获得文章所有评论
       getData:function () {
         let that = this;
-        axios.get('http://127.0.0.1:8000/article/getcommentsbyarticleid/5//')
+        let art_id = sessionStorage.getItem('artid')?sessionStorage.getItem('artid'):5;
+        this.user_id = sessionStorage.getItem('u_id')?sessionStorage.getItem('u_id'):'';
+        axios.get('http://127.0.0.1:8000/article/getcommentsbyarticleid/'+art_id+'/'+that.user_id+'/')
           .then(function (response) {
             that.result_list = response.data;
             for (let i in that.result_list){
@@ -157,15 +181,6 @@ export default {
         for (let i in this.result_list) {
           if (this.result_list[i].comment_id === commentid) {
             this.result_list[i].showreplysize += 3;
-            break;
-          }
-        }
-      },
-      // 重置显示的回复数量
-      resetReplySize:function (commentid) {
-        for (let i in this.result_list) {
-          if (this.result_list[i].comment_id === commentid) {
-            this.result_list[i].showreplysize = 3;
             break;
           }
         }
@@ -196,32 +211,78 @@ export default {
       },
       // 发表评论函数
       comment:function () {
-        let data = {
-          "user_id":sessionStorage.getItem('u_id'),
-          "content":this.comment_text,
-          "article_id":5,
-        };
-        let that = this;
-        this.comment_text = '';
-        axios.post('http://127.0.0.1:8000/article/commentarticle/',data,{
-          headers:{
-            "token":sessionStorage.getItem('token')
+        if (sessionStorage.getItem('u_id')){
+          if(this.comment_text){
+            let data = {
+              "user_id":sessionStorage.getItem('u_id'),
+              "content":this.comment_text,
+              "article_id":5,
+            };
+            let that = this;
+            this.comment_text = '';
+            axios.post('http://127.0.0.1:8000/article/commentarticle/',data,{
+              headers:{
+                "token":sessionStorage.getItem('token')
+              }
+            })
+              .then(function (response) {
+                if(response.data.statuscode ==='202'){
+                  that.getData();
+                }
+              })
+              .catch(function (error) {
+                console.log(error)
+              })
+          }else {
+            this.err_message='评论不能为空';
+            this.err_message_info='请在输入区域输入评论';
           }
-        })
-        .then(function (response) {
-          if(response.data.statuscode ==='202'){
-            that.getData();
-          }
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+        } else {
+          this.err_message='你还未登录';
+          this.err_message_info='请登录后使用该功能';
+        }
+      },
+      // 点赞函数
+      clickLike:function (commentid) {
+        if (this.user_id){
+          let data = {
+            "user_id":this.user_id,
+            "comment_id":commentid,
+          };
+          let that = this;
+          axios.post('http://127.0.0.1:8000/article/clickagree/',data,{
+            headers:{
+              "token":sessionStorage.getItem('token')
+            }
+          })
+            .then(function (response) {
+              if(response.data.statuscode ==='202'){
+                that.err_message='点赞成功';
+                that.err_message_info='点赞成功';
+                that.getData();
+              }
+            })
+            .catch(function (error) {
+              console.log(error)
+            })
+        } else {
+          this.err_message='你还未登录';
+          this.err_message_info='请登录后使用该功能';
+        }
+      },
+      // 已经点过赞的提示消息
+      alreadyClick:function () {
+        this.err_message='您已经点过赞了';
+        this.err_message_info='您已经点过赞了';
       }
     },
   }
 </script>
 
 <style scoped>
+  .all-comment-title,.comment-title{
+    padding-left: 2%;
+  }
   /*发表评论区域*/
   .comment-input-area{
     height: 150px;
@@ -301,12 +362,28 @@ export default {
     height:100%;
     width: 80%;
   }
+  /*点赞区*/
+  .likes-area{
+    width: 10%;
+    height: 35px;
+    margin-left: 90%;
+    line-height: 32px;
+  }
+  .likes-area span{
+    color: #c6c3bf;
+    font-size: 20px;
+  }
+  .likes-area img{
+    height: 100%;
+    margin-bottom: 5px;
+  }
   /*评论内容文字区*/
   .con-font{
-    height:80%;
+    height:65%;
     width: 100%;
     font-size: 22px;
     line-height: 120px;
+    text-align: center;
   }
   /*时间和按钮区域*/
   .time-btn{
@@ -396,6 +473,7 @@ export default {
   }
   /*回复的内容*/
   .reply-font div:first-child{
+    padding-left: 5%;
     font-size: 18px;
     height: 70%;
   }

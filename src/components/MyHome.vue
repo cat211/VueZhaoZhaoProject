@@ -157,8 +157,7 @@
         let that = this;
         axios.post('http://127.0.0.1:8000/user/uploadicon/', formdata)
           .then(function (response) {
-            if (response.data.statuscode == '202')
-              setTimeout(2);
+            if (response.data.statuscode === '202')
             that.getUserInfo();
           })
       },

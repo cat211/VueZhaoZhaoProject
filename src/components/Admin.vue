@@ -132,7 +132,7 @@
                   alert('登录成功！')
                   vm.show=false;
                   sessionStorage.setItem('adminid',vm.beadhouse_id)
-                  sessionStorage.setItem('token',response.headers.token)
+                  sessionStorage.setItem('admin_token',response.headers.token)
                 }
                 else {
                   alert('登录失败！')
@@ -149,15 +149,15 @@
           addState:function () {
             if(this.check_info_id&&this.dyn_type_id&&this.update_time&&this.content){
               var vm = this;
-              var token = sessionStorage.getItem('token');
-              var user_id = sessionStorage.getItem('u_id');
+              var token = sessionStorage.getItem('admin_token');
+              var user_id = sessionStorage.getItem('adminid');
               var data = {
                 "user_id": user_id,
                 "check_info_id":this.check_info_id,
                 "dyn_type_id":this.dyn_type_id,
                 "update_time":this.update_time,
                 "content":this.content
-              }
+              };
               if (token) {
                 axios.post('http://127.0.0.1:8000/user/addstate/', data, {headers: {"token": token}
                 })
@@ -168,7 +168,7 @@
                     else {
                       alert('添加失败！')
                     }
-                    console.log(response.data)
+                    console.log(response.data);
                     console.log(response)
                   })
                   .catch(function (error) {
@@ -176,7 +176,7 @@
                   })
               }
               else {
-                alert('请先登录！')
+                alert('请先登录！');
                 this.$router.push({path: "/login"});
               }
             }
@@ -191,7 +191,7 @@
             "admin_id":sessionStorage.getItem('adminid')
           }
           var vm = this;
-          var token = sessionStorage.getItem('token');
+          var token = sessionStorage.getItem('admin_token');
           //获取用户积分
           axios.post('http://127.0.0.1:8000/user/admingetuserinfo/', data,{headers: {"token": token}})
             .then(function (response) {
@@ -256,7 +256,7 @@
 
   .my-index-center {
     padding-top: 20px;
-    min-height: 600px;
+    min-height:800px;
   }
   .my-input span p{
     margin: 0;

@@ -60,7 +60,7 @@ export default {
   methods:{
     logOut:function () {
       sessionStorage.clear();
-      this.$emit('exit',false)
+      this.$emit('exit',false);
       this.$router.push({path:"/login"});
     },
     goToState:function () {
