@@ -98,19 +98,24 @@
       }).catch();
     },
     methods: {
+      // 分页
       showContent: function () {
-        let start = (this.page_index - 1) * 9;
+        let start = (this.page_index - 1) * 9; //起始位置
+        // 对比数据列表的长度和终止位置的长度来决定终止位置
         let end = this.articlelist.length <= this.page_index * 9 - 1 ? this.articlelist.length : this.page_index * 9 - 1;
         this.result_list = [];
         for (let i = start; i <= end; i++) {
           this.result_list.push(this.articlelist[i]);
         }
+        // 左边内容部分只显示三个
         this.result_list_three=this.result_list.splice(0,3)
       },
+      // 根据当前页更新数据
       getIndex: function (i) {
         this.page_index = i;
         this.showContent();
       },
+      // 翻页，配合pagelist页码组件使用
       lastPage: function () {
         if (this.page_index > 1) {
           this.page_index -= 1;
@@ -118,6 +123,7 @@
           this.showContent();
         }
       },
+      // 翻页，配合pagelist页码组件使用
       nextPage: function () {
         if (this.page_size > this.page_index) {
           this.page_index += 1;

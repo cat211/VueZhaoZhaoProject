@@ -137,8 +137,8 @@
     name: "",
     data() {
       return {
-        room_id: 0,
-        room_config: [],
+        room_id: 0,   // 房间id
+        room_config: [],  // 房间配置列表  比如淋雨，wifi什么的
         rooms_info: [],
         dataList: [],
         unitName: '未选择',
@@ -167,6 +167,7 @@
       }
     },
     methods: {
+      // 跳转到养老院页面
       goToBh: function () {
         var bh_id = sessionStorage.getItem('bhid');
         this.$router.push({path: "/apartinfo"});
@@ -340,12 +341,12 @@
         })
         .catch(function (error) {
           console.log(error)
-        })
+        });
       //判断房间是否被收藏
       vm.user_id = sessionStorage.getItem('u_id');
       if (vm.user_id) {
-        var token = sessionStorage.getItem('token')
-        var room_id = sessionStorage.getItem('roomid')
+        var token = sessionStorage.getItem('token');
+        var room_id = sessionStorage.getItem('roomid');
         var data = {
           "user_id": vm.user_id,
           "room_id": vm.room_id,
@@ -356,7 +357,7 @@
           }
         })
           .then(function (response) {
-            console.log(response.data.collectstatus)
+            console.log(response.data.collectstatus);
             if (response.data.collectstatus) {
               vm.flag = false;
             } else {
