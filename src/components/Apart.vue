@@ -351,7 +351,7 @@
 
   .bh-price, .text-orange {
     color: #ffa500;
-    font-size: 30px;
+    font-size: 28px;
     font-weight: bold;
   }
 

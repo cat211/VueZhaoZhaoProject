@@ -95,7 +95,7 @@
           </li>
         </ul>
         <div class="col-md-3 bottom buy">总计:<span v-text="sum"></span>元
-          <div class="btn btn-warning btn-lg" @click.prevent="addOrder">结算</div>
+          <div class="btn btn-warning btn-lg  " @click.prevent="addOrder">结算</div>
         </div>
       </div>
 
@@ -381,7 +381,7 @@
   .cart-container {
     font-size: 16px;
     width: 1100px;
-    min-height: 680px;
+    min-height: 550px;
     margin: auto;
     margin-top: 20px;
     margin-bottom: 100px;
@@ -504,7 +504,7 @@
     line-height: 50px;
   }
   .buy div{
-    position: absolute;
+    position:absolute;
     right: 5px;
   }
 

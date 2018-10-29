@@ -32,6 +32,12 @@
           <li role="presentation" v-show="true">
             <a href="javascript:void 0" @click = logOut v-if="islogin">退出</a>
           </li>
+          <li role="presentation" v-if="!my_message" @click="goToMessage()">
+            <a href="javascript:void 0" ><img src="../assets/images/nav-xx.png" alt=""></a>
+          </li>
+          <li role="presentation" v-if="my_message" @click="goToMessage()">
+            <a href="javascript:void 0" ><img src="../assets/images/nav-xx2.png" alt=""></a>
+          </li>
         </ul>
       </div>
       <div class="col-md-1"></div>
@@ -45,6 +51,7 @@ export default {
   props:['islogin'],
   data () {
     return {
+      my_message:false
     }
   },
   mounted:function () {
@@ -55,6 +62,10 @@ export default {
       sessionStorage.clear();
       this.$emit('exit',false);
       this.$router.push({path:"/login"});
+    },
+    goToMessage:function () {
+      sessionStorage.setItem('gotomessage',true)
+      this.$router.push({path:"/personalcenter"});
     }
   }
 }
@@ -73,7 +84,9 @@ export default {
   .my-nav a{
     color: white;
   }
-
+  .my-nav a:hover {
+    color: black;
+  }
   .my-every-btn button{
     color: white;
     width: 80px;
@@ -116,13 +129,9 @@ export default {
     position:absolute;
   }
 
-  iframe{
-    border: 0px;
-    min-height: 500px;
-    margin: 0;padding: 0;
-    width: 100%;
-
+  li img{
+    width: 30px;
+    height: 30px;
   }
-
 
 </style>

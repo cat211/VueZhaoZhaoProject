@@ -64,7 +64,7 @@ export default {
   .my-nav-img img{
     height: 65px;
   }
-  .my-nav a,.my-footer{
+  .my-nav a,.my-footer,h4{
     color: white;
   }
   .my-every-btn button{
@@ -85,6 +85,7 @@ export default {
   .my-footer{
     padding-top: 15px;
     font-size: 13px;
+    color: white;
   }
   .my-input span p{
     margin: 0;
@@ -104,13 +105,6 @@ export default {
   }
   .my-img-btn p{
     position:absolute;
-  }
-  iframe{
-    border: 0px;
-    min-height: 500px;
-    margin: 0;padding: 0;
-    width: 100%;
-
   }
   .develop:hover,.develop:visited,.develop{
     color: white;
