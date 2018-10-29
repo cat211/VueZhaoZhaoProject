@@ -25,7 +25,7 @@
             <div>收藏<img src="../assets/images/b_coll.png" alt=""></div>
           </div>
           <div class="col-sm-1 a-art-cllo" v-show="!b_cllo" v-on:click="canl_cllo_art">
-            <div>收藏<img src="../assets/images/a_coll.png" alt=""></div>
+            <div>取消<img src="../assets/images/a_coll.png" alt=""></div>
           </div>
           <div class="col-sm-1">
             <a >举报</a>

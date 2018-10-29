@@ -66,7 +66,7 @@
       return{
         user_info: {
           err_message_info:'',
-          err_message:''
+          err_message:'',
         },
         useridicon: sessionStorage.getItem('u_id'),
       }

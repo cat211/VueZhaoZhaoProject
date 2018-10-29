@@ -73,7 +73,9 @@ export default {
   .my-nav a{
     color: white;
   }
-
+  .my-nav a:hover {
+    color: black;
+  }
   .my-every-btn button{
     color: white;
     width: 80px;
@@ -116,13 +118,6 @@ export default {
     position:absolute;
   }
 
-  iframe{
-    border: 0px;
-    min-height: 500px;
-    margin: 0;padding: 0;
-    width: 100%;
-
-  }
 
 
 </style>
