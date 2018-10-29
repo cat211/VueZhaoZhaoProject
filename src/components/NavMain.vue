@@ -30,7 +30,7 @@
             <router-link to="./personalcenter"><a href="javascript:void 0" >个人中心</a></router-link>
           </li>
           <li role="presentation" v-show="true">
-            <a href="javascript:void 0" @click = logOut v-if="islogin">退出</a>
+            <a href="javascript:void 0" @click ="logOut(),disConnectSocket()" v-if="islogin">退出</a>
           </li>
           <li role="presentation" v-if="!flag" @click="goToState()">
             <a href="javascript:void 0" ><img src="../assets/images/nav-xx.png" alt=""></a>
@@ -61,18 +61,18 @@ export default {
     logOut:function () {
       sessionStorage.clear();
       this.$emit('exit',false);
-      this.disConnectSocket();
       this.$router.push({path:"/login"});
     },
+    // 跳转到个人中心
     goToState:function () {
       this.flag = false;
-      this.disConnectSocket();
+      this.disConnectSocket(); // 触发父组件方法
       sessionStorage.setItem('gotostate',true);
       this.$router.push({path:"/personalcenter"});
     },
     // 断开websocket连接
     disConnectSocket:function () {
-      this.$emit('disconnectwebsocket');
+      this.$emit('cutwebsocket');
     }
   },
   watch: {

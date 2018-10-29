@@ -153,6 +153,7 @@
         } else {
         }
       },
+      // 计算总价
       sumPrice: function () {
         this.sum = 0;
         for (let i of this.cart_info) {
@@ -185,6 +186,7 @@
         this.unitName = item.name;
         this.unitId = item.id;
       },
+      // 得到入驻人信息
       getname: function () {
         var user_id = sessionStorage.getItem('u_id');
         if (user_id) {
@@ -214,6 +216,7 @@
 
         }
       },
+      // 删除商品函数
       delGoods: function (good_id, good_type) {
         let data = {
           "user_id": sessionStorage.getItem('u_id'),
@@ -292,7 +295,7 @@
           this.err_message_info = '您还未选择入住人，请选择入住人后提交订单';
         } else {
           for (let good of this.cart_info) {
-            if (this.checkedBoxList.indexOf(good.id) >= 0) {
+            if (this.checkedBoxList.indexOf(good.id) >= 0) { // 判断商品是否被选中
               this.order_list.push(good)
             }
           }
@@ -301,12 +304,14 @@
             this.err_message_info = '您还未选择商品，请选择商品后提交订单';
           }
           else {
-            $('#PayModal').modal('show');
+            $('#PayModal').modal('show');  // 显示结算模态框，模态框上两个按钮会触发不同的函数
           }
         }
       },
+      // 生成订单函数 已结算
       pay:function () {
         $('#PayModal').modal('hide');
+        // 获得购物车中选中商品数据
         let data = {
           "user_id": sessionStorage.getItem('u_id'),
           "price": this.sum,
@@ -336,6 +341,7 @@
           }
         })
       },
+      // 生成订单函数 未结算
       noPay:function () {
         $('#PayModal').modal('hide');
         let data = {

@@ -119,12 +119,12 @@
     name: 'Index',
     data: function () {
       return {
-        house_list: [],
-        ser_word: '',
-        city: '苏州',
+        house_list: [], // 用来存放公寓
+        ser_word: '',   // 查询字符串
+        city: '苏州',   // 默认城市为苏州  ip定位要身份验证，懒得弄就写死了
         addInp: false,
         mask: false,
-        search_city: '苏州',
+        search_city: '苏州', // 天气预报城市搜索
         sky: {},
         sky_src:'http://127.0.0.1:8000/media/pic/sky-sun.png',
         housesrc:[
@@ -143,8 +143,8 @@
       }
     },
     mounted: function () {
-      this.getSky();
-      this.GetHouseData();
+      this.getSky();   // 获得天气预报
+      this.GetHouseData(); // 获得公寓列表
     },
     methods: {
       //点击弹出三级联动npm install v-distpicker --save
@@ -159,14 +159,15 @@
         this.city = data.province.value + ' ' + data.city.value + ' ' + data.area.value;
         this.search_city = data.city.value.split('市')[0].split('城区')[0]
       },
+      // 天气预报
       getSky: function () {
         var vm = this;
         var data = {
           "city": this.search_city
-        }
+        };
         axios.post('http://127.0.0.1:8000/beadhouse/sky/', data)
           .then(function (response) {
-            vm.sky = response.data
+            vm.sky = response.data;
             var reg1 = /.*?晴.*/;
             var reg2 = /.*?阴.*/;
             var reg3 = /.*?云.*/;
@@ -191,26 +192,25 @@
             else{
               vm.sky_src='http://127.0.0.1:8000/media/pic/sky-sun.png';
             }
-            console.log(vm.sky)
           })
           .catch(function (error) {
             console.log(error)
           });
       },
+      // 得到热门公寓
       GetHouseData: function () {
         var that = this;
         axios.get('http://127.0.0.1:8000/beadhouse/gethouseby///1/1/')
           .then(function (response) {
             response.data.forEach((item, index) => {
               if (item.score >= 4.9) {
-                console.log(item);
                 if (that.house_list.length < 8) {
                   that.house_list.push(item)
                 }
 
                 // console.log(this.house_list)
               }
-            })
+            });
             for (let i of that.house_list) {
               i.long_name = i.name;
               if (i.name.length > 13) {
@@ -222,6 +222,7 @@
             console.log(error)
           });
       },
+      // 主页的搜索功能
       search: function () {
         if (this.ser_word) {
           sessionStorage.setItem('already_searched', this.ser_word);
@@ -230,11 +231,13 @@
           this.$router.push({path: "/apart"});
         }
       },
+      // 跳转到公寓详情
       toapartinfo: function (id) {
         sessionStorage.setItem('bhid', id);
       },
+      // 跳转到个人中心
       goToMyState:function () {
-        sessionStorage.setItem('gotostate',true)
+        sessionStorage.setItem('gotostate',true);
         this.$router.push({path: "/personalcenter"});
       }
     }

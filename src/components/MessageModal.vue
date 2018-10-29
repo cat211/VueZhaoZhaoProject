@@ -32,7 +32,7 @@ export default {
     mounted () {
 
     },
-    watch:{
+    watch:{ // 监听传进来的提示信息标题来不断的自动显示模态框
       "err_message": function() {
         this.myerr = this.err_message;
         this.myerr_info = this.err_message_info;

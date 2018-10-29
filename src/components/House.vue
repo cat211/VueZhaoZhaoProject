@@ -135,7 +135,7 @@
         },
       },
       mounted() {
-
+        // 获得公寓详情
         var vm = this;
         vm.bh_id=sessionStorage.getItem('bhid');
         vm.bh_name=sessionStorage.getItem('bhname');

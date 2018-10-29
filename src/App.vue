@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <nav-main :islogin="my_token" :dyn_flag="dyn_flag" @exit="toexit"></nav-main>
-    <router-view @send="tochange" @connectwebsocket="WebSocketCheckDyn" @disconnectwebsocket="DisConnectWebSocket"/>
+    <nav-main :islogin="my_token" :dyn_flag="dyn_flag" @exit="toexit" @cutwebsocket="DisConnectWebSocket"></nav-main>
+    <router-view @send="tochange" @connectwebsocket="WebSocketCheckDyn"/>
     <div-footer></div-footer>
   </div>
 </template>
@@ -54,8 +54,8 @@ export default {
         alert("您的浏览器不支持 WebSocket!");
       }
     },
+    // 断开websocket连接
     DisConnectWebSocket:function () {
-      alert('ok');
       this.ws.close();
       this.ws = null;
     }

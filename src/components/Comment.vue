@@ -140,10 +140,10 @@ export default {
           if (this.result_list[i].comment_id === commentid) {
             this.result_list[i].showreply = !this.result_list[i].showreply;
             if(this.result_list[i].btnvalue === '收起回复'){
-              this.result_list[i].btnvalue = '查看回复';
-              this.result_list[i].showreplysize = 3
+              this.result_list[i].btnvalue = '查看回复';  // 按钮文字的切换
+              this.result_list[i].showreplysize = 3     // 默认只显示3条回复
             }else {
-              this.result_list[i].btnvalue = '收起回复'
+              this.result_list[i].btnvalue = '收起回复'   // 按钮文字的切换
             }
             break;
           }
@@ -152,7 +152,7 @@ export default {
       // 隐藏显示回复框
       hideReplyInput:function(commentid){
         for (let i in this.result_list) {
-          if (this.result_list[i].comment_id === commentid) {
+          if (this.result_list[i].comment_id === commentid) {  // 根据id更改对应回复框的显示状态
             this.result_list[i].showreplyinput = !this.result_list[i].showreplyinput;
             break;
           }
@@ -167,7 +167,7 @@ export default {
           .then(function (response) {
             that.result_list = response.data;
             for (let i in that.result_list){
-              if(that.result_list[i].replys.length<1){
+              if(that.result_list[i].replys.length<1){  // 如果这条评论没有人回复，就收起回复列表
                 that.result_list[i].showreply=false
               }
             }
@@ -180,7 +180,7 @@ export default {
       showMoreReply:function (commentid) {
         for (let i in this.result_list) {
           if (this.result_list[i].comment_id === commentid) {
-            this.result_list[i].showreplysize += 3;
+            this.result_list[i].showreplysize += 3;  // 每次多显示3个
             break;
           }
         }
