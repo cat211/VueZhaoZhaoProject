@@ -18,13 +18,13 @@
           <!--<router-link to="./mycoll"><a href="javascript:void 0" class="list-group-item ">我的订单</a></router-link>-->
           <!--<router-link to="./mystate"><a href="javascript:void 0" class="list-group-item ">状态报表</a></router-link>-->
           <a href="#" class="list-group-item active">个人中心</a>
-          <a href="#" class="list-group-item lgi" @click="myhomestate=true,myinfostate=false,myoldstate=false,mycollstate=false,myordertate=false,mystatestate=false">我的首页</a>
-          <a href="#" class="list-group-item lgi" @click="myhomestate=false,myinfostate=true,myoldstate=false,mycollstate=false,myordertate=false,mystatestate=false">我的信息</a>
-          <a href="#" class="list-group-item lgi" @click="myhomestate=false,myinfostate=false,myoldstate=true,mycollstate=false,myordertate=false,mystatestate=false">入住人信息</a>
-          <a href="#" class="list-group-item lgi" @click="myhomestate=false,myinfostate=false,myoldstate=false,mycollstate=true,myordertate=false,mystatestate=false">我的收藏</a>
-          <a href="#" class="list-group-item lgi" @click="myhomestate=false,myinfostate=false,myoldstate=false,mycollstate=false,myordertate=true,mystatestate=false">我的订单</a>
-          <a href="#" class="list-group-item lgi" @click="myhomestate=false,myinfostate=false,myoldstate=false,mycollstate=false,myordertate=false,mystatestate=true">状态报表</a>
-
+          <a href="#" class="list-group-item lgi" @click="myhomestate=true,myinfostate=false,myoldstate=false,mycollstate=false,myordertate=false,mystatestate=false,mymessage=false">我的首页</a>
+          <a href="#" class="list-group-item lgi" @click="myhomestate=false,myinfostate=true,myoldstate=false,mycollstate=false,myordertate=false,mystatestate=false,mymessage=false">我的信息</a>
+          <a href="#" class="list-group-item lgi" @click="myhomestate=false,myinfostate=false,myoldstate=true,mycollstate=false,myordertate=false,mystatestate=false,mymessage=false">入住人信息</a>
+          <a href="#" class="list-group-item lgi" @click="myhomestate=false,myinfostate=false,myoldstate=false,mycollstate=true,myordertate=false,mystatestate=false,mymessage=false">我的收藏</a>
+          <a href="#" class="list-group-item lgi" @click="myhomestate=false,myinfostate=false,myoldstate=false,mycollstate=false,myordertate=true,mystatestate=false,mymessage=false">我的订单</a>
+          <a href="#" class="list-group-item lgi" @click="myhomestate=false,myinfostate=false,myoldstate=false,mycollstate=false,myordertate=false,mystatestate=true,mymessage=false">状态报表</a>
+          <a href="#" class="list-group-item lgi" @click="myhomestate=false,myinfostate=false,myoldstate=false,mycollstate=false,myordertate=false,mystatestate=false,mymessage=true">消息通知</a>
         </div>
       </div>
       <!--内容左导航end-->
@@ -37,6 +37,7 @@
           <my-order v-if="myordertate"></my-order>
           <my-coll v-if="mycollstate"></my-coll>
           <my-state v-if="mystatestate"></my-state>
+          <my-message v-if="mymessage"></my-message>
         </div>
 
       </div>
@@ -59,6 +60,7 @@ export default {
       myordertate: false,
       mycollstate: false,
       mystatestate: false,
+      mymessage: false,
     }
   },
   methods:{
@@ -69,6 +71,7 @@ export default {
         this.myordertate=false,
         this.mycollstate=false,
         this.mystatestate=false
+        this.mymessage=false
     }
 
   },
@@ -80,7 +83,18 @@ export default {
         this.myoldstate=false,
         this.mycollstate=false,
         this.myordertate=false,
+        this.mymessage=false,
         this.mystatestate=true
+    }
+    else if(sessionStorage.getItem('gotomessage')){
+      sessionStorage.setItem('gotomessage','')
+      this.myhomestate=false,
+        this.myinfostate=false,
+        this.myoldstate=false,
+        this.mycollstate=false,
+        this.myordertate=false,
+        this.mystatestate=false
+        this.mymessage=true
     }
   }
 }

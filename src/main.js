@@ -12,6 +12,7 @@ import MyOldInfo from './components/MyOldInfo'
 import MyOrder from './components/MyOrder'
 import MyColl from './components/MyColl'
 import MyState from './components/MyState'
+import MyMessage from './components/MyMessage'
 import PageList from './components/PageList'
 import Modal from './components/Modal'
 import MessageModal from './components/MessageModal'
@@ -31,6 +32,7 @@ Vue.component('my-oldinfo',MyOldInfo);
 Vue.component('my-order',MyOrder);
 Vue.component('my-coll',MyColl);
 Vue.component('my-state',MyState);
+Vue.component('my-message',MyMessage);
 Vue.component('v-distpicker',VDistpicker);
 Vue.component('page-list',PageList);
 Vue.component('modal',Modal);
