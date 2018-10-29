@@ -24,7 +24,7 @@
           <a href="#" class="list-group-item lgi" @click="myhomestate=false,myinfostate=false,myoldstate=false,mycollstate=true,myordertate=false,mystatestate=false,mymessage=false">我的收藏</a>
           <a href="#" class="list-group-item lgi" @click="myhomestate=false,myinfostate=false,myoldstate=false,mycollstate=false,myordertate=true,mystatestate=false,mymessage=false">我的订单</a>
           <a href="#" class="list-group-item lgi" @click="myhomestate=false,myinfostate=false,myoldstate=false,mycollstate=false,myordertate=false,mystatestate=true,mymessage=false">状态报表</a>
-          <a href="#" class="list-group-item lgi" @click="myhomestate=false,myinfostate=false,myoldstate=false,mycollstate=false,myordertate=false,mystatestate=false,mymessage=true">消息通知</a>
+          <!--<a href="#" class="list-group-item lgi" @click="myhomestate=false,myinfostate=false,myoldstate=false,mycollstate=false,myordertate=false,mystatestate=false,mymessage=true">消息通知</a>-->
         </div>
       </div>
       <!--内容左导航end-->
@@ -37,7 +37,7 @@
           <my-order v-if="myordertate"></my-order>
           <my-coll v-if="mycollstate"></my-coll>
           <my-state v-if="mystatestate"></my-state>
-          <my-message v-if="mymessage"></my-message>
+          <!--<my-message v-if="mymessage"></my-message>-->
         </div>
 
       </div>
