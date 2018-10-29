@@ -116,6 +116,7 @@
         //更新积分
 
         //  更新签到状态
+        //获取用户积分(由于该后台接口设计人员设计失误，且并未更改，故只能用此方法暂时实现此功能)
         axios.post('http://127.0.0.1:8000/user/sign/', data, {
           headers: {
             "token": token
@@ -123,6 +124,7 @@
         })
           .then(function (response) {
             vm.state = response.data;
+            //更新用户积分
             if (vm.state.statuscode == '202') {
               axios.post('http://127.0.0.1:8000/user/updatepoints/', data, {headers: {"token": token}})
                 .then(function (response) {
@@ -148,11 +150,13 @@
       },
       //跳转更改个人信息
       changeInfo: function () {
+        //触发父组件中的函数
         this.$emit('changeinfoclick')
 
       },
       //修改头像
       upLoadIcon: function () {
+        //取得表单数据
         let formdata = new FormData(document.querySelector("#iconform"));
         let that = this;
         axios.post('http://127.0.0.1:8000/user/uploadicon/', formdata)
@@ -161,6 +165,7 @@
             that.getUserInfo();
           })
       },
+      //获取用户信息
       getUserInfo:function () {
         let vm = this;
         let token = sessionStorage.getItem('token');
@@ -170,7 +175,10 @@
         if (token) {
           axios.post('http://127.0.0.1:8000/user/getuserinfo/', data, {headers: {"token": token}})
             .then(function (response) {
+              //用户信息
               vm.user_info = response.data;
+              //用户积分
+              //计算等级
               vm.myscore=vm.user_info.points%100;
               vm.myscorestyle='width:'+vm.myscore+'%';
               vm.level=Math.ceil(vm.myscore/10);
@@ -179,6 +187,7 @@
             .catch(function (error) {
               console.log(error)
             });
+          //判断是否签到
           axios.post('http://127.0.0.1:8000/user/checktest/', data, {headers: {"token": token}})
             .then(function (response) {
               // config.headers.common['token']=token

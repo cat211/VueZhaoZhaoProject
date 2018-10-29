@@ -54,6 +54,7 @@ export default {
   name: 'PersonalCenter',
   data () {
     return {
+      //我的首页、我的信息、入住人信息、我的订单、状态报表、消息
       myhomestate: true,
       myinfostate: false,
       myoldstate: false,
