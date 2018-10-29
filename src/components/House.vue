@@ -75,7 +75,7 @@
                 <span>元/月</span>
               </h4>
               </div>
-              <div class="col-md-2"><h4 class="houselineheight">20张</h4></div>
+              <div class="col-md-2"><h4 class="houselineheight"><span  v-text="r.roomnum"></span>张</h4></div>
               <div class="col-md-2 houselineheight">
               <button type="button" class="btn btn-lg btn-success" @click="goToDetails(r.id,r.name)">详情</button>
               </div>

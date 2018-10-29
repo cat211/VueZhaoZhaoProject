@@ -32,10 +32,10 @@
           <li role="presentation" v-show="true">
             <a href="javascript:void 0" @click = logOut v-if="islogin">退出</a>
           </li>
-          <li role="presentation" v-if="!my_message" @click="goToMessage()">
+          <li role="presentation" v-if="!my_message" @click="goToState()">
             <a href="javascript:void 0" ><img src="../assets/images/nav-xx.png" alt=""></a>
           </li>
-          <li role="presentation" v-if="my_message" @click="goToMessage()">
+          <li role="presentation" v-if="my_message" @click="goToState()">
             <a href="javascript:void 0" ><img src="../assets/images/nav-xx2.png" alt=""></a>
           </li>
         </ul>
@@ -63,8 +63,8 @@ export default {
       this.$emit('exit',false)
       this.$router.push({path:"/login"});
     },
-    goToMessage:function () {
-      sessionStorage.setItem('gotomessage',true)
+    goToState:function () {
+      sessionStorage.setItem('gotostate',true)
       this.$router.push({path:"/personalcenter"});
     }
   }
@@ -130,8 +130,8 @@ export default {
   }
 
   li img{
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
   }
 
 </style>

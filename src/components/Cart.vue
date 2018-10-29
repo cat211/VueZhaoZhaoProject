@@ -325,7 +325,12 @@
             that.err_message_info = '订单'+response.data.orderid+'生成成功，请在个人中心查看订单状态';
             that.getData();
             that.checkedBoxList = []
-          }else {
+          }
+          else if(response.data.statuscode == '407'){
+            that.err_message = '下单失败';
+            that.err_message_info = '订单中包含无效商品,请查看商品剩余数量';
+          }
+          else {
             that.err_message = '生成订单失败';
             that.err_message_info = '由于某些未知的原因订单生成失败，作为开发人员都没遇到过这种情况，你真的点背';
           }
