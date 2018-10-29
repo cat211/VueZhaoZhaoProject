@@ -32,10 +32,10 @@
           <li role="presentation" v-show="true">
             <a href="javascript:void 0" @click = logOut v-if="islogin">退出</a>
           </li>
-          <li role="presentation" v-if="!flag" @click="goToMessage()">
+          <li role="presentation" v-if="!flag" @click="goToState()">
             <a href="javascript:void 0" ><img src="../assets/images/nav-xx.png" alt=""></a>
           </li>
-          <li role="presentation" v-if="flag" @click="goToMessage()">
+          <li role="presentation" v-if="flag" @click="goToState()">
             <a href="javascript:void 0" ><img src="../assets/images/nav-xx2.png" alt=""></a>
           </li>
         </ul>
@@ -64,10 +64,10 @@ export default {
       this.disConnectSocket();
       this.$router.push({path:"/login"});
     },
-    goToMessage:function () {
+    goToState:function () {
       this.flag = false;
       this.disConnectSocket();
-      sessionStorage.setItem('gotomessage',true);
+      sessionStorage.setItem('gotostate',true);
       this.$router.push({path:"/personalcenter"});
     },
     // 断开websocket连接
