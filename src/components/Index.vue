@@ -87,7 +87,7 @@
           <div class="col-md-1"></div>
           <div class="col-md-10">
             <div class="row  ">
-              <div class="col-md-3 single-room " v-for="h in house_list" v-on:click="toapartinfo(h.id)">
+              <div class="col-md-3 single-room " v-for="h in house_list" v-on:click="toapartinfo(h.id,h.name)">
                 <router-link to="/house" class="beadhouse-img">
                   <img :src=housesrc[h.id%10] alt="" :title=h.long_name>
                 </router-link>
@@ -232,8 +232,9 @@
         }
       },
       // 跳转到公寓详情
-      toapartinfo: function (id) {
+      toapartinfo: function (id,name) {
         sessionStorage.setItem('bhid', id);
+        sessionStorage.setItem('bhname', name);
       },
       // 跳转到个人中心
       goToMyState:function () {
