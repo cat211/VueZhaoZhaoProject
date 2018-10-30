@@ -66,7 +66,7 @@
             <div class="col-md-4"></div>
             <div class="col-md-4 my-old-change">
               <button class="btn btn-danger add-old-info" @click="addOldInfo()">添加人物</button>
-              <button class="btn btn-danger save" @click="saveOldInfo()">保存信息</button>
+              <button class="btn btn-primary save" @click="saveOldInfo()">保存信息</button>
             </div>
             <div class="col-md-4"></div>
           </div>
@@ -178,7 +178,7 @@
       },
       //添加入住人信息
       addOldInfo: function () {
-        var k = 0
+        var k = 0;
         for (let i of this.old_info) {
           if (i.name =='') {
             this.err_message='姓名不能为空';

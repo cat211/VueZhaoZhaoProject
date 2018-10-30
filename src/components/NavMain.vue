@@ -60,13 +60,13 @@ export default {
   methods:{
     logOut:function () {
       sessionStorage.clear();
+      this.disConnectSocket(); // 触发父组件方法
       this.$emit('exit',false);
       this.$router.push({path:"/login"});
     },
     // 跳转到个人中心
     goToState:function () {
       this.flag = false;
-      this.disConnectSocket(); // 触发父组件方法
       sessionStorage.setItem('gotostate',true);
       this.$router.push({path:"/personalcenter"});
     },
