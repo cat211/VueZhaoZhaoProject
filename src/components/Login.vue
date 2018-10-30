@@ -3,11 +3,9 @@
     <div class="col-lg-7"></div>
     <div class="col-lg-3">
       <div id="login" class="row">
-
         <div class="col-md-12">
           <h1>登录朝朝优选</h1>
         </div>
-
         <div class="col-md-12">
           <div class="col-md-1"></div>
           <div class="col-md-10">
@@ -29,20 +27,16 @@
           </div>
           <div class="col-md-1"></div>
         </div>
-
         <div class="col-md-12">
           <p v-text="u_err" class="err"></p>
         </div>
-
         <div class="col-md-12">
           <button class="btn btn-success" type="button" v-on:click="checklogin">登录</button>
         </div>
-
         <div class="col-md-12">
           <div class="col-md-6">
             <input type="checkbox" class="chcbox" v-on:click="remember" v-model="checked">
             <span>记住密码</span>
-
           </div>
           <div class="col-md-6">
             <router-link to="/forget" class="fpwd-a">忘记密码？</router-link>
@@ -73,7 +67,9 @@
     name: 'Login',
     data: function () {
       return {
+        //用户电话
         u_tel: '',
+        //用户密码
         u_pwd: '',
         u_err: '',
         checked: null,
@@ -81,6 +77,7 @@
       }
     },
     mounted: function () {
+      //延时
       setTimeout(() => {
         // alert('coming')
         this.u_err = ''

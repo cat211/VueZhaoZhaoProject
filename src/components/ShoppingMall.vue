@@ -1,18 +1,10 @@
 <template>
   <div>
-
     <div class="intergral-ads">
       <img src="../assets/images/maojin.jpg" alt="">
     </div>
     <div class="intergral-content">
-      <div class="intergral-hot">
-        <a href="#">所有兑换</a>
-      </div>
-      <div class="intergral-can">
-        <a href="#">我能兑换</a>
-      </div>
       <div id="showintegral">
-
         <div class="getintegral">
           <a href="#" v-show="!logined" v-on:click="tologin" class="notlogin">请先登录</a>
           <a class="getintegral-p" v-show="logined" v-text="myintergral" v-on:click="topersonal"></a>
@@ -364,4 +356,6 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   @import "../../static/css/shoppingmall.css";
+  /*积分商城*/
+
 </style>

@@ -164,12 +164,14 @@
     name: "",
     data() {
       return {
+        //xxxstate用于标签页切换
         allstate: true,
         nopaystate: false,
         ingstate: false,
         successstate: false,
         badstate: false,
         user_order: [],
+        //用于提示信息的显示
         show:true,
         err_message:'',
         err_message_info:'',
@@ -177,6 +179,7 @@
       }
     },
     methods: {
+      //获取订单信息
       getOrder: function () {
         var vm = this;
         var token = sessionStorage.getItem('token');
@@ -266,7 +269,7 @@
           })
 
       },
-      //支付(未支付订单->完成)
+      //更改支付状态(未支付订单->完成)
       goToPay: function (orderid, price) {
         sessionStorage.setItem('orderid',orderid);
         this.price = price;

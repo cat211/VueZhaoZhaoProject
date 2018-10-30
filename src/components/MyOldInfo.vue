@@ -128,16 +128,19 @@
         var reg1 = /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
         var reg2= /^1[3456789]\d{9}$/;
         for (let i of this.old_info) {
+          //判断姓名是否为空
           if (i.name == '') {
             this.err_message='姓名不能为空';
             this.err_message_info='请输入完整的姓名';
             break;
           }
+          //判断电话号码格式
           if (!reg2.test(i.telephone)||!reg2.test(i.ec_telephone)) {
             this.err_message='电话号格式不正确';
             this.err_message_info='请输入正确的电话号码';
             break;
           }
+          //判断日期格式
           if (!reg1.test(i.birthday)) {
             this.err_message='日期格式错误';
             this.err_message_info='请输入正确的日期 如:1975-01-29';
@@ -145,6 +148,7 @@
           }
           j++;
         }
+        //如果输入数据格式均正确
         if (j == this.old_info.length) {
           var vm = this;
           var token = sessionStorage.getItem('token');
@@ -219,7 +223,6 @@
           var result;
           result=confirm("您确定要解除与该入住人的关联吗?注：解除关联将删除包含该入住人的状态、订单，此操作不可逆！"); //在页面上弹出对话框
           if(result==true){
-
             axios.post('http://127.0.0.1:8000/user/deletecheckinfo/', data, {headers: {"token": token}})
               .then(function (response) {
                 if (response.data.statuscode == '202') {

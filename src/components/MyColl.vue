@@ -48,7 +48,7 @@
               </div>
               <div class="col-sm-4 col-md-4" v-for="r in room_info">
                 <div class="thumbnail">
-                  <img :src="roomsrc[r.room_id%10]"  :title=r.long_room__beadhouse__name>
+                  <img :src="roomsrc[r.room_id%10]" :title=r.long_room__beadhouse__name>
                   <div class="caption">
                     <h4><strong v-text="r.room__name"></strong></h4>
                     <p v-text="r.room__beadhouse__name"></p>
@@ -109,7 +109,7 @@
         showbh: false,
         showroom: false,
         showart: false,
-        roomsrc:[
+        roomsrc: [
           'http://127.0.0.1:8000/media/pic/room-1.jpg',
           'http://127.0.0.1:8000/media/pic/room-2.jpg',
           'http://127.0.0.1:8000/media/pic/room-3.jpg',
@@ -121,7 +121,7 @@
           'http://127.0.0.1:8000/media/pic/room-1.jpg',
           'http://127.0.0.1:8000/media/pic/room-2.jpg',
         ],
-        artsrc:[
+        artsrc: [
           'http://127.0.0.1:8000/media/pic/art-1.jpg',
           'http://127.0.0.1:8000/media/pic/art-2.jpg',
           'http://127.0.0.1:8000/media/pic/art-3.jpg',
@@ -133,7 +133,7 @@
           'http://127.0.0.1:8000/media/pic/art-1.jpg',
           'http://127.0.0.1:8000/media/pic/art-2.jpg',
         ],
-        housesrc:[
+        housesrc: [
           'http://127.0.0.1:8000/media/pic/house-1.jpg',
           'http://127.0.0.1:8000/media/pic/house-2.jpg',
           'http://127.0.0.1:8000/media/pic/house-3.jpg',
@@ -151,15 +151,20 @@
     methods: {
       //选择公寓收藏，获取公寓信息
       getBhInfo: function () {
+        //判断当前选择的标签页
+        //公寓收藏
         this.bhstate = true;
-          this.roomstate = false;
-          this.artstate = false;
+        //房间收藏
+        this.roomstate = false;
+        //文章收藏
+        this.artstate = false;
         var vm = this;
         var token = sessionStorage.getItem('token');
         var user_id = sessionStorage.getItem('u_id');
         var data = {
           "user_id": user_id
         }
+        //如果用户已经登录
         if (token) {
           axios.post('http://127.0.0.1:8000/beadhouse/gethousebyuserid/', data, {
             headers: {
@@ -168,10 +173,13 @@
           })
             .then(function (response) {
               vm.bh_info = response.data;
+              //如果没有公寓收藏则显示提示信息
               if (vm.bh_info.statuscode == '409') {
                 vm.showbh = true;
 
-              } else {
+              }
+              //如果存在公寓收藏，则对公寓名进行格式化截断
+              else {
                 for (let i of vm.bh_info) {
                   i.long_beadhouse__name = i.beadhouse__name;
                   if (i.beadhouse__name.length > 9) {
@@ -187,6 +195,7 @@
             })
 
         }
+        //没有token提示登录
         else {
           alert('请先登录！')
           this.$router.push({path: "/login"});
@@ -195,8 +204,8 @@
       //选择房间收藏，获取房间信息
       getRoomInfo: function () {
         this.bhstate = false;
-          this.roomstate = true;
-          this.artstate = false;
+        this.roomstate = true;
+        this.artstate = false;
         var vm = this;
         var token = sessionStorage.getItem('token');
         var user_id = sessionStorage.getItem('u_id');
@@ -210,7 +219,7 @@
         })
           .then(function (response) {
             vm.room_info = response.data;
-            if (vm.room_info.length<1) {
+            if (vm.room_info.length < 1) {
               vm.showroom = true;
             }
             else {
@@ -247,7 +256,7 @@
           .then(function (response) {
             vm.art_info = response.data;
             console.log(response.data)
-            if (vm.art_info.length<1) {
+            if (vm.art_info.length < 1) {
               vm.showart = true
             }
             else {
@@ -285,6 +294,7 @@
             }
           })
             .then(function (response) {
+              //删除成功
               if (response.data.statuscode == '202') {
 
                 alert('取消成功')
@@ -366,21 +376,25 @@
       },
       //跳转公寓详情页
       goToBhiInfo: function (bhid) {
+        //公寓id
         sessionStorage.setItem('bhid', bhid);
         this.$router.push({path: "/apartinfo"});
       },
       goToRoomInfo: function (roomid, roomname) {
+        //房间id
         sessionStorage.setItem('roomid', roomid);
         sessionStorage.setItem('roomname', roomname);
         this.$router.push({path: "/details"});
       },
       goToArtiInfo: function (artid) {
+        //文章id
         sessionStorage.setItem('artid', artid);
         this.$router.push({path: "/articledetails"});
       }
     },
 
     mounted() {
+      //获取公寓信息
       this.getBhInfo();
 
     }

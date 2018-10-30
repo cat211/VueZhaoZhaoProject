@@ -68,26 +68,33 @@
       }
     },
     mounted: function () {
+      //获取当前公寓id
       this.beadhouse_id = sessionStorage.getItem('bhid');
       let that = this;
+      //根据id查询公寓
       axios.get('http://127.0.0.1:8000/beadhouse/gethousebyid/' + this.beadhouse_id + '/').then(function (response) {
         that.beadhouse_name = response.data[0].name;
+        //获取套餐信息
         that.getMeals();
       });
     },
     methods: {
+      //获取套餐信息
       getMeals: function () {
         let that = this;
         axios.get('http://127.0.0.1:8000/beadhouse/getmealbyhouseid/' + this.beadhouse_id + '/').then(function (response) {
           that.meal_list = response.data;
         })
       },
+      //跳转公寓详情页
       goBeadHouse:function () {
         this.$router.push({path:"/apartinfo"});
       },
+      //跳转选择房间页
       goBeadHouseRoom:function(){
         this.$router.push({path:"/house"});
       },
+      //加入购物车
       addCart:function (event) {
         if (sessionStorage.getItem('token')) {
           let meal = {

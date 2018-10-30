@@ -151,34 +151,19 @@
     name: "",
     data() {
       return {
-        old_info: [
-          {
-            "id": 3,
-            "name": '王小翠'
-          },
-          {
-            "id": 2,
-            "name": '刘大爷'
-          },
-        ],
-        check_info: [
-          {
-            "eat_dyn": [],
-            "medicine_dyn": [],
-            "active_dyn": [],
-            "person_id": 1,
-            "person_name": '王小翠'
-          },
-        ],
+        old_info: [],
+        check_info: [],
         checked: {
           "check_info_id": '',
           "check_info_name": '',
         },
         num: 0,
         flag: false,
+        //xxflag用于显示更多操作
         eatflag:false,
         docflag:false,
         artflag:false,
+        //xxshow用于提示信息的显示
         show:true,
         eshow:true,
         mshow:true,
@@ -190,6 +175,7 @@
     methods: {
       //显示当前入住人状态信息
       showCheckData(c) {
+        //默认显示更多仅显示3条
         this.eatflag=false,
         this.docflag=false,
         this.artflag=false,
@@ -234,6 +220,7 @@
         })
           .then(function (response) {
             console.log(response.data)
+            //判断点击的是哪个类型的显示更多
             if (type == 1) {
               vm.check_info.eat_dyn = response.data.dyn
               vm.eatflag = true
@@ -283,6 +270,7 @@
               "checkinfo_id": vm.old_info[0].id,
               "dyn_type": null
             }
+            //获取所有入住人的状态信息
             axios.post('http://127.0.0.1:8000/user/getdynlistbycheckinfoid/', data, {
               headers: {
                 "token": token
