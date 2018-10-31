@@ -105,7 +105,7 @@
             "user_id":vm.user_id,
             "house_id":vm.bh_id,
           }
-          axios.post('http://127.0.0.1:8000/beadhouse/collecthouse/',data,{headers:{
+          axios.post(sysConf.djangoUrl+'/beadhouse/collecthouse/',data,{headers:{
               "token":token
             }})
             .then(function (response) {
@@ -139,7 +139,7 @@
             "user_id":vm.user_id,
             "house_id":vm.bh_id,
           }
-          axios.post('http://127.0.0.1:8000/beadhouse/cancelhousecollect/',data,{headers:{
+          axios.post(sysConf.djangoUrl+'/beadhouse/cancelhousecollect/',data,{headers:{
               "token":token
             }})
             .then(function (response) {
@@ -162,7 +162,7 @@
     mounted() {
       var vm = this;
       vm.bh_id=sessionStorage.getItem('bhid');
-      axios.get('http://127.0.0.1:8000/beadhouse/gethousebyid/'+vm.bh_id+'/',)
+      axios.get(sysConf.djangoUrl+'/beadhouse/gethousebyid/'+vm.bh_id+'/',)
         .then(function (response) {
           vm.bh_all_info = response.data[0];
           console.log(vm.bh_all_info)
@@ -228,7 +228,7 @@
           "user_id":vm.user_id,
           "house_id":vm.bh_id,
         }
-        axios.post('http://127.0.0.1:8000/beadhouse/ishousecollect/',data,{headers:{
+        axios.post(sysConf.djangoUrl+'/beadhouse/ishousecollect/',data,{headers:{
             "token":token
           }})
           .then(function (response) {

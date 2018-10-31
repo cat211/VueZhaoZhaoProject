@@ -207,7 +207,7 @@
 
                }
                //更改用户积分
-               axios.post('http://127.0.0.1:8000/user/adminupdatepoints/', data,{headers: {"token": token}})
+               axios.post(sysConf.djangoUrl+'/user/adminupdatepoints/', data,{headers: {"token": token}})
                  .then(function (response) {
                    if(response.data.code=='202'){
                      alert('操作成功！')

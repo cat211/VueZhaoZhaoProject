@@ -41,7 +41,7 @@
               "password": this.new_pwd
             }
             var that = this;
-            axios.post('http://127.0.0.1:8000/user/changepassword/', datas, {
+            axios.post(sysConf.djangoUrl+'/user/changepassword/', datas, {
               headers: {
                 "token": sessionStorage.getItem('token')
               }

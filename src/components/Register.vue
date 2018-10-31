@@ -77,7 +77,7 @@ export default {
           "v_code":this.message_code,
           "password":this.password,
         };
-        axios.post('http://127.0.0.1:8000/user/register/',user).then(function (response) {
+        axios.post(sysConf.djangoUrl+'/user/register/',user).then(function (response) {
           if(response.headers.token){
             sessionStorage.setItem('token',response.headers.token);
             sessionStorage.setItem('u_id',response.data.id);
@@ -117,7 +117,7 @@ export default {
       this.btn_flag = true;
       let that = this;
       this.time_count = 30;
-      axios.get('http://127.0.0.1:8000/user/sendmessage/'+that.telephone+'/').
+      axios.get(sysConf.djangoUrl+'/user/sendmessage/'+that.telephone+'/').
       then(function (response) {
 
       });
@@ -133,7 +133,7 @@ export default {
       this.btn_flag = true;
       let that = this;
       this.time_count = 30;
-      axios.get('http://127.0.0.1:8000/user/sendcall/'+that.telephone+'/').
+      axios.get(sysConf.djangoUrl+'/user/sendcall/'+that.telephone+'/').
       then(function (response) {
 
       });

@@ -92,12 +92,12 @@
     },
     methods: {
       getart: function () {
-        var that = this
-          var art_id=sessionStorage.getItem('artid')
-          console.log(that.art_id)
-        axios.get('http://127.0.0.1:8000/article/getarticlebyid/' + art_id + '/')
+        var that = this;
+          var art_id=sessionStorage.getItem('artid');
+          console.log(that.art_id);
+        axios.get(sysConf.djangoUrl+'/article/getarticlebyid/' + art_id + '/')
           .then(function (response) {
-            console.log(response)
+            console.log(response);
             that.details = response.data[0];
           })
           .catch(function (error) {
@@ -115,7 +115,7 @@
         // var ii=i
         if (u_id){
           // this.art_id = this.$route.query.article_id;
-          axios.get('http://127.0.0.1:8000/article/getcommentsbyarticleid/' + art_id + '/'+u_id+'/')
+          axios.get(sysConf.djangoUrl+'/article/getcommentsbyarticleid/' + art_id + '/'+u_id+'/')
             .then(function (response) {
               if (response.data.length != 0) {
                 console.log(response.data);
@@ -148,7 +148,7 @@
 
             var art_id=sessionStorage.getItem('artid')
 
-          axios.get('http://127.0.0.1:8000/article/getcommentsbyarticleid/' + art_id + '/'+'/')
+          axios.get(sysConf.djangoUrl+'/article/getcommentsbyarticleid/' + art_id + '/'+'/')
             .then(function (response) {
               if (response.data.length != 0) {
                 console.log(response.data)
@@ -188,7 +188,7 @@
             "article_id":art_id
           }
           var that=this
-          axios.post('http://127.0.0.1:8000/article/collectarticle/',user,{
+          axios.post(sysConf.djangoUrl+'/article/collectarticle/',user,{
             headers:{
               "token":sessionStorage.getItem('token')
             }
@@ -219,7 +219,7 @@
             "article_id": art_id
           }
           var that=this
-          axios.post('http://127.0.0.1:8000/article/cancelarticlecollect/',user,{
+          axios.post(sysConf.djangoUrl+'/article/cancelarticlecollect/',user,{
             headers:{
               "token":sessionStorage.getItem('token')
             }
@@ -255,7 +255,7 @@
             }
           })
             .then(function (response) {
-              console.log(response.data)
+              console.log(response.data);
               if(response.data.collectstatus){
                 that.b_cllo=false
               }else {
@@ -268,7 +268,7 @@
         }
       },
       torecommend:function (id) {
-        sessionStorage.setItem('artid',id)
+        sessionStorage.setItem('artid',id);
         // alter(sessionStorage.getItem('artid'))
         this.$router.push({path: "/articledetails"});
         this.$router.go(0)

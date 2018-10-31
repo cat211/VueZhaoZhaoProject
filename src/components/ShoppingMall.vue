@@ -125,8 +125,8 @@
       },
       getGoods: function () {
 
-        var that = this
-        axios.get('http://127.0.0.1:8000/goods/getallgoods/')
+        var that = this;
+        axios.get(sysConf.djangoUrl+'/goods/getallgoods/')
             .then(function (response){
               // console.log(response.data)
               response.data.forEach((item, index) => {
@@ -136,7 +136,7 @@
                   item.fields.name=item.fields.name.substring(0,11)+'...'
 
                 }
-                that.goods_list.push(item.fields)
+                that.goods_list.push(item.fields);
                 that.showContent();
                 if(that.goods_list.length/8 == 0){
                   that.page_size = that.goods_list.length/8;
@@ -168,7 +168,7 @@
           };
           var that=this;
           console.log(sessionStorage.getItem('token'));
-          axios.post('http://127.0.0.1:8000/user/getuserinfo/',user,{
+          axios.post(sysConf.djangoUrl+'/user/getuserinfo/',user,{
             headers:{
               "token":sessionStorage.getItem('token')
             }
@@ -199,18 +199,18 @@
               "user_id":sessionStorage.getItem('u_id')
             }
             var that=this;
-            console.log(sessionStorage.getItem('token'))
-            axios.post('http://127.0.0.1:8000/user/getuserinfo/',user,{
+            console.log(sessionStorage.getItem('token'));
+            axios.post(sysConf.djangoUrl+'/user/getuserinfo/',user,{
               headers:{
                 "token":sessionStorage.getItem('token')
               }
             })
               .then(function (response) {
-                console.log('ok')
+                console.log('ok');
                 if (response.data.id) {
-                  that.myintergral='我的积分：'+response.data.points
-                  sessionStorage.setItem('u_points',response.data.points)
-                  console.log('关闭后的积分')
+                  that.myintergral='我的积分：'+response.data.points;
+                  sessionStorage.setItem('u_points',response.data.points);
+                  console.log('关闭后的积分');
                   console.log(that.myintergral)
                 }
               })
@@ -228,7 +228,7 @@
             "user_id":u_id
           }
 
-          axios.post('http://127.0.0.1:8000/order/getorder/', user, {
+          axios.post(sysConf.djangoUrl+'/order/getorder/', user, {
             headers: {
               "token": token
             }
@@ -263,7 +263,7 @@
                   "status":2
                 };
                   console.log(addorder);
-                  axios.post('http://127.0.0.1:8000/order/addorder/', addorder, {
+                  axios.post(sysConf.djangoUrl+'/order/addorder/', addorder, {
                     headers: {
                       "token": token
                     }
@@ -297,7 +297,7 @@
           var user = {
             "user_id":sessionStorage.getItem('u_id')
           }
-          axios.post('http://127.0.0.1:8000/user/getuserinfo/',user,{
+          axios.post(sysConf.djangoUrl+'/user/getuserinfo/',user,{
             headers:{
               "token":istoken
             }
@@ -305,8 +305,8 @@
             .then(function (response) {
               console.log('ok1')
               if (response.data.id) {
-                that.myintergral='我的积分：'+response.data.points
-                sessionStorage.setItem('u_points',response.data.points)
+                that.myintergral='我的积分：'+response.data.points;
+                sessionStorage.setItem('u_points',response.data.points);
                 console.log(that.myintergral)
               }
             })

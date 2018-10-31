@@ -110,40 +110,40 @@
         showroom: false,
         showart: false,
         roomsrc: [
-          'http://127.0.0.1:8000/media/pic/room-1.jpg',
-          'http://127.0.0.1:8000/media/pic/room-2.jpg',
-          'http://127.0.0.1:8000/media/pic/room-3.jpg',
-          'http://127.0.0.1:8000/media/pic/room-4.jpg',
-          'http://127.0.0.1:8000/media/pic/room-1.jpg',
-          'http://127.0.0.1:8000/media/pic/room-2.jpg',
-          'http://127.0.0.1:8000/media/pic/room-3.jpg',
-          'http://127.0.0.1:8000/media/pic/room-4.jpg',
-          'http://127.0.0.1:8000/media/pic/room-1.jpg',
-          'http://127.0.0.1:8000/media/pic/room-2.jpg',
+          sysConf.djangoUrl+'/media/pic/room-1.jpg',
+          sysConf.djangoUrl+'/media/pic/room-2.jpg',
+          sysConf.djangoUrl+'/media/pic/room-3.jpg',
+          sysConf.djangoUrl+'/media/pic/room-4.jpg',
+          sysConf.djangoUrl+'/media/pic/room-1.jpg',
+          sysConf.djangoUrl+'/media/pic/room-2.jpg',
+          sysConf.djangoUrl+'/media/pic/room-3.jpg',
+          sysConf.djangoUrl+'/media/pic/room-4.jpg',
+          sysConf.djangoUrl+'/media/pic/room-1.jpg',
+          sysConf.djangoUrl+'/media/pic/room-2.jpg',
         ],
         artsrc: [
-          'http://127.0.0.1:8000/media/pic/art-1.jpg',
-          'http://127.0.0.1:8000/media/pic/art-2.jpg',
-          'http://127.0.0.1:8000/media/pic/art-3.jpg',
-          'http://127.0.0.1:8000/media/pic/art-4.jpg',
-          'http://127.0.0.1:8000/media/pic/art-1.jpg',
-          'http://127.0.0.1:8000/media/pic/art-2.jpg',
-          'http://127.0.0.1:8000/media/pic/art-3.jpg',
-          'http://127.0.0.1:8000/media/pic/art-4.jpg',
-          'http://127.0.0.1:8000/media/pic/art-1.jpg',
-          'http://127.0.0.1:8000/media/pic/art-2.jpg',
+          sysConf.djangoUrl+'/media/pic/art-1.jpg',
+          sysConf.djangoUrl+'/media/pic/art-2.jpg',
+          sysConf.djangoUrl+'/media/pic/art-3.jpg',
+          sysConf.djangoUrl+'/media/pic/art-4.jpg',
+          sysConf.djangoUrl+'/media/pic/art-1.jpg',
+          sysConf.djangoUrl+'/media/pic/art-2.jpg',
+          sysConf.djangoUrl+'/media/pic/art-3.jpg',
+          sysConf.djangoUrl+'/media/pic/art-4.jpg',
+          sysConf.djangoUrl+'/media/pic/art-1.jpg',
+          sysConf.djangoUrl+'/media/pic/art-2.jpg',
         ],
         housesrc: [
-          'http://127.0.0.1:8000/media/pic/house-1.jpg',
-          'http://127.0.0.1:8000/media/pic/house-2.jpg',
-          'http://127.0.0.1:8000/media/pic/house-3.jpg',
-          'http://127.0.0.1:8000/media/pic/house-4.jpg',
-          'http://127.0.0.1:8000/media/pic/house-5.jpg',
-          'http://127.0.0.1:8000/media/pic/house-6.jpg',
-          'http://127.0.0.1:8000/media/pic/house-7.jpg',
-          'http://127.0.0.1:8000/media/pic/house-1.jpg',
-          'http://127.0.0.1:8000/media/pic/house-3.jpg',
-          'http://127.0.0.1:8000/media/pic/house-5.jpg',
+          sysConf.djangoUrl+'/media/pic/house-1.jpg',
+          sysConf.djangoUrl+'/media/pic/house-2.jpg',
+          sysConf.djangoUrl+'/media/pic/house-3.jpg',
+          sysConf.djangoUrl+'/media/pic/house-4.jpg',
+          sysConf.djangoUrl+'/media/pic/house-5.jpg',
+          sysConf.djangoUrl+'/media/pic/house-6.jpg',
+          sysConf.djangoUrl+'/media/pic/house-7.jpg',
+          sysConf.djangoUrl+'/media/pic/house-1.jpg',
+          sysConf.djangoUrl+'/media/pic/house-3.jpg',
+          sysConf.djangoUrl+'/media/pic/house-5.jpg',
         ]
 
       }
@@ -166,7 +166,7 @@
         }
         //如果用户已经登录
         if (token) {
-          axios.post('http://127.0.0.1:8000/beadhouse/gethousebyuserid/', data, {
+          axios.post(sysConf.djangoUrl+'/beadhouse/gethousebyuserid/', data, {
             headers: {
               "token": token
             }
@@ -197,7 +197,7 @@
         }
         //没有token提示登录
         else {
-          alert('请先登录！')
+          alert('请先登录！');
           this.$router.push({path: "/login"});
         }
       },
@@ -212,7 +212,7 @@
         var data = {
           "user_id": user_id
         }
-        axios.post('http://127.0.0.1:8000/beadhouse/getroombyuserid/ ', data, {
+        axios.post(sysConf.djangoUrl+'/beadhouse/getroombyuserid/ ', data, {
           headers: {
             "token": token
           }
@@ -248,7 +248,7 @@
         var data = {
           "user_id": user_id
         }
-        axios.post('http://127.0.0.1:8000/article/getarticlebyuserid/ ', data, {
+        axios.post(sysConf.djangoUrl+'/article/getarticlebyuserid/ ', data, {
           headers: {
             "token": token
           }
@@ -288,7 +288,7 @@
             "house_id": bhid,
           }
           console.log(bhid)
-          axios.post('http://127.0.0.1:8000/beadhouse/cancelhousecollect/', data, {
+          axios.post(sysConf.djangoUrl+'/beadhouse/cancelhousecollect/', data, {
             headers: {
               "token": token
             }
@@ -320,7 +320,7 @@
             "user_id": user_id,
             "room_id": roomid,
           }
-          axios.post('http://127.0.0.1:8000/beadhouse/cancelroomcollect/', data, {
+          axios.post(sysConf.djangoUrl+'/beadhouse/cancelroomcollect/', data, {
             headers: {
               "token": token
             }
@@ -353,7 +353,7 @@
             "article_id": articleid,
           }
           console.log(articleid)
-          axios.post('http://127.0.0.1:8000/article/cancelarticlecollect/', data, {
+          axios.post(sysConf.djangoUrl+'/article/cancelarticlecollect/', data, {
             headers: {
               "token": token
             }

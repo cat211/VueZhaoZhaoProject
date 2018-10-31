@@ -109,7 +109,7 @@
               "points":now_points
             }
             var istoken = sessionStorage.getItem('token');
-            axios.post('http://127.0.0.1:8000/user/updatepoints/', user,{
+            axios.post(sysConf.djangoUrl+'/user/updatepoints/', user,{
               headers: {
                 "token": istoken
               }
@@ -167,7 +167,7 @@
         // console.log(u_id)
         var token = sessionStorage.getItem('token');
         var that=this;
-        axios.post('http://127.0.0.1:8000/user/getcheckinfo/', u_id, {
+        axios.post(sysConf.djangoUrl+'/user/getcheckinfo/', u_id, {
           headers: {
             "token": token
           }

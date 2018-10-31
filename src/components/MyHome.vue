@@ -117,7 +117,7 @@
 
         //  更新签到状态
         //获取用户积分(由于该后台接口设计人员设计失误，且并未更改，故只能用此方法暂时实现此功能)
-        axios.post('http://127.0.0.1:8000/user/sign/', data, {
+        axios.post(sysConf.djangoUrl+'/user/sign/', data, {
           headers: {
             "token": token
           }
@@ -126,7 +126,7 @@
             vm.state = response.data;
             //更新用户积分
             if (vm.state.statuscode == '202') {
-              axios.post('http://127.0.0.1:8000/user/updatepoints/', data, {headers: {"token": token}})
+              axios.post(sysConf.djangoUrl+'/user/updatepoints/', data, {headers: {"token": token}})
                 .then(function (response) {
                   vm.state = response.data;
                   if (vm.state.code == '202') {
@@ -159,7 +159,7 @@
         //取得表单数据
         let formdata = new FormData(document.querySelector("#iconform"));
         let that = this;
-        axios.post('http://127.0.0.1:8000/user/uploadicon/', formdata)
+        axios.post(sysConf.djangoUrl+'/user/uploadicon/', formdata)
           .then(function (response) {
             if (response.data.statuscode === '202')
             that.getUserInfo();
@@ -173,7 +173,7 @@
           "user_id": sessionStorage.getItem('u_id')
         };
         if (token) {
-          axios.post('http://127.0.0.1:8000/user/getuserinfo/', data, {headers: {"token": token}})
+          axios.post(sysConf.djangoUrl+'/user/getuserinfo/', data, {headers: {"token": token}})
             .then(function (response) {
               //用户信息
               vm.user_info = response.data;
@@ -188,7 +188,7 @@
               console.log(error)
             });
           //判断是否签到
-          axios.post('http://127.0.0.1:8000/user/checktest/', data, {headers: {"token": token}})
+          axios.post(sysConf.djangoUrl+'/user/checktest/', data, {headers: {"token": token}})
             .then(function (response) {
               // config.headers.common['token']=token
               console.log(response.data.check_result);

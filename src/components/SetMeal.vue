@@ -54,16 +54,16 @@
         err_message:'',
         err_message_info:'',
         setsrc:[
-          'http://127.0.0.1:8000/media/pic/set-3.jpg',
-          'http://127.0.0.1:8000/media/pic/set-1.jpg',
-          'http://127.0.0.1:8000/media/pic/set-4.jpg',
-          'http://127.0.0.1:8000/media/pic/set-2.jpg',
-          'http://127.0.0.1:8000/media/pic/set-3.jpg',
-          'http://127.0.0.1:8000/media/pic/set-1.jpg',
-          'http://127.0.0.1:8000/media/pic/set-4.jpg',
-          'http://127.0.0.1:8000/media/pic/set-2.jpg',
-          'http://127.0.0.1:8000/media/pic/set-3.jpg',
-          'http://127.0.0.1:8000/media/pic/set-1.jpg',
+          sysConf.djangoUrl+'/media/pic/set-3.jpg',
+          sysConf.djangoUrl+'/media/pic/set-1.jpg',
+          sysConf.djangoUrl+'/media/pic/set-4.jpg',
+          sysConf.djangoUrl+'/media/pic/set-2.jpg',
+          sysConf.djangoUrl+'/media/pic/set-3.jpg',
+          sysConf.djangoUrl+'/media/pic/set-1.jpg',
+          sysConf.djangoUrl+'/media/pic/set-4.jpg',
+          sysConf.djangoUrl+'/media/pic/set-2.jpg',
+          sysConf.djangoUrl+'/media/pic/set-3.jpg',
+          sysConf.djangoUrl+'/media/pic/set-1.jpg',
         ]
       }
     },
@@ -72,7 +72,7 @@
       this.beadhouse_id = sessionStorage.getItem('bhid');
       let that = this;
       //根据id查询公寓
-      axios.get('http://127.0.0.1:8000/beadhouse/gethousebyid/' + this.beadhouse_id + '/').then(function (response) {
+      axios.get(sysConf.djangoUrl+'/beadhouse/gethousebyid/' + this.beadhouse_id + '/').then(function (response) {
         that.beadhouse_name = response.data[0].name;
         //获取套餐信息
         that.getMeals();
@@ -82,7 +82,7 @@
       //获取套餐信息
       getMeals: function () {
         let that = this;
-        axios.get('http://127.0.0.1:8000/beadhouse/getmealbyhouseid/' + this.beadhouse_id + '/').then(function (response) {
+        axios.get(sysConf.djangoUrl+'/beadhouse/getmealbyhouseid/' + this.beadhouse_id + '/').then(function (response) {
           that.meal_list = response.data;
         })
       },
@@ -109,7 +109,7 @@
           };
           let that = this;
           let token = sessionStorage.getItem('token');
-          axios.post('http://127.0.0.1:8000/cart/addcart/', meal, {headers: {"token": token}})
+          axios.post(sysConf.djangoUrl+'/cart/addcart/', meal, {headers: {"token": token}})
             .then(function (response) {
               if (response.data.statuscode === '202') {
                 that.err_message='添加成功';

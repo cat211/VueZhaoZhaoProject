@@ -105,16 +105,16 @@
             bh_id:'',
             bh_name:'',
             roomsrc:[
-              'http://127.0.0.1:8000/media/pic/room-1.jpg',
-              'http://127.0.0.1:8000/media/pic/room-2.jpg',
-              'http://127.0.0.1:8000/media/pic/room-3.jpg',
-              'http://127.0.0.1:8000/media/pic/room-4.jpg',
-              'http://127.0.0.1:8000/media/pic/room-1.jpg',
-              'http://127.0.0.1:8000/media/pic/room-2.jpg',
-              'http://127.0.0.1:8000/media/pic/room-3.jpg',
-              'http://127.0.0.1:8000/media/pic/room-4.jpg',
-              'http://127.0.0.1:8000/media/pic/room-1.jpg',
-              'http://127.0.0.1:8000/media/pic/room-2.jpg',
+              sysConf.djangoUrl+'/media/pic/room-1.jpg',
+              sysConf.djangoUrl+'/media/pic/room-2.jpg',
+              sysConf.djangoUrl+'/media/pic/room-3.jpg',
+              sysConf.djangoUrl+'/media/pic/room-4.jpg',
+              sysConf.djangoUrl+'/media/pic/room-1.jpg',
+              sysConf.djangoUrl+'/media/pic/room-2.jpg',
+              sysConf.djangoUrl+'/media/pic/room-3.jpg',
+              sysConf.djangoUrl+'/media/pic/room-4.jpg',
+              sysConf.djangoUrl+'/media/pic/room-1.jpg',
+              sysConf.djangoUrl+'/media/pic/room-2.jpg',
             ]
           }
       },
@@ -139,7 +139,7 @@
         var vm = this;
         vm.bh_id=sessionStorage.getItem('bhid');
         vm.bh_name=sessionStorage.getItem('bhname');
-        axios.get('http://127.0.0.1:8000/beadhouse/getroomsbyhouseid/'+vm.bh_id+'/')
+        axios.get(sysConf.djangoUrl+'/beadhouse/getroomsbyhouseid/'+vm.bh_id+'/')
           .then(function (response) {
             vm.rooms_info = response.data;
             sessionStorage.setItem('rooms_info',vm.rooms_info )

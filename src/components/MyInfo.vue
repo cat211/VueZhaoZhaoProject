@@ -87,7 +87,7 @@
             "telephone":this.user_info.telephone,
           };
           let that = this;
-          axios.post('http://127.0.0.1:8000/user/changeinfo/',data,{headers:{"token":token}})
+          axios.post(sysConf.djangoUrl+'/user/changeinfo/',data,{headers:{"token":token}})
             .then(function (response) {
               if(response.data.code=='202'){
                 that.err_message='保存成功';
@@ -113,7 +113,7 @@
       console.log(data['user_id']);
       console.log(typeof(data['user_id']));
       if(token){
-        axios.post('http://127.0.0.1:8000/user/getuserinfo/',data,{headers:{"token":token}})
+        axios.post(sysConf.djangoUrl+'/user/getuserinfo/',data,{headers:{"token":token}})
           .then(function (response) {
             if(response.data.code === "202"){
               this.err_message = '修改成功';

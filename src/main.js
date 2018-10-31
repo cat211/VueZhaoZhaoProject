@@ -17,6 +17,10 @@ import PageList from './components/PageList'
 import Modal from './components/Modal'
 import MessageModal from './components/MessageModal'
 import Comment from './components/Comment' // 测试评论用
+
+
+// 引入全局变量
+import '@/components/Conf.js'
 // 引用第三方模块
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'

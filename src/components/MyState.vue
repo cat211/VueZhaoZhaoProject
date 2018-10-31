@@ -190,7 +190,7 @@
           "checkinfo_id": c.id,
           "dyn_type": ''
         }
-        axios.post('http://127.0.0.1:8000/user/getdynlistbycheckinfoid/', data, {
+        axios.post(sysConf.djangoUrl+'/user/getdynlistbycheckinfoid/', data, {
           headers: {
             "token": token
           }
@@ -213,7 +213,7 @@
           "checkinfo_id": this.checked.check_info_id,
           "dyn_type": type
         }
-        axios.post('http://127.0.0.1:8000/user/getdynlistbycheckinfoid/', data, {
+        axios.post(sysConf.djangoUrl+'/user/getdynlistbycheckinfoid/', data, {
           headers: {
             "token": token
           }
@@ -251,7 +251,7 @@
           "user_id": user_id
         }
         //获取当前用户登记的所有入住人
-        axios.post('http://127.0.0.1:8000/user/getcheckinfo/', d, {
+        axios.post(sysConf.djangoUrl+'/user/getcheckinfo/', d, {
           headers: {
             "token": token
           }
@@ -271,7 +271,7 @@
               "dyn_type": null
             }
             //获取所有入住人的状态信息
-            axios.post('http://127.0.0.1:8000/user/getdynlistbycheckinfoid/', data, {
+            axios.post(sysConf.djangoUrl+'/user/getdynlistbycheckinfoid/', data, {
               headers: {
                 "token": token
               }

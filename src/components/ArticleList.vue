@@ -71,22 +71,22 @@
         flag: true,
         result_list_three:[],
         artsrc:[
-          'http://127.0.0.1:8000/media/pic/art-1.jpg',
-          'http://127.0.0.1:8000/media/pic/art-2.jpg',
-          'http://127.0.0.1:8000/media/pic/art-3.jpg',
-          'http://127.0.0.1:8000/media/pic/art-4.jpg',
-          'http://127.0.0.1:8000/media/pic/art-1.jpg',
-          'http://127.0.0.1:8000/media/pic/art-2.jpg',
-          'http://127.0.0.1:8000/media/pic/art-3.jpg',
-          'http://127.0.0.1:8000/media/pic/art-4.jpg',
-          'http://127.0.0.1:8000/media/pic/art-1.jpg',
-          'http://127.0.0.1:8000/media/pic/art-2.jpg',
+          sysConf.djangoUrl+'/media/pic/art-1.jpg',
+          sysConf.djangoUrl+'/media/pic/art-2.jpg',
+          sysConf.djangoUrl+'/media/pic/art-3.jpg',
+          sysConf.djangoUrl+'/media/pic/art-4.jpg',
+          sysConf.djangoUrl+'/media/pic/art-1.jpg',
+          sysConf.djangoUrl+'/media/pic/art-2.jpg',
+          sysConf.djangoUrl+'/media/pic/art-3.jpg',
+          sysConf.djangoUrl+'/media/pic/art-4.jpg',
+          sysConf.djangoUrl+'/media/pic/art-1.jpg',
+          sysConf.djangoUrl+'/media/pic/art-2.jpg',
         ]
       }
     },
     mounted() {
       let that = this;
-      axios.get("http://127.0.0.1:8000/article/getarticles/").then(function (response) {
+      axios.get(sysConf.djangoUrl+"/article/getarticles/").then(function (response) {
         that.articlelist = response.data;
         console.log(that.articlelist)
         that.showContent();
@@ -139,7 +139,7 @@
         sessionStorage.setItem('bhid', id)
       },
       toarticledetails: function (id) {
-        sessionStorage.setItem('artid', id)
+        sessionStorage.setItem('artid', id);
         this.$router.push({path: "/articledetails"});
       }
     },

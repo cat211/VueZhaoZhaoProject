@@ -108,7 +108,7 @@
             "password": this.u_pwd,
           };
           var that = this;
-          axios.post('http://127.0.0.1:8000/user/login/', user)
+          axios.post(sysConf.djangoUrl+'/user/login/', user)
             .then(function (response) {
               // vm.list = response.data;
               // console.log(response.data.id)

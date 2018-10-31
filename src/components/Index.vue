@@ -126,18 +126,18 @@
         mask: false,
         search_city: '苏州', // 天气预报城市搜索
         sky: {},
-        sky_src:'http://127.0.0.1:8000/media/pic/sky-sun.png',
+        sky_src:sysConf.djangoUrl+'/media/pic/sky-sun.png',
         housesrc:[
-          'http://127.0.0.1:8000/media/pic/house-1.jpg',
-          'http://127.0.0.1:8000/media/pic/house-2.jpg',
-          'http://127.0.0.1:8000/media/pic/house-3.jpg',
-          'http://127.0.0.1:8000/media/pic/house-4.jpg',
-          'http://127.0.0.1:8000/media/pic/house-5.jpg',
-          'http://127.0.0.1:8000/media/pic/house-6.jpg',
-          'http://127.0.0.1:8000/media/pic/house-7.jpg',
-          'http://127.0.0.1:8000/media/pic/house-1.jpg',
-          'http://127.0.0.1:8000/media/pic/house-3.jpg',
-          'http://127.0.0.1:8000/media/pic/house-5.jpg',
+          sysConf.djangoUrl+'/media/pic/house-1.jpg',
+          sysConf.djangoUrl+'/media/pic/house-2.jpg',
+          sysConf.djangoUrl+'/media/pic/house-3.jpg',
+          sysConf.djangoUrl+'/media/pic/house-4.jpg',
+          sysConf.djangoUrl+'/media/pic/house-5.jpg',
+          sysConf.djangoUrl+'/media/pic/house-6.jpg',
+          sysConf.djangoUrl+'/media/pic/house-7.jpg',
+          sysConf.djangoUrl+'/media/pic/house-1.jpg',
+          sysConf.djangoUrl+'/media/pic/house-3.jpg',
+          sysConf.djangoUrl+'/media/pic/house-5.jpg',
         ]
 
       }
@@ -165,7 +165,7 @@
         var data = {
           "city": this.search_city
         };
-        axios.post('http://127.0.0.1:8000/beadhouse/sky/', data)
+        axios.post(sysConf.djangoUrl+'/beadhouse/sky/', data)
           .then(function (response) {
             vm.sky = response.data;
             var reg1 = /.*?晴.*/;
@@ -175,22 +175,22 @@
             var reg5 = /.*?雪.*/;
 
             if (reg1.test(vm.sky.result.HeWeather5[0].daily_forecast[0].cond.txt_n)) {
-              vm.sky_src='http://127.0.0.1:8000/media/pic/sky-sun.png';
+              vm.sky_src=sysConf.djangoUrl+'/media/pic/sky-sun.png';
             }
             else if (reg2.test(vm.sky.result.HeWeather5[0].daily_forecast[0].cond.txt_n)) {
-              vm.sky_src='http://127.0.0.1:8000/media/pic/sky-yin.png';
+              vm.sky_src=sysConf.djangoUrl+'/media/pic/sky-yin.png';
             }
             else if (reg3.test(vm.sky.result.HeWeather5[0].daily_forecast[0].cond.txt_n)) {
-              vm.sky_src='http://127.0.0.1:8000/media/pic/sky-yun.png';
+              vm.sky_src=sysConf.djangoUrl+'/media/pic/sky-yun.png';
             }
             else if (reg4.test(vm.sky.result.HeWeather5[0].daily_forecast[0].cond.txt_n)) {
-              vm.sky_src='http://127.0.0.1:8000/media/pic/sky-rain.png';
+              vm.sky_src=sysConf.djangoUrl+'/media/pic/sky-rain.png';
             }
             else if (reg5.test(vm.sky.result.HeWeather5[0].daily_forecast[0].cond.txt_n)) {
-              vm.sky_src='http://127.0.0.1:8000/media/pic/sky-xue.png';
+              vm.sky_src=sysConf.djangoUrl+'/media/pic/sky-xue.png';
             }
             else{
-              vm.sky_src='http://127.0.0.1:8000/media/pic/sky-sun.png';
+              vm.sky_src=sysConf.djangoUrl+'/media/pic/sky-sun.png';
             }
           })
           .catch(function (error) {
@@ -200,7 +200,7 @@
       // 得到热门公寓
       GetHouseData: function () {
         var that = this;
-        axios.get('http://127.0.0.1:8000/beadhouse/gethouseby///1/1/')
+        axios.get(sysConf.djangoUrl+'/beadhouse/gethouseby///1/1/')
           .then(function (response) {
             response.data.forEach((item, index) => {
               if (item.score >= 4.9) {

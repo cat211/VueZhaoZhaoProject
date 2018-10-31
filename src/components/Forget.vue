@@ -47,7 +47,7 @@ export default {
         var user = this.f_tel
         var that = this
         console.log(user)
-        axios.get('http://127.0.0.1:8000/user/updatepwd/'+user+'/')
+        axios.get(sysConf.djangoUrl+'/user/updatepwd/'+user+'/')
           .then(function (response) {
             // vm.list = response.data;
             console.log(response)
@@ -85,11 +85,10 @@ export default {
           "v_code":this.f_code,
           "telephone":this.f_tel
         }
-        var that=this
-        axios.post('http://127.0.0.1:8000/user/forgetpassword/',user)
+        var that=this;
+        axios.post(sysConf.djangoUrl+'/user/forgetpassword/',user)
           .then(function (response) {
             // vm.list = response.data;
-            console.log(response)
             if (response.data.statuscode=='202'){
               sessionStorage.setItem('token', response.headers.token);
               that.$router.push({path: "/changepwd"});

@@ -103,7 +103,7 @@
           "user_id": user_id
         };
         if (token) {
-          axios.post('http://127.0.0.1:8000/user/getcheckinfo/', data, {headers: {"token": token}
+          axios.post(sysConf.djangoUrl+'/user/getcheckinfo/', data, {headers: {"token": token}
           })
             .then(function (response) {
               vm.old_info = response.data;
@@ -159,7 +159,7 @@
           };
           let that = this;
           if (token) {
-            axios.post('http://127.0.0.1:8000/user/addcheckinfo/', data, {headers: {"token": token}})
+            axios.post(sysConf.djangoUrl+'/user/addcheckinfo/', data, {headers: {"token": token}})
               .then(function (response) {
                 if (response.data.statuscode == '202') {
                   that.err_message='保存成功';
@@ -223,7 +223,7 @@
           var result;
           result=confirm("您确定要解除与该入住人的关联吗?注：解除关联将删除包含该入住人的状态、订单，此操作不可逆！"); //在页面上弹出对话框
           if(result==true){
-            axios.post('http://127.0.0.1:8000/user/deletecheckinfo/', data, {headers: {"token": token}})
+            axios.post(sysConf.djangoUrl+'/user/deletecheckinfo/', data, {headers: {"token": token}})
               .then(function (response) {
                 if (response.data.statuscode == '202') {
                   for (let i in vm.old_info) {

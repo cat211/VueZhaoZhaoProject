@@ -163,7 +163,7 @@ export default {
         let that = this;
         let art_id = sessionStorage.getItem('artid')?sessionStorage.getItem('artid'):5;
         this.user_id = sessionStorage.getItem('u_id')?sessionStorage.getItem('u_id'):'';
-        axios.get('http://127.0.0.1:8000/article/getcommentsbyarticleid/'+art_id+'/'+that.user_id+'/')
+        axios.get(sysConf.djangoUrl+'article/getcommentsbyarticleid/'+art_id+'/'+that.user_id+'/')
           .then(function (response) {
             that.result_list = response.data;
             for (let i in that.result_list){
@@ -195,7 +195,7 @@ export default {
         };
         this.reply_content = '';
         let that = this;
-        axios.post('http://127.0.0.1:8000/article/replycomment/',data,{
+        axios.post(sysConf.djangoUrl+'/article/replycomment/',data,{
           headers:{
             "token":sessionStorage.getItem('token')
           }
@@ -220,7 +220,7 @@ export default {
             };
             let that = this;
             this.comment_text = '';
-            axios.post('http://127.0.0.1:8000/article/commentarticle/',data,{
+            axios.post(sysConf.djangoUrl+'/article/commentarticle/',data,{
               headers:{
                 "token":sessionStorage.getItem('token')
               }
@@ -250,7 +250,7 @@ export default {
             "comment_id":commentid,
           };
           let that = this;
-          axios.post('http://127.0.0.1:8000/article/clickagree/',data,{
+          axios.post(sysConf.djangoUrl+'/article/clickagree/',data,{
             headers:{
               "token":sessionStorage.getItem('token')
             }

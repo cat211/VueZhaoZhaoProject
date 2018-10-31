@@ -310,7 +310,7 @@
       },
       getData:function () {
         let vm = this;
-        axios.get('http://127.0.0.1:8000/beadhouse/gethouseby/'+vm.search_city+'/'+vm.search_data+'/'+vm.sort_type_one+'/'+vm.sort_type_two+'/')
+        axios.get(sysConf.djangoUrl+'/beadhouse/gethouseby/'+vm.search_city+'/'+vm.search_data+'/'+vm.sort_type_one+'/'+vm.sort_type_two+'/')
           .then(function (response) {
             vm.bh_info = response.data;
             vm.new_result_list = vm.bh_info;

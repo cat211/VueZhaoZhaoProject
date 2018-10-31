@@ -18,7 +18,6 @@ import SetMeal from '@/components/SetMeal'
 import Developer from '@/components/Developer'
 import Admin from '@/components/Admin'
 import ArticleDetails from '@/components/ArticleDetails'
-
 Vue.use(Router);
 
 export default new Router({

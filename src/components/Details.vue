@@ -153,16 +153,16 @@
         err_message: '',
         err_message_info:'',
         setsrc:[
-          'http://127.0.0.1:8000/media/pic/set-3.jpg',
-          'http://127.0.0.1:8000/media/pic/set-1.jpg',
-          'http://127.0.0.1:8000/media/pic/set-2.jpg',
-          'http://127.0.0.1:8000/media/pic/set-4.jpg',
-          'http://127.0.0.1:8000/media/pic/set-3.jpg',
-          'http://127.0.0.1:8000/media/pic/set-1.jpg',
-          'http://127.0.0.1:8000/media/pic/set-2.jpg',
-          'http://127.0.0.1:8000/media/pic/set-4.jpg',
-          'http://127.0.0.1:8000/media/pic/set-3.jpg',
-          'http://127.0.0.1:8000/media/pic/set-1.jpg',
+          sysConf.djangoUrl+'/media/pic/set-3.jpg',
+          sysConf.djangoUrl+'/media/pic/set-1.jpg',
+          sysConf.djangoUrl+'/media/pic/set-2.jpg',
+          sysConf.djangoUrl+'/media/pic/set-4.jpg',
+          sysConf.djangoUrl+'/media/pic/set-3.jpg',
+          sysConf.djangoUrl+'/media/pic/set-1.jpg',
+          sysConf.djangoUrl+'/media/pic/set-2.jpg',
+          sysConf.djangoUrl+'/media/pic/set-4.jpg',
+          sysConf.djangoUrl+'/media/pic/set-3.jpg',
+          sysConf.djangoUrl+'/media/pic/set-1.jpg',
         ]
       }
     },
@@ -178,18 +178,18 @@
         vm.room_id = sessionStorage.getItem('roomid');
         vm.user_id = sessionStorage.getItem('u_id');
         if (vm.user_id) {
-          var token = sessionStorage.getItem('token')
+          var token = sessionStorage.getItem('token');
           var data = {
             "user_id": vm.user_id,
             "room_id": vm.room_id,
-          }
-          axios.post('http://127.0.0.1:8000/beadhouse/collectroom/', data, {
+          };
+          axios.post(sysConf.djangoUrl+'/beadhouse/collectroom/', data, {
             headers: {
               "token": token
             }
           })
             .then(function (response) {
-              console.log(response.data)
+              console.log(response.data);
               if (response.data.statuscode == '202') {
                 vm.flag = false;
                 vm.err_message = '收藏成功';
@@ -218,13 +218,13 @@
             "user_id": vm.user_id,
             "room_id": vm.room_id,
           }
-          axios.post('http://127.0.0.1:8000/beadhouse/cancelroomcollect/', data, {
+          axios.post(sysConf.djangoUrl+'/beadhouse/cancelroomcollect/', data, {
             headers: {
               "token": token
             }
           })
             .then(function (response) {
-              if (response.data.statuscode == '202') {
+              if (response.data.statuscode === '202') {
                 vm.flag = true;
                 vm.err_message = '取消成功';
                 vm.err_message_info = '该房间已经从收藏列表移除'
@@ -246,8 +246,8 @@
         var vm = this;
         vm.user_id = sessionStorage.getItem('u_id');
         if (vm.user_id) {
-          var token = sessionStorage.getItem('token')
-          var room_id = sessionStorage.getItem('roomid')
+          var token = sessionStorage.getItem('token');
+          var room_id = sessionStorage.getItem('roomid');
           //房间0 套餐1
           if (vm.setmeal_id) {
             var data = {
@@ -291,7 +291,7 @@
           // }
           // alert(vm.room_id)
           // alert(vm.setmeal_id)
-          axios.post('http://127.0.0.1:8000/cart/addcart/', data, {
+          axios.post(sysConf.djangoUrl+'/cart/addcart/', data, {
             headers: {
               "token": token
             }
@@ -323,18 +323,18 @@
       this.rooms_info = sessionStorage.getItem('rooms_info');
       //得到所有的配置
       var vm = this;
-      axios.get('http://127.0.0.1:8000/beadhouse/getconfigbyid/' + vm.room_id + '/')
+      axios.get(sysConf.djangoUrl+'/beadhouse/getconfigbyid/' + vm.room_id + '/')
         .then(function (response) {
           vm.room_config = response.data;
           for (let c of vm.room_config) {
-            c.srcd = "http://localhost:8000/media/pic/detc" + c.configtype_id + '.jpg'
+            c.srcd = sysConf.djangoUrl+'/media/pic/detc' + c.configtype_id + '.jpg'
           }
           console.log(vm.room_config)
         })
         .catch(function (error) {
           console.log(error)
         })
-      axios.get('http://127.0.0.1:8000/beadhouse/getmealbyroomid/' + vm.room_id + '/')
+      axios.get(sysConf.djangoUrl+'/beadhouse/getmealbyroomid/' + vm.room_id + '/')
         .then(function (response) {
           vm.room_set = response.data;
           console.log(vm.room_set)
@@ -351,7 +351,7 @@
           "user_id": vm.user_id,
           "room_id": vm.room_id,
         }
-        axios.post('http://127.0.0.1:8000/beadhouse/isroomcollect/', data, {
+        axios.post(sysConf.djangoUrl+'/beadhouse/isroomcollect/', data, {
           headers: {
             "token": token
           }

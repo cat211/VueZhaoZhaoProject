@@ -196,7 +196,7 @@
           };
           var token = sessionStorage.getItem('token');
           var that = this;
-          axios.post('http://127.0.0.1:8000/user/getcheckinfo/', u_id, {
+          axios.post(sysConf.djangoUrl+'/user/getcheckinfo/', u_id, {
             headers: {
               "token": token
             }
@@ -224,7 +224,7 @@
           "type": parseInt(good_type),
         };
         let that = this;
-        axios.post('http://127.0.0.1:8000/cart/deletecart/', data, {"headers": {"token": sessionStorage.getItem('token')}}).then(function (response) {
+        axios.post(sysConf.djangoUrl+'/cart/deletecart/', data, {"headers": {"token": sessionStorage.getItem('token')}}).then(function (response) {
           that.getData();
           that.err_message = good_id+'号商品删除成功';
           that.err_message_info = '您已经成功将商品从购物车中删除';
@@ -241,7 +241,7 @@
         };
         var that = this;
         if (token) {
-          axios.post('http://127.0.0.1:8000/cart/getcart/', data, {
+          axios.post(sysConf.djangoUrl+'/cart/getcart/', data, {
             headers: {
               "token": token
             }
@@ -320,7 +320,7 @@
           "status": 2,
         };
         let that = this;
-        axios.post('http://127.0.0.1:8000/order/addorder/', data, {
+        axios.post(sysConf.djangoUrl+'/order/addorder/', data, {
           headers: {
             "token": sessionStorage.getItem('token')
           }
@@ -352,7 +352,7 @@
           "status": 1,
         };
         let that = this;
-        axios.post('http://127.0.0.1:8000/order/addorder/', data, {
+        axios.post(sysConf.djangoUrl+'/order/addorder/', data, {
           headers: {
             "token": sessionStorage.getItem('token')
           }

@@ -189,7 +189,7 @@
           var data = {
             "user_id": user_id
           }
-          axios.post('http://127.0.0.1:8000/order/getorder/', data, {
+          axios.post(sysConf.djangoUrl+'/order/getorder/', data, {
             headers: {
               "token": token
             }
@@ -200,7 +200,6 @@
               if(vm.user_order.length<1){
                 vm.show=false
               }
-              console.log(vm.user_order)
 
               for (let o of vm.user_order) {
                 var k=0;

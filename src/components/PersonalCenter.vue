@@ -66,36 +66,36 @@ export default {
   },
   methods:{
     changeInfo:function () {
-      this.myhomestate=false,
-        this.myinfostate=true,
-        this.myoldstate=false,
-        this.myordertate=false,
-        this.mycollstate=false,
-        this.mystatestate=false
-        this.mymessage=false
+      this.myhomestate=false;
+        this.myinfostate=true;
+        this.myoldstate=false;
+        this.myordertate=false;
+        this.mycollstate=false;
+        this.mystatestate=false;
+        this.mymessage=false;
     }
 
   },
   mounted(){
     if(sessionStorage.getItem('gotostate')){
-      sessionStorage.setItem('gotostate','')
-      this.myhomestate=false,
-        this.myinfostate=false,
-        this.myoldstate=false,
-        this.mycollstate=false,
-        this.myordertate=false,
-        this.mymessage=false,
-        this.mystatestate=true
+      sessionStorage.setItem('gotostate','');
+      this.myhomestate=false;
+        this.myinfostate=false;
+        this.myoldstate=false;
+        this.mycollstate=false;
+        this.myordertate=false;
+        this.mymessage=false;
+        this.mystatestate=true;
     }
     else if(sessionStorage.getItem('gotomessage')){
-      sessionStorage.setItem('gotomessage','')
-      this.myhomestate=false,
-        this.myinfostate=false,
-        this.myoldstate=false,
-        this.mycollstate=false,
-        this.myordertate=false,
-        this.mystatestate=false
-        this.mymessage=true
+      sessionStorage.setItem('gotomessage','');
+      this.myhomestate=false;
+        this.myinfostate=false;
+        this.myoldstate=false;
+        this.mycollstate=false;
+        this.myordertate=false;
+        this.mystatestate=false;
+        this.mymessage=true;
     }
   }
 }
