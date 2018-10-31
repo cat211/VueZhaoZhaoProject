@@ -63,8 +63,8 @@
             <input type="checkbox" :id=c.id :value=c.id v-model="checkedBoxList" :data-type="c.type" @click="">
             <a href="javascript:void 0"><img src="../assets/images/det2.jpg" alt=""></a>
           </div>
-          <div v-text="c.name"></div>
-          <div v-text="c.beadhouse_name"></div>
+          <div><a href="javascript:void 0" v-text="c.name" @click="goGoodsInfo(c.name,c.good_id,c.type,c.beadhouse_id)"></a></div>
+          <div><a href="javascript:void 0" v-text="c.beadhouse_name" @click="goBeadHouse(c.beadhouse_id,c.beadhouse_name)"></a></div>
           <div v-text="c.price"></div>
           <div class="cart-btn-operator" :id="c.id">
             <input readonly="readonly" type="" value="-" @click="countReduce($event),sumPrice()" :disabled="c.number<1">
@@ -186,6 +186,24 @@
         this.unitName = item.name;
         this.unitId = item.id;
       },
+      // 通过商品名跳转
+      goGoodsInfo:function(name,id,type,bh_id){
+        if (type === 0){
+          sessionStorage.setItem('roomid',id);
+          sessionStorage.setItem('roomname',name);
+          sessionStorage.setItem('bhid',bh_id);
+          this.$router.push({path: '/details'});
+        }else if (type === 1){
+          sessionStorage.setItem('bhid',bh_id);
+          this.$router.push({path: '/setMeal'});
+        }
+      },
+      // 通过养老院名称跳转
+      goBeadHouse:function(bh_id,bh_name){
+        sessionStorage.setItem('bhid',bh_id);
+        sessionStorage.setItem('bhname',bh_name);
+        this.$router.push({path: '/house'});
+      },
       // 得到入驻人信息
       getname: function () {
         var user_id = sessionStorage.getItem('u_id');
@@ -256,6 +274,7 @@
                   "name": room.name,
                   "price": room.price,
                   "beadhouse_name": room.beadhouse_name,
+                  "beadhouse_id":room.beadhouse_id,
                   "number": room.number,
                   "good_id": room.id,
                   "type": 0,
@@ -269,6 +288,7 @@
                   "name": meal.name,
                   "price": meal.price,
                   "beadhouse_name": meal.beadhouse_name,
+                  "beadhouse_id":meal.beadhouse_id,
                   "number": meal.number,
                   "good_id": meal.id,
                   "type": 1,

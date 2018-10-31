@@ -333,7 +333,7 @@
         })
         .catch(function (error) {
           console.log(error)
-        })
+        });
       axios.get(sysConf.djangoUrl+'/beadhouse/getmealbyroomid/' + vm.room_id + '/')
         .then(function (response) {
           vm.room_set = response.data;

@@ -142,7 +142,7 @@
         axios.get(sysConf.djangoUrl+'/beadhouse/getroomsbyhouseid/'+vm.bh_id+'/')
           .then(function (response) {
             vm.rooms_info = response.data;
-            sessionStorage.setItem('rooms_info',vm.rooms_info )
+            sessionStorage.setItem('rooms_info',vm.rooms_info );
             console.log(vm.rooms_info)
           })
           .catch(function (error) {
