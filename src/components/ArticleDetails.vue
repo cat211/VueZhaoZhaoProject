@@ -60,8 +60,6 @@
       <!--评论组件-->
       <page-comment></page-comment>
     </div>
-
-
   </div>
 </template>
 

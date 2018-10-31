@@ -161,9 +161,9 @@ export default {
       // 获得文章所有评论
       getData:function () {
         let that = this;
-        let art_id = sessionStorage.getItem('artid')?sessionStorage.getItem('artid'):5;
+        let art_id = sessionStorage.getItem('artid');
         this.user_id = sessionStorage.getItem('u_id')?sessionStorage.getItem('u_id'):'';
-        axios.get(sysConf.djangoUrl+'article/getcommentsbyarticleid/'+art_id+'/'+that.user_id+'/')
+        axios.get(sysConf.djangoUrl+'/article/getcommentsbyarticleid/'+art_id+'/'+that.user_id+'/')
           .then(function (response) {
             that.result_list = response.data;
             for (let i in that.result_list){
@@ -191,7 +191,7 @@ export default {
           "user_id":sessionStorage.getItem('u_id'),
           "comment_id":commentid,
           "content":this.reply_content,
-          "article_id":5,
+          "article_id":sessionStorage.getItem('artid'),
         };
         this.reply_content = '';
         let that = this;
