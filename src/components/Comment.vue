@@ -187,27 +187,37 @@ export default {
       },
       // 回复函数
       reply:function (commentid) {
-        let data = {
-          "user_id":sessionStorage.getItem('u_id'),
-          "comment_id":commentid,
-          "content":this.reply_content,
-          "article_id":sessionStorage.getItem('artid'),
-        };
-        this.reply_content = '';
-        let that = this;
-        axios.post(sysConf.djangoUrl+'/article/replycomment/',data,{
-          headers:{
-            "token":sessionStorage.getItem('token')
+        if(sessionStorage.getItem('u_id')){
+          if (this.reply_content){
+            let data = {
+              "user_id":sessionStorage.getItem('u_id'),
+              "comment_id":commentid,
+              "content":this.reply_content,
+              "article_id":sessionStorage.getItem('artid'),
+            };
+            this.reply_content = '';
+            let that = this;
+            axios.post(sysConf.djangoUrl+'/article/replycomment/',data,{
+              headers:{
+                "token":sessionStorage.getItem('token')
+              }
+            })
+              .then(function (response) {
+                if(response.data.statuscode ==='202'){
+                  that.getData();
+                }
+              })
+              .catch(function (error) {
+                console.log(error)
+              })
+          } else {
+            this.err_message='评论不能为空';
+            this.err_message_info='请在输入区域输入评论';
           }
-        })
-        .then(function (response) {
-            if(response.data.statuscode ==='202'){
-              that.getData();
-            }
-        })
-        .catch(function (error) {
-            console.log(error)
-        })
+        }else {
+          this.err_message='你还未登录';
+          this.err_message_info='请登录后使用该功能';
+        }
       },
       // 发表评论函数
       comment:function () {
