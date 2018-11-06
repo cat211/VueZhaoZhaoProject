@@ -148,7 +148,7 @@
             })
         }else {
 
-            var art_id=sessionStorage.getItem('artid')
+            var art_id=sessionStorage.getItem('artid');
 
           axios.get(sysConf.djangoUrl+'/article/getcommentsbyarticleid/' + art_id + '/'+'/')
             .then(function (response) {

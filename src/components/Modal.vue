@@ -75,7 +75,6 @@
         num:0,
         err_im:'',
 
-
       }
     },
     mounted: function () {
