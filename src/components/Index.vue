@@ -174,19 +174,19 @@
             var reg4 = /.*?雨.*/;
             var reg5 = /.*?雪.*/;
 
-            if (reg1.test(vm.sky.result.HeWeather5[0].daily_forecast[0].cond.txt_n)) {
+            if (reg1.test(vm.sky.result.HeWeather5[0].daily_forecast.cond.txt_n)) {
               vm.sky_src=sysConf.djangoUrl+'/media/pic/sky-sun.png';
             }
-            else if (reg2.test(vm.sky.result.HeWeather5[0].daily_forecast[0].cond.txt_n)) {
+            else if (reg2.test(vm.sky.result.HeWeather5[0].daily_forecast.cond.txt_n)) {
               vm.sky_src=sysConf.djangoUrl+'/media/pic/sky-yin.png';
             }
-            else if (reg3.test(vm.sky.result.HeWeather5[0].daily_forecast[0].cond.txt_n)) {
+            else if (reg3.test(vm.sky.result.HeWeather5[0].daily_forecast.cond.txt_n)) {
               vm.sky_src=sysConf.djangoUrl+'/media/pic/sky-yun.png';
             }
-            else if (reg4.test(vm.sky.result.HeWeather5[0].daily_forecast[0].cond.txt_n)) {
+            else if (reg4.test(vm.sky.result.HeWeather5[0].daily_forecast.cond.txt_n)) {
               vm.sky_src=sysConf.djangoUrl+'/media/pic/sky-rain.png';
             }
-            else if (reg5.test(vm.sky.result.HeWeather5[0].daily_forecast[0].cond.txt_n)) {
+            else if (reg5.test(vm.sky.result.HeWeather5[0].daily_forecast.cond.txt_n)) {
               vm.sky_src=sysConf.djangoUrl+'/media/pic/sky-xue.png';
             }
             else{
