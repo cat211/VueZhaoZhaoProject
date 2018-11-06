@@ -13,7 +13,7 @@
         <input type="text" v-model="comment_text">
       </div>
       <div>
-        <button class="btn btn-primary" @click="Comment()">发表评论</button>
+        <button class="btn btn-primary" @click="comment">发表评论</button>
       </div>
     </div>
     <!--所有评论标题-->
@@ -52,18 +52,18 @@
           </div>
           <!--显示时间和按钮区-->
           <div class="time-btn">
-              <div>
-                <!--显示时间-->
-                <span v-text="comment.time"></span>
-              </div>
-              <div>
-                <!--收起/显示回复的按钮-->
-                <button class="btn btn-default" @click="hideReplyInput(comment.comment_id)">回复</button>
-              </div>
-              <div>
-                <!--收起/显示回复的按钮-->
-                <button class="btn btn-primary" v-text="comment.btnvalue" @click="hideReply(comment.comment_id,comment.btnvalue)"></button>
-              </div>
+            <div>
+              <!--显示时间-->
+              <span v-text="comment.time"></span>
+            </div>
+            <div>
+              <!--收起/显示回复的按钮-->
+              <button class="btn btn-default" @click="hideReplyInput(comment.comment_id)">回复</button>
+            </div>
+            <div>
+              <!--收起/显示回复的按钮-->
+              <button class="btn btn-primary" v-text="comment.btnvalue" @click="hideReply(comment.comment_id,comment.btnvalue)"></button>
+            </div>
           </div>
         </div>
       </div>
@@ -111,7 +111,7 @@
 
 <script>
   import axios from 'axios'
-export default {
+  export default {
     name: 'Comment',
     data () {
       return {
@@ -131,9 +131,60 @@ export default {
     watch:{
       "result_list": function(newpage,oldpage) {
       },
-    deep:true,
-  },
+      deep:true,
+    },
     methods:{
+      // 显示隐藏回复方法
+      hideReply:function (commentid,btnvalue) {
+        for (let i in this.result_list) {
+          if (this.result_list[i].comment_id === commentid) {
+            this.result_list[i].showreply = !this.result_list[i].showreply;
+            if(this.result_list[i].btnvalue === '收起回复'){
+              this.result_list[i].btnvalue = '查看回复';  // 按钮文字的切换
+              this.result_list[i].showreplysize = 3     // 默认只显示3条回复
+            }else {
+              this.result_list[i].btnvalue = '收起回复'   // 按钮文字的切换
+            }
+            break;
+          }
+        }
+      },
+      // 隐藏显示回复框
+      hideReplyInput:function(commentid){
+        for (let i in this.result_list) {
+          if (this.result_list[i].comment_id === commentid) {  // 根据id更改对应回复框的显示状态
+            this.result_list[i].showreplyinput = !this.result_list[i].showreplyinput;
+            break;
+          }
+        }
+      },
+      // 获得文章所有评论
+      getData:function () {
+        let that = this;
+        let art_id = sessionStorage.getItem('artid');
+        this.user_id = sessionStorage.getItem('u_id')?sessionStorage.getItem('u_id'):'';
+        axios.get(sysConf.djangoUrl+'/article/getcommentsbyarticleid/'+art_id+'/'+that.user_id+'/')
+          .then(function (response) {
+            that.result_list = response.data;
+            for (let i in that.result_list){
+              if(that.result_list[i].replys.length<1){  // 如果这条评论没有人回复，就收起回复列表
+                that.result_list[i].showreply=false
+              }
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          });
+      },
+      // 显示更多回复
+      showMoreReply:function (commentid) {
+        for (let i in this.result_list) {
+          if (this.result_list[i].comment_id === commentid) {
+            this.result_list[i].showreplysize += 3;  // 每次多显示3个
+            break;
+          }
+        }
+      },
       // 回复函数
       reply:function (commentid) {
         if(sessionStorage.getItem('u_id')){
@@ -169,7 +220,7 @@ export default {
         }
       },
       // 发表评论函数
-      Comment:function () {
+      comment:function () {
         if (sessionStorage.getItem('u_id')){
           if(this.comment_text){
             let data = {
@@ -233,58 +284,7 @@ export default {
       alreadyClick:function () {
         this.err_message='您已经点过赞了';
         this.err_message_info='您已经点过赞了';
-      },
-      // 显示隐藏回复方法
-      hideReply:function (commentid,btnvalue) {
-        for (let i in this.result_list) {
-          if (this.result_list[i].comment_id === commentid) {
-            this.result_list[i].showreply = !this.result_list[i].showreply;
-            if(this.result_list[i].btnvalue === '收起回复'){
-              this.result_list[i].btnvalue = '查看回复';  // 按钮文字的切换
-              this.result_list[i].showreplysize = 3     // 默认只显示3条回复
-            }else {
-              this.result_list[i].btnvalue = '收起回复'   // 按钮文字的切换
-            }
-            break;
-          }
-        }
-      },
-      // 隐藏显示回复框
-      hideReplyInput:function(commentid){
-        for (let i in this.result_list) {
-          if (this.result_list[i].comment_id === commentid) {  // 根据id更改对应回复框的显示状态
-            this.result_list[i].showreplyinput = !this.result_list[i].showreplyinput;
-            break;
-          }
-        }
-      },
-      // 获得文章所有评论
-      getData:function () {
-        let that = this;
-        let art_id = sessionStorage.getItem('artid');
-        this.user_id = sessionStorage.getItem('u_id')?sessionStorage.getItem('u_id'):'';
-        axios.get(sysConf.djangoUrl+'/article/getcommentsbyarticleid/'+art_id+'/'+that.user_id+'/')
-          .then(function (response) {
-            that.result_list = response.data;
-            for (let i in that.result_list){
-              if(that.result_list[i].replys.length<1){  // 如果这条评论没有人回复，就收起回复列表
-                that.result_list[i].showreply=false
-              }
-            }
-          })
-          .catch(function (error) {
-            console.log(error)
-          });
-      },
-      // 显示更多回复
-      showMoreReply:function (commentid) {
-        for (let i in this.result_list) {
-          if (this.result_list[i].comment_id === commentid) {
-            this.result_list[i].showreplysize += 3;  // 每次多显示3个
-            break;
-          }
-        }
-      },
+      }
     },
   }
 </script>
@@ -496,5 +496,4 @@ export default {
     width: 100%;
     line-height: 35px;
   }
-
 </style>
