@@ -1,6 +1,8 @@
 <template>
   <!--内容-->
   <div class="row my-index-center">
+    <!--提示消息模态框-->
+    <message-modal :err_message="err_message" :err_message_info="err_message_info"></message-modal>
     <!--内容左空白-->
     <div class="col-md-2"></div>
     <!--内容左空白end-->
@@ -76,6 +78,8 @@
         flag:'',
         user_id:'',
         bh_id:'',
+        err_message:'',
+        err_message_info:'',
         bh_all_info:{
           "name":'',
           "address":'',
@@ -96,23 +100,24 @@
       },
       //收藏公寓
       collBh:function () {
-        var vm = this;
+        let vm = this;
         vm.bh_id=sessionStorage.getItem('bhid');
         vm.user_id=sessionStorage.getItem('u_id');
         if(vm.user_id){
-          var token=sessionStorage.getItem('token')
+          var token=sessionStorage.getItem('token');
           var data={
             "user_id":vm.user_id,
             "house_id":vm.bh_id,
-          }
+          };
           axios.post(sysConf.djangoUrl+'/beadhouse/collecthouse/',data,{headers:{
               "token":token
             }})
             .then(function (response) {
-              console.log(response.data)
+              console.log(response.data);
               if(response.data.statuscode=='202'){
                 vm.flag=false;
-                alert('收藏成功！')
+                vm.err_message='收藏成功';
+                vm.err_message_info='详情请在个人中心-我的收藏查看';
               }else {
                 vm.flag=true;
               }
@@ -134,7 +139,7 @@
         vm.bh_id=sessionStorage.getItem('bhid');
         vm.user_id=sessionStorage.getItem('u_id');
         if(vm.user_id){
-          var token=sessionStorage.getItem('token')
+          var token=sessionStorage.getItem('token');
           var data={
             "user_id":vm.user_id,
             "house_id":vm.bh_id,
@@ -145,7 +150,8 @@
             .then(function (response) {
               if(response.data.statuscode=='202'){
                 vm.flag=true;
-                alert('取消成功')
+                vm.err_message='取消成功';
+                vm.err_message_info='您已取消收藏该公寓';
               }else {
                 vm.flag=false;
               }
@@ -155,7 +161,8 @@
             })
         }
         else {
-          alert('请先登录！')
+          this.err_message='你还未登录';
+          this.err_message_info='请登录后使用该功能';
         }
       },
     },
