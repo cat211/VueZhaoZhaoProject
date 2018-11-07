@@ -1,7 +1,5 @@
 <template>
   <div class="col-md-9">
-    <!--提示消息模态框-->
-    <message-modal :err_message="err_message" :err_message_info="err_message_info"></message-modal>
     <div class="row">
       <div class="col-md-12">
         <div class="panel panel-primary">
@@ -52,7 +50,6 @@
         </div>
         <!--第1.1行end-->
         <!--第1.2行-->
-
       </div>
     </div>
   </div>
@@ -116,8 +113,8 @@
         axios.post(sysConf.djangoUrl+'/user/getuserinfo/',data,{headers:{"token":token}})
           .then(function (response) {
             if(response.data.code === "202"){
-              this.err_message = '修改成功';
-              this.err_message = '修改个人信息成功';
+              vm.err_message = '修改成功';
+              vm.err_message = '修改个人信息成功';
             }
             vm.user_info = response.data;
             console.log(vm.user_info )

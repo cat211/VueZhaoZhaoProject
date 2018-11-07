@@ -161,8 +161,11 @@
         let that = this;
         axios.post(sysConf.djangoUrl+'/user/uploadicon/', formdata)
           .then(function (response) {
-            if (response.data.statuscode === '202')
-            that.getUserInfo();
+            if (response.data.statuscode === '202'){
+              that.getUserInfo();
+            }else {
+              console.log('err')
+            }
           })
       },
       //获取用户信息
@@ -181,8 +184,7 @@
               //计算等级
               vm.myscore=vm.user_info.points%100;
               vm.myscorestyle='width:'+vm.myscore+'%';
-              vm.level=Math.ceil(vm.myscore/10);
-              console.log(vm.user_info);
+              vm.level=Math.ceil(vm.myscore/10)
             })
             .catch(function (error) {
               console.log(error)
@@ -191,7 +193,6 @@
           axios.post(sysConf.djangoUrl+'/user/checktest/', data, {headers: {"token": token}})
             .then(function (response) {
               // config.headers.common['token']=token
-              console.log(response.data.check_result);
               if (response.data.check_result) {
                 vm.flag = true;
                 vm.signtext = '签到+1';
@@ -199,14 +200,11 @@
               else {
                 vm.flag = false;
                 vm.signtext = '已签到';
-
-
               }
             })
             .catch(function (error) {
               console.log(error)
             });
-
         }
         else {
           this.err_message='你还未登录';
