@@ -1,5 +1,7 @@
 <template>
   <div class="col-md-9">
+    <!--提示消息模态框-->
+    <message-modal :err_message="err_message" :err_message_info="err_message_info"></message-modal>
     <div class="row">
       <div class="col-md-12">
         <ul class="nav nav-tabs">
@@ -282,12 +284,12 @@
         var vm = this;
         var user_id = sessionStorage.getItem('u_id');
         if (user_id) {
-          var token = sessionStorage.getItem('token')
+          var token = sessionStorage.getItem('token');
           var data = {
             "user_id": user_id,
             "house_id": bhid,
-          }
-          console.log(bhid)
+          };
+          console.log(bhid);
           axios.post(sysConf.djangoUrl+'/beadhouse/cancelhousecollect/', data, {
             headers: {
               "token": token
@@ -297,7 +299,8 @@
               //删除成功
               if (response.data.statuscode == '202') {
 
-                alert('取消成功')
+                vm.err_message='取消成功';
+                vm.err_message_info='您已取消该文章的收藏';
                 vm.getBhInfo();
               } else {
                 vm.bhstate = false;
@@ -308,7 +311,8 @@
             })
         }
         else {
-          alert('请先登录！')
+          vm.err_message='你还未登录';
+          vm.err_message_info='请登录后使用该功能';
         }
       },
       delRoomColl: function (roomid) {
@@ -327,7 +331,8 @@
           })
             .then(function (response) {
               if (response.data.statuscode == '202') {
-                alert('取消成功');
+                vm.err_message='取消成功';
+                vm.err_message_info='您已取消该文章的收藏';
                 vm.getRoomInfo();
 
               } else {
@@ -339,7 +344,8 @@
             })
         }
         else {
-          alert('请先登录！')
+          vm.err_message='你还未登录';
+          vm.err_message_info='请登录后使用该功能';
         }
       },
       //删除文章收藏
@@ -360,7 +366,8 @@
           })
             .then(function (response) {
               if (response.data.statuscode == '202') {
-                alert('取消成功')
+                vm.err_message='取消成功';
+                vm.err_message_info='您已取消该文章的收藏';
                 vm.getArtInfo();
               } else {
                 vm.artstate = false;
@@ -371,7 +378,8 @@
             })
         }
         else {
-          alert('请先登录！')
+          vm.err_message='你还未登录';
+          vm.err_message_info='请登录后使用该功能';
         }
       },
       //跳转公寓详情页

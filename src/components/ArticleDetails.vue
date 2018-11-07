@@ -26,7 +26,7 @@
             <div>取消<img src="../assets/images/a_coll.png" alt=""></div>
           </div>
           <div class="col-sm-1">
-            <a >举报</a>
+            <a>举报</a>
           </div>
         </div>
       </div>
