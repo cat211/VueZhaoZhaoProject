@@ -164,7 +164,7 @@
             if (response.data.statuscode === '202'){
               that.getUserInfo();
             }else {
-              console.log('err')
+              that.getUserInfo();
             }
           })
       },
