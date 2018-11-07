@@ -1,5 +1,7 @@
 <template>
   <div>
+    <!--提示消息模态框-->
+    <message-modal :err_message="err_message" :err_message_info="err_message_info"></message-modal>
     <div>
       <div class="act-header">
         <div class="row">
@@ -81,6 +83,8 @@
         b_cllo:true,
         showre:false,
         want_replay:false,
+        err_message_info:'',
+        err_message:'',
       }
     },
     mounted: function () {
@@ -119,9 +123,9 @@
                 console.log(response.data);
                 that.all_comment = response.data;
                 that.all_comment.forEach((item, index) => {
-                  console.log(item)
+                  console.log(item);
                   item.showreplay=false
-                })
+                });
                 if (!that.want_replay) {
                   that.all_comment[i].showreplay = true;
                   that.want_replay=true;
@@ -149,8 +153,8 @@
           axios.get(sysConf.djangoUrl+'/article/getcommentsbyarticleid/' + art_id + '/'+'/')
             .then(function (response) {
               if (response.data.length != 0) {
-                console.log(response.data)
-                that.all_comment = response.data
+                console.log(response.data);
+                that.all_comment = response.data;
                 console.log(that.all_comment)
               }
               else {
@@ -167,10 +171,10 @@
 
       },
       cllo_art:function () {
-        var u_id=sessionStorage.getItem('u_id')
+        var u_id=sessionStorage.getItem('u_id');
         if (u_id) {
           if (sessionStorage.getItem('artid')){
-              var art_id = sessionStorage.getItem('artid')
+              var art_id = sessionStorage.getItem('artid');
             var user={
               "user_id":u_id,
               "article_id":art_id
@@ -185,7 +189,7 @@
             "user_id":u_id,
             "article_id":art_id
           }
-          var that=this
+          var that=this;
           axios.post(sysConf.djangoUrl+'/article/collectarticle/',user,{
             headers:{
               "token":sessionStorage.getItem('token')
@@ -194,7 +198,9 @@
             .then(function (response) {
               console.log(response.data)
               if(response.data.statuscode=='202'){
-                that.b_cllo=false
+                that.b_cllo=false;
+                that.err_message = '收藏成功';
+                that.err_message_info = '详情请在个人中心-我的收藏查看';
               }else {
 
               }
@@ -225,7 +231,9 @@
             .then(function (response) {
               console.log(response.data)
               if(response.data.statuscode=='202'){
-                that.b_cllo=true
+                that.b_cllo=true;
+                that.err_message = '取消成功';
+                that.err_message_info = '您已取消收藏该文章';
               }else {
 
               }

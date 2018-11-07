@@ -93,16 +93,16 @@
     methods: {
       closetwo: function () {
         var u_points=this.showint.substring(5,);
-        console.log('看看积分有多少')
-        console.log(u_points)
-        var int_points=parseInt(u_points)
-        var int_good_points=parseInt(this.good_poins)
-        console.log(int_good_points)
+        console.log('看看积分有多少');
+        console.log(u_points);
+        var int_points=parseInt(u_points);
+        var int_good_points=parseInt(this.good_poins);
+        console.log(int_good_points);
         if (int_points>=int_good_points){
           if (this.unitName==='请选择入住人'){
             this.err_im='请选择入住人'
           }else {
-            var now_points=int_points-int_good_points
+            var now_points=int_points-int_good_points;
             // this.$options.methods.changepoints(now_points);
             var user={
               "user_id":sessionStorage.getItem('u_id'),
@@ -120,7 +120,7 @@
               })
               .catch(function (error) {
                 console.log(error)
-              })
+              });
             this.$emit('close',{code:0,name:this.unitName,id:this.unitId});
           }
 

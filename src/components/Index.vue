@@ -173,6 +173,7 @@
             var reg3 = /.*?云.*/;
             var reg4 = /.*?雨.*/;
             var reg5 = /.*?雪.*/;
+
             if (reg1.test(vm.sky.result.HeWeather5[0].daily_forecast.cond.txt_n)) {
               vm.sky_src=sysConf.djangoUrl+'/media/pic/sky-sun.png';
             }

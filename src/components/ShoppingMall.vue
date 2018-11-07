@@ -1,5 +1,7 @@
 <template>
   <div>
+    <!--提示消息模态框-->
+    <message-modal :err_message="err_message" :err_message_info="err_message_info"></message-modal>
     <div class="intergral-ads">
       <img src="../assets/images/maojin.jpg" alt="">
     </div>
@@ -26,10 +28,6 @@
           </div>
         </div>
       </div>
-
-
-
-
       <!--<div class="intergral-content-middle row">-->
         <!--<div class="col-lg-4 mygoods" v-for="good in result_list">-->
           <!--<a href="#"><img src="../assets/images/anmoqi.png" alt=""></a><br>-->
@@ -83,6 +81,8 @@
         good_id:0,
         good_name:'',
         good_price:0,
+        err_message:'',
+        err_message_info:'',
       }
     },
     mounted: function () {
@@ -90,32 +90,6 @@
       this.getGoods();
     },
     methods: {
-      // islogin: function () {
-      //   var istoken = sessionStorage.getItem('token');
-      //   var that = this
-      //   if (istoken) {
-      //     var user = {
-      //       "user_id": sessionStorage.getItem('u_id')
-      //     }
-      //
-      //     axios.post('http://127.0.0.1:8000/user/getuserinfo/', user, {
-      //       headers: {
-      //         "token": istoken
-      //       }
-      //     })
-      //       .then(function (response) {
-      //         if (response.data.id)
-      //           sessionStorage.setItem('u_inter', '我的积分：' + response.data.points)
-      //         sessionStorage.setItem('u_id', response.data.id)
-      //         that.myintergral = '我的积分：' + response.data.points
-      //       })
-      //       .catch(function (error) {
-      //         console.log(error)
-      //       })
-      //   } else {
-      //     this.logined = false
-      //   }
-      // },
       tologin: function () {
         sessionStorage.setItem('from', '/shoppingmall');
         this.$router.push({path: "/login"});
@@ -197,7 +171,7 @@
           setTimeout(() => {
             var user = {
               "user_id":sessionStorage.getItem('u_id')
-            }
+            };
             var that=this;
             console.log(sessionStorage.getItem('token'));
             axios.post(sysConf.djangoUrl+'/user/getuserinfo/',user,{
@@ -216,17 +190,19 @@
               })
               .catch(function (error) {
                 console.log(error)
-              })
-            this.isModalVisible = false
+              });
+            this.isModalVisible = false;
+            // this.err_message = '兑换成功';
+            // this.err_message_info = '详细信息请在个人中心-我的订单查看'
           }, 900);
           // this.$options.methods.toorder(state.name,state.id)
-          console.log('toorder')
-          var that=this
-          var u_id=sessionStorage.getItem('u_id')
-          var token=sessionStorage.getItem('token')
+          console.log('toorder');
+          var that=this;
+          var u_id=sessionStorage.getItem('u_id');
+          var token=sessionStorage.getItem('token');
           var user={
             "user_id":u_id
-          }
+          };
 
           axios.post(sysConf.djangoUrl+'/order/getorder/', user, {
             headers: {
@@ -275,9 +251,6 @@
                     .catch(function (error) {
                       console.log(error)
                     })
-
-
-
 
             })
             .catch(function (error) {
