@@ -52,18 +52,18 @@
           </div>
           <!--显示时间和按钮区-->
           <div class="time-btn">
-              <div>
-                <!--显示时间-->
-                <span v-text="comment.time"></span>
-              </div>
-              <div>
-                <!--收起/显示回复的按钮-->
-                <button class="btn btn-default" @click="hideReplyInput(comment.comment_id)">回复</button>
-              </div>
-              <div>
-                <!--收起/显示回复的按钮-->
-                <button class="btn btn-primary" v-text="comment.btnvalue" @click="hideReply(comment.comment_id,comment.btnvalue)"></button>
-              </div>
+            <div>
+              <!--显示时间-->
+              <span v-text="comment.time"></span>
+            </div>
+            <div>
+              <!--收起/显示回复的按钮-->
+              <button class="btn btn-default" @click="hideReplyInput(comment.comment_id)">回复</button>
+            </div>
+            <div>
+              <!--收起/显示回复的按钮-->
+              <button class="btn btn-primary" v-text="comment.btnvalue" @click="hideReply(comment.comment_id,comment.btnvalue)"></button>
+            </div>
           </div>
         </div>
       </div>
@@ -111,7 +111,7 @@
 
 <script>
   import axios from 'axios'
-export default {
+  export default {
     name: 'Comment',
     data () {
       return {
@@ -131,8 +131,8 @@ export default {
     watch:{
       "result_list": function(newpage,oldpage) {
       },
-    deep:true,
-  },
+      deep:true,
+    },
     methods:{
       // 显示隐藏回复方法
       hideReply:function (commentid,btnvalue) {
@@ -496,5 +496,4 @@ export default {
     width: 100%;
     line-height: 35px;
   }
-
 </style>

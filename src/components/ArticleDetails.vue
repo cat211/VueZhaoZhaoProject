@@ -1,7 +1,5 @@
 <template>
   <div>
-    <!--提示消息模态框-->
-    <message-modal :err_message="err_message" :err_message_info="err_message_info"></message-modal>
     <div>
       <div class="act-header">
         <div class="row">
@@ -12,9 +10,7 @@
             <h1 v-text="details.title">健康生活：每天一杯水，医生远离我</h1>
           </div>
           <div class="col-lg-4">
-
           </div>
-
         </div>
         <div class="row art-from">
           <div class="col-sm-2">
@@ -148,7 +144,7 @@
             })
         }else {
 
-            var art_id=sessionStorage.getItem('artid')
+            var art_id=sessionStorage.getItem('artid');
 
           axios.get(sysConf.djangoUrl+'/article/getcommentsbyarticleid/' + art_id + '/'+'/')
             .then(function (response) {
