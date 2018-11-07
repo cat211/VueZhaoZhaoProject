@@ -39,7 +39,7 @@
               <div class=" panel panel-info word">
                 <div class="panel-heading">石鹏理</div>
                 <div class="panel-body img">
-                  <img src="../assets/images/user.png" alt="">
+                  <img src="../assets/images/dspl.jpg" alt="">
                 </div>
                 <h4>全能小哥哥</h4>
                 <p>前端后台难不倒</p>
@@ -52,7 +52,7 @@
               <div class=" panel panel-info word">
                 <div class="panel-heading">陶予祺</div>
                 <div class="panel-body img">
-                  <img src="../assets/images/user.png" alt="">
+                  <img src="../assets/images/dtyq.jpg" alt="">
                 </div>
                 <h4>速度小姐姐</h4>
                 <p>任务下达立即搞</p>
@@ -65,7 +65,7 @@
               <div class=" panel panel-info word">
                 <div class="panel-heading">李雨彤</div>
                 <div class="panel-body img">
-                  <img src="../assets/images/user.png" alt="">
+                  <img src="../assets/images/dlyt.jpg" alt="">
                 </div>
                 <h4>创意美少女</h4>
                 <p>要问属谁点子多</p>
@@ -78,7 +78,7 @@
               <div class=" panel panel-info word">
                 <div class="panel-heading">韦春龙</div>
                 <div class="panel-body img">
-                  <img src="../assets/images/user.png" alt="">
+                  <img src="../assets/images/dwcl.jpg" alt="">
                 </div>
                 <h4>毅力开心果</h4>
                 <p>遇到难题坚持干</p>

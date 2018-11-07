@@ -6,7 +6,7 @@
       <div class="col-md-12">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title glyphicon glyphicon-user">我的信息</h3>
+            <h3 class="panel-title glyphicon glyphicon-user">入住人信息</h3>
           </div>
           <!--第1个人的信息区-->
           <div class="panel-body" v-if="show">
