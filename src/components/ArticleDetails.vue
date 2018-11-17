@@ -103,69 +103,6 @@
           })
 
       },
-
-      getallreplay: function (f,i) {
-
-        var that = this;
-        var u_id=sessionStorage.getItem('u_id');
-
-        var art_id = sessionStorage.getItem('artid');
-        // var ii=i
-        if (u_id){
-          // this.art_id = this.$route.query.article_id;
-          axios.get(sysConf.djangoUrl+'/article/getcommentsbyarticleid/' + art_id + '/'+u_id+'/')
-            .then(function (response) {
-              if (response.data.length != 0) {
-                console.log(response.data);
-                that.all_comment = response.data;
-                that.all_comment.forEach((item, index) => {
-                  console.log(item);
-                  item.showreplay=false
-                });
-                if (!that.want_replay) {
-                  that.all_comment[i].showreplay = true;
-                  that.want_replay=true;
-                }else {
-                  that.all_comment[i].showreplay = false;
-                  that.want_replay=false;
-                }
-                // console.log('看看状态加进来没')
-                console.log(that.all_comment)
-              }
-              else {
-
-                that.com_flag = false
-              }
-
-
-            })
-            .catch(function (error) {
-              console.log(error)
-            })
-        }else {
-
-            var art_id=sessionStorage.getItem('artid');
-
-          axios.get(sysConf.djangoUrl+'/article/getcommentsbyarticleid/' + art_id + '/'+'/')
-            .then(function (response) {
-              if (response.data.length != 0) {
-                console.log(response.data);
-                that.all_comment = response.data;
-                console.log(that.all_comment)
-              }
-              else {
-
-                that.com_flag = false
-              }
-
-
-            })
-            .catch(function (error) {
-              console.log(error)
-            })
-        }
-
-      },
       cllo_art:function () {
         var u_id=sessionStorage.getItem('u_id');
         if (u_id) {
@@ -275,23 +212,6 @@
         this.$router.push({path: "/articledetails"});
         this.$router.go(0)
       },
-      // show_re:function (i,index) {
-      //   alert(i)
-      //   alert(index)
-      //   alert(this.all_comment[index].user_id)
-      //   alert(i)
-        //
-        // if(this.all_comment[index].showreplay){
-        //   this.all_comment[index].showreplay=false
-        // }
-        // else {
-        //   this.all_comment[index].showreplay=true
-        //   alert(this.all_comment[index].showreplay)
-        //
-        // }
-
-
-
     }
   }
 </script>

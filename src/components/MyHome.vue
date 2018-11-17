@@ -161,8 +161,10 @@
         let that = this;
         axios.post(sysConf.djangoUrl+'/user/uploadicon/', formdata)
           .then(function (response) {
-            if (response.data.statuscode === '202')
-            that.getUserInfo();
+            if (response.data.statuscode === '202'){
+              that.getUserInfoAgain();
+
+            }
           })
       },
       //获取用户信息
@@ -181,8 +183,7 @@
               //计算等级
               vm.myscore=vm.user_info.points%100;
               vm.myscorestyle='width:'+vm.myscore+'%';
-              vm.level=Math.ceil(vm.myscore/10);
-              console.log(vm.user_info);
+              vm.level=Math.ceil(vm.myscore/10)
             })
             .catch(function (error) {
               console.log(error)
@@ -191,7 +192,6 @@
           axios.post(sysConf.djangoUrl+'/user/checktest/', data, {headers: {"token": token}})
             .then(function (response) {
               // config.headers.common['token']=token
-              console.log(response.data.check_result);
               if (response.data.check_result) {
                 vm.flag = true;
                 vm.signtext = '签到+1';
@@ -199,18 +199,37 @@
               else {
                 vm.flag = false;
                 vm.signtext = '已签到';
-
-
               }
             })
             .catch(function (error) {
               console.log(error)
             });
-
         }
         else {
           this.err_message='你还未登录';
           this.err_message_info='请登陆后使用该功能';
+        }
+      },
+      // 触发父组件连接websocket函数
+      WebSocketConnect:function(){
+        this.$emit('connectwebsocket');
+      },
+      //获取用户信息
+      getUserInfoAgain:function () {
+        let vm = this;
+        let token = sessionStorage.getItem('token');
+        let data = {
+          "user_id": sessionStorage.getItem('u_id')
+        };
+        if (token) {
+          axios.post(sysConf.djangoUrl + '/user/getuserinfo/', data, {headers: {"token": token}})
+            .then(function (response) {
+              //用户信息
+              vm.user_info = response.data;
+            })
+            .catch(function (error) {
+              console.log(error)
+            });
         }
       }
     },
