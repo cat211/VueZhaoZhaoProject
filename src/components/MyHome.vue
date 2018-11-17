@@ -162,9 +162,8 @@
         axios.post(sysConf.djangoUrl+'/user/uploadicon/', formdata)
           .then(function (response) {
             if (response.data.statuscode === '202'){
-              that.getUserInfo();
-            }else {
-              that.getUserInfo();
+              that.getUserInfoAgain();
+
             }
           })
       },
@@ -209,6 +208,28 @@
         else {
           this.err_message='你还未登录';
           this.err_message_info='请登陆后使用该功能';
+        }
+      },
+      // 触发父组件连接websocket函数
+      WebSocketConnect:function(){
+        this.$emit('connectwebsocket');
+      },
+      //获取用户信息
+      getUserInfoAgain:function () {
+        let vm = this;
+        let token = sessionStorage.getItem('token');
+        let data = {
+          "user_id": sessionStorage.getItem('u_id')
+        };
+        if (token) {
+          axios.post(sysConf.djangoUrl + '/user/getuserinfo/', data, {headers: {"token": token}})
+            .then(function (response) {
+              //用户信息
+              vm.user_info = response.data;
+            })
+            .catch(function (error) {
+              console.log(error)
+            });
         }
       }
     },

@@ -67,7 +67,6 @@
   <!--中间内容end-->
 
 </template>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=pLOIzQgNtxca2efvhPPHLgP3kID8hbCN"></script>
 <script>
   import axios from 'axios'
 

@@ -56,7 +56,9 @@ export default {
     },
     // 断开websocket连接
     DisConnectWebSocket:function () {
-      this.ws.close();
+      if(this.ws){
+        this.ws.close();
+      }
       this.ws = null;
     }
   }

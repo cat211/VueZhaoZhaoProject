@@ -111,6 +111,8 @@
         showbh: false,
         showroom: false,
         showart: false,
+        err_message:'',
+        err_message_info:'',
         roomsrc: [
           sysConf.djangoUrl+'/media/pic/room-1.jpg',
           sysConf.djangoUrl+'/media/pic/room-2.jpg',
