@@ -20,22 +20,22 @@
             </p>
             <p>
               <span>最高气温:</span>
-              <span v-text="sky.result.HeWeather5[0].daily_forecast.tmp.max"></span>
+              <span v-text="sky.result.HeWeather5[0].daily_forecast[0].tmp.max"></span>
               <span>℃</span>
             </p>
             <p>
               <span>最低气温:</span>
-              <span v-text="sky.result.HeWeather5[0].daily_forecast.tmp.min"></span>
+              <span v-text="sky.result.HeWeather5[0].daily_forecast[0].tmp.min"></span>
               <span>℃</span>
             </p>
             <p>
               <span>天气状况:</span>
-              <span v-text="sky.result.HeWeather5[0].daily_forecast.cond.txt_n"></span>
+              <span v-text="sky.result.HeWeather5[0].daily_forecast[0].cond.txt_n"></span>
             </p>
             <p>
               <span>风力:</span>
-              <span v-text="sky.result.HeWeather5[0].daily_forecast.wind.dir"></span>
-              <span v-text="sky.result.HeWeather5[0].daily_forecast.wind.sc"></span>
+              <span v-text="sky.result.HeWeather5[0].daily_forecast[0].wind.dir"></span>
+              <span v-text="sky.result.HeWeather5[0].daily_forecast[0].wind.sc"></span>
               <span>级</span>
               <span v-text="sky.result.HeWeather5[0].suggestion.comf.brf"></span>
             </p>
@@ -125,7 +125,450 @@
         addInp: false,
         mask: false,
         search_city: '苏州', // 天气预报城市搜索
-        sky: {},
+        sky: {
+          "code": "10000",
+          "charge": false,
+          "msg": "查询成功",
+          "result": {
+            "HeWeather5": [
+              {
+                "aqi": {
+                  "city": {
+                    "aqi": "38",
+                    "qlty": "优",
+                    "pm25": "19",
+                    "pm10": "38",
+                    "no2": "32",
+                    "so2": "5",
+                    "co": "0.4",
+                    "o3": "63"
+                  }
+                },
+                "basic": {
+                  "city": "苏州",
+                  "cnty": "中国",
+                  "id": "CN101190401",
+                  "lat": "31.29937935",
+                  "lon": "120.61958313",
+                  "update": {
+                    "loc": "2018-11-17 14:45",
+                    "utc": "2018-11-17 06:45"
+                  }
+                },
+                "daily_forecast": [
+                  {
+                    "astro": {
+                      "mr": "13:39",
+                      "ms": "00:18",
+                      "sr": "06:27",
+                      "ss": "16:57"
+                    },
+                    "cond": {
+                      "code_d": "104",
+                      "code_n": "305",
+                      "txt_d": "阴",
+                      "txt_n": "小雨"
+                    },
+                    "date": "2018-11-17",
+                    "hum": "73",
+                    "pcpn": "2.0",
+                    "pop": "61",
+                    "pres": "1025",
+                    "tmp": {
+                      "max": "15",
+                      "min": "10"
+                    },
+                    "uv": "1",
+                    "vis": "18",
+                    "wind": {
+                      "deg": "23",
+                      "dir": "东北风",
+                      "sc": "3-4",
+                      "spd": "18"
+                    }
+                  },
+                  {
+                    "astro": {
+                      "mr": "14:11",
+                      "ms": "01:13",
+                      "sr": "06:28",
+                      "ss": "16:57"
+                    },
+                    "cond": {
+                      "code_d": "306",
+                      "code_n": "104",
+                      "txt_d": "中雨",
+                      "txt_n": "阴"
+                    },
+                    "date": "2018-11-18",
+                    "hum": "80",
+                    "pcpn": "0.0",
+                    "pop": "0",
+                    "pres": "1022",
+                    "tmp": {
+                      "max": "13",
+                      "min": "9"
+                    },
+                    "uv": "2",
+                    "vis": "14",
+                    "wind": {
+                      "deg": "351",
+                      "dir": "北风",
+                      "sc": "3-4",
+                      "spd": "24"
+                    }
+                  },
+                  {
+                    "astro": {
+                      "mr": "14:44",
+                      "ms": "02:08",
+                      "sr": "06:29",
+                      "ss": "16:56"
+                    },
+                    "cond": {
+                      "code_d": "104",
+                      "code_n": "101",
+                      "txt_d": "阴",
+                      "txt_n": "多云"
+                    },
+                    "date": "2018-11-19",
+                    "hum": "80",
+                    "pcpn": "0.0",
+                    "pop": "1",
+                    "pres": "1026",
+                    "tmp": {
+                      "max": "15",
+                      "min": "9"
+                    },
+                    "uv": "1",
+                    "vis": "18",
+                    "wind": {
+                      "deg": "353",
+                      "dir": "北风",
+                      "sc": "3-4",
+                      "spd": "17"
+                    }
+                  },
+                  {
+                    "astro": {
+                      "mr": "15:17",
+                      "ms": "03:04",
+                      "sr": "06:30",
+                      "ss": "16:56"
+                    },
+                    "cond": {
+                      "code_d": "300",
+                      "code_n": "305",
+                      "txt_d": "阵雨",
+                      "txt_n": "小雨"
+                    },
+                    "date": "2018-11-20",
+                    "hum": "65",
+                    "pcpn": "0.0",
+                    "pop": "3",
+                    "pres": "1024",
+                    "tmp": {
+                      "max": "18",
+                      "min": "12"
+                    },
+                    "uv": "2",
+                    "vis": "19",
+                    "wind": {
+                      "deg": "96",
+                      "dir": "东风",
+                      "sc": "1-2",
+                      "spd": "10"
+                    }
+                  },
+                  {
+                    "astro": {
+                      "mr": "15:52",
+                      "ms": "04:03",
+                      "sr": "06:30",
+                      "ss": "16:56"
+                    },
+                    "cond": {
+                      "code_d": "305",
+                      "code_n": "305",
+                      "txt_d": "小雨",
+                      "txt_n": "小雨"
+                    },
+                    "date": "2018-11-21",
+                    "hum": "81",
+                    "pcpn": "0.0",
+                    "pop": "0",
+                    "pres": "1024",
+                    "tmp": {
+                      "max": "14",
+                      "min": "12"
+                    },
+                    "uv": "4",
+                    "vis": "14",
+                    "wind": {
+                      "deg": "19",
+                      "dir": "东北风",
+                      "sc": "3-4",
+                      "spd": "12"
+                    }
+                  },
+                  {
+                    "astro": {
+                      "mr": "16:30",
+                      "ms": "05:04",
+                      "sr": "06:31",
+                      "ss": "16:55"
+                    },
+                    "cond": {
+                      "code_d": "101",
+                      "code_n": "101",
+                      "txt_d": "多云",
+                      "txt_n": "多云"
+                    },
+                    "date": "2018-11-22",
+                    "hum": "81",
+                    "pcpn": "0.0",
+                    "pop": "0",
+                    "pres": "1026",
+                    "tmp": {
+                      "max": "14",
+                      "min": "8"
+                    },
+                    "uv": "3",
+                    "vis": "19",
+                    "wind": {
+                      "deg": "3",
+                      "dir": "北风",
+                      "sc": "3-4",
+                      "spd": "22"
+                    }
+                  },
+                  {
+                    "astro": {
+                      "mr": "17:14",
+                      "ms": "06:07",
+                      "sr": "06:32",
+                      "ss": "16:55"
+                    },
+                    "cond": {
+                      "code_d": "101",
+                      "code_n": "305",
+                      "txt_d": "多云",
+                      "txt_n": "小雨"
+                    },
+                    "date": "2018-11-23",
+                    "hum": "73",
+                    "pcpn": "0.0",
+                    "pop": "0",
+                    "pres": "1024",
+                    "tmp": {
+                      "max": "16",
+                      "min": "9"
+                    },
+                    "uv": "3",
+                    "vis": "20",
+                    "wind": {
+                      "deg": "3",
+                      "dir": "北风",
+                      "sc": "3-4",
+                      "spd": "12"
+                    }
+                  }
+                ],
+                "hourly_forecast": [
+                  {
+                    "cond": {
+                      "code": "104",
+                      "txt": "阴"
+                    },
+                    "date": "2018-11-17 16:00",
+                    "hum": "78",
+                    "pop": "7",
+                    "pres": "1024",
+                    "tmp": "14",
+                    "wind": {
+                      "deg": "66",
+                      "dir": "东北风",
+                      "sc": "4-5",
+                      "spd": "25"
+                    }
+                  },
+                  {
+                    "cond": {
+                      "code": "104",
+                      "txt": "阴"
+                    },
+                    "date": "2018-11-17 19:00",
+                    "hum": "82",
+                    "pop": "18",
+                    "pres": "1025",
+                    "tmp": "13",
+                    "wind": {
+                      "deg": "69",
+                      "dir": "东北风",
+                      "sc": "3-4",
+                      "spd": "19"
+                    }
+                  },
+                  {
+                    "cond": {
+                      "code": "305",
+                      "txt": "小雨"
+                    },
+                    "date": "2018-11-17 22:00",
+                    "hum": "85",
+                    "pop": "58",
+                    "pres": "1024",
+                    "tmp": "12",
+                    "wind": {
+                      "deg": "53",
+                      "dir": "东北风",
+                      "sc": "3-4",
+                      "spd": "20"
+                    }
+                  },
+                  {
+                    "cond": {
+                      "code": "305",
+                      "txt": "小雨"
+                    },
+                    "date": "2018-11-18 01:00",
+                    "hum": "88",
+                    "pop": "25",
+                    "pres": "1024",
+                    "tmp": "11",
+                    "wind": {
+                      "deg": "14",
+                      "dir": "东北风",
+                      "sc": "3-4",
+                      "spd": "23"
+                    }
+                  },
+                  {
+                    "cond": {
+                      "code": "305",
+                      "txt": "小雨"
+                    },
+                    "date": "2018-11-18 04:00",
+                    "hum": "92",
+                    "pop": "20",
+                    "pres": "1023",
+                    "tmp": "10",
+                    "wind": {
+                      "deg": "55",
+                      "dir": "东北风",
+                      "sc": "3-4",
+                      "spd": "24"
+                    }
+                  },
+                  {
+                    "cond": {
+                      "code": "305",
+                      "txt": "小雨"
+                    },
+                    "date": "2018-11-18 07:00",
+                    "hum": "93",
+                    "pop": "43",
+                    "pres": "1023",
+                    "tmp": "10",
+                    "wind": {
+                      "deg": "79",
+                      "dir": "东北风",
+                      "sc": "3-4",
+                      "spd": "22"
+                    }
+                  },
+                  {
+                    "cond": {
+                      "code": "104",
+                      "txt": "阴"
+                    },
+                    "date": "2018-11-18 10:00",
+                    "hum": "87",
+                    "pop": "80",
+                    "pres": "1023",
+                    "tmp": "11",
+                    "wind": {
+                      "deg": "5",
+                      "dir": "北风",
+                      "sc": "3-4",
+                      "spd": "22"
+                    }
+                  },
+                  {
+                    "cond": {
+                      "code": "305",
+                      "txt": "小雨"
+                    },
+                    "date": "2018-11-18 13:00",
+                    "hum": "85",
+                    "pop": "25",
+                    "pres": "1022",
+                    "tmp": "12",
+                    "wind": {
+                      "deg": "343",
+                      "dir": "西北风",
+                      "sc": "3-4",
+                      "spd": "16"
+                    }
+                  }
+                ],
+                "now": {
+                  "cond": {
+                    "code": "104",
+                    "txt": "阴"
+                  },
+                  "fl": "14",
+                  "hum": "61",
+                  "pcpn": "0.0",
+                  "pres": "1023",
+                  "tmp": "15",
+                  "vis": "10",
+                  "wind": {
+                    "deg": "81",
+                    "dir": "东风",
+                    "sc": "2",
+                    "spd": "8"
+                  }
+                },
+                "status": "ok",
+                "suggestion": {
+                  "air": {
+                    "brf": "良",
+                    "txt": "气象条件有利于空气污染物稀释、扩散和清除，可在室外正常活动。"
+                  },
+                  "comf": {
+                    "brf": "较舒适",
+                    "txt": "白天天气晴好，早晚会感觉偏凉，午后舒适、宜人。"
+                  },
+                  "cw": {
+                    "brf": "不宜",
+                    "txt": "不宜洗车，未来24小时内有雨，如果在此期间洗车，雨水和路上的泥水可能会再次弄脏您的爱车。"
+                  },
+                  "drsg": {
+                    "brf": "较冷",
+                    "txt": "建议着厚外套加毛衣等服装。年老体弱者宜着大衣、呢外套加羊毛衫。"
+                  },
+                  "flu": {
+                    "brf": "易发",
+                    "txt": "天冷空气湿度大，易发生感冒，请注意适当增加衣服，加强自我防护避免感冒。"
+                  },
+                  "sport": {
+                    "brf": "较适宜",
+                    "txt": "阴天，较适宜进行各种户内外运动。"
+                  },
+                  "trav": {
+                    "brf": "适宜",
+                    "txt": "天气较好，风稍大，但温度适宜，总体来说还是好天气。这样的天气适宜旅游，您可以尽情享受大自然的风光。"
+                  },
+                  "uv": {
+                    "brf": "最弱",
+                    "txt": "属弱紫外线辐射天气，无需特别防护。若长期在户外，建议涂擦SPF在8-12之间的防晒护肤品。"
+                  }
+                }
+              }
+            ]
+          }
+        },
         sky_src:sysConf.djangoUrl+'/media/pic/sky-sun.png',
         housesrc:[
           sysConf.djangoUrl+'/media/pic/house-1.jpg',
@@ -168,6 +611,7 @@
         axios.post(sysConf.djangoUrl+'/beadhouse/sky/', data)
           .then(function (response) {
             vm.sky = response.data;
+            console.log(vm.sky);
             var reg1 = /.*?晴.*/;
             var reg2 = /.*?阴.*/;
             var reg3 = /.*?云.*/;

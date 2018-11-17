@@ -31,7 +31,7 @@
               </div>
             </div>
             <div class="col-md-8 our-img">
-              <img src="../assets/images/det2.jpg" alt="">
+              <img src="../assets/images/login_background.jpg" alt="">
             </div>
           </div>
           <div class="row">
